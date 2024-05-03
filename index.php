@@ -44,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="breadcrumb-item active">Starter Page</li>
                             </ol>
                         </div><!-- /.col -->
-                    </div><!-- /.row -->
+                    </div><!-- /.row -->     
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
