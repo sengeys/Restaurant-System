@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Dashboard</title>
 
+    <!-- Logo browser -->
+    <link rel="icon" href="dist/img/RestaurantLogo.png" type="image">
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -34,7 +35,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/RestaurantLogo.png" alt="RestaurantLogo" height="80" width="80">
+            <img class="animation__shake" src="dist/img/RestaurantLogo.png" alt="RestaurantLogo" height="60" width="60">
         </div>
 
         <!-- Navbar -->
@@ -57,7 +58,7 @@
             <a href="index.php" class="brand-link">
                 <img src="dist/img/RestaurantLogo.png" alt="Restaurant Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">RESTAURANT</span>
             </a>
 
             <!-- Sidebar -->
