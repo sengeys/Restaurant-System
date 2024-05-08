@@ -111,6 +111,7 @@
                                 </li>
                             </ul>
                         </li>
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users-cog"></i>
@@ -172,12 +173,6 @@
                                     <a href="pages/mailbox/mailbox.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Add Table</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/compose.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Table</p>
                                     </a>
                                 </li>
                             </ul>
