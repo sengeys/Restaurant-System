@@ -69,7 +69,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="../pages/order.php" class="nav-link">
                         <i class="nav-icon fas fa-cart-arrow-down"></i>
                         <p>
                             Order
@@ -78,7 +78,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="../pages/payment.php" class="nav-link">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Payment
