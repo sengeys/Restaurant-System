@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Dashboard</title>
     <!-- link style -->
-    <?php include '../layouts/link-style.php';?>
+    <?php include '../layouts/link-style.php'; ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Preloader -->
-    <?php include '../layouts/preloader.php';?>
+    <?php include '../layouts/preloader.php'; ?>
     <!-- Navbar -->
-    <?php include '../layouts/navbar.php';?>
+    <?php include '../layouts/navbar.php'; ?>
     <!-- Main Sidebar Container -->
-    <?php include '../layouts/sidebar.php';?>
+    <?php include '../layouts/sidebar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -45,9 +45,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Responsive Hover Table</h3>
+                                <h3 class="card-title">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#modal-default">
+                                        <i class="nav-icon fas fa-plus"></i>
+                                        Add New
+                                    </button>
+                                </h3>
                                 <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                    <div class="input-group input-group-sm-3" style="width: 200px;">
                                         <input type="text" name="table_search" class="form-control float-right"
                                             placeholder="Search">
 
@@ -64,45 +70,84 @@
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>User</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th>Reason</th>
+                                            <th>Customer ID</th>
+                                            <th>Customer Name</th>
+                                            <th>Contact</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>183</td>
                                             <td>John Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td><span class="tag tag-success">Approved</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback
-                                                doner.</td>
+                                            <td>012 222 423</td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-trash"></i>
+                                                    Delete
+                                                </button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>219</td>
                                             <td>Alexander Pierce</td>
-                                            <td>11-7-2014</td>
-                                            <td><span class="tag tag-warning">Pending</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback
-                                                doner.</td>
+                                            <td>011 234 765</td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-trash"></i>
+                                                    Delete
+                                                </button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>657</td>
                                             <td>Bob Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td><span class="tag tag-primary">Approved</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback
-                                                doner.</td>
+                                            <td>087 456 875</td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-trash"></i>
+                                                    Delete
+                                                </button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>175</td>
                                             <td>Mike Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td><span class="tag tag-danger">Denied</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback
-                                                doner.</td>
+                                            <td>017 324 445</td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-trash"></i>
+                                                    Delete
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -117,12 +162,51 @@
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
+
+        <!-- Model -->
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Default Modal</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="">
+                        <div class="modal-body">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputCustomerName">Customer Name</label>
+                                    <input type="text" class="form-control" id="inputCustomerName"
+                                        placeholder="Customer Name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputContact">Contact</label>
+                                    <input type="text" class="form-control" id="inputContact" placeholder="Contact">
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
     </div>
 
     <!-- Main Footer -->
-    <?php include '../layouts/footer.php';?>
+    <?php include '../layouts/footer.php'; ?>
     <!-- link script -->
-    <?php include '../layouts/link-script.php';?>
+    <?php include '../layouts/link-script.php'; ?>
 </body>
 
 </html>

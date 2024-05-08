@@ -89,40 +89,55 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-users-cog"></i>
-                                <p>
-                                    Item
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-users-cog"></i>
+                            <a href="pages/customer.php" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Customer
-                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="pages/item.php" class="nav-link">
+                                <i class="nav-icon fas fa-box"></i>
+                                <p>
+                                    Item
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="pages/staff.php" class="nav-link">
                                 <i class="nav-icon fas fa-users-cog"></i>
                                 <p>
                                     Staff
-                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="pages/table.php" class="nav-link">
                                 <i class="nav-icon fas fa-columns"></i>
                                 <p>
                                     Table
-                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="pages/order.php" class="nav-link">
+                                <i class="nav-icon fas fa-cart-arrow-down"></i>
+                                <p>
+                                    Order
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="pages/payment.php" class="nav-link">
+                                <i class="nav-icon fas fa-credit-card"></i>
+                                <p>
+                                    Payment
                                 </p>
                             </a>
                         </li>
