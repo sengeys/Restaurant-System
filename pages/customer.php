@@ -200,7 +200,6 @@
             <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-
     </div>
 
     <!-- Main Footer -->
