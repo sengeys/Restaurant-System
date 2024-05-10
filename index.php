@@ -122,20 +122,24 @@
                                     Table
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Table</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/compose.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Table</p>
-                                    </a>
-                                </li>
-                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="pages/order.php" class="nav-link">
+                                <i class="nav-icon fas fa-cart-arrow-down"></i>
+                                <p>
+                                    Order
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="pages/payment.php" class="nav-link">
+                                <i class="nav-icon fas fa-credit-card"></i>
+                                <p>
+                                    Payment  
+                                </p>
+                            </a>
                         </li>
                     </ul>
                 </nav>
