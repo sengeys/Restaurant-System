@@ -137,7 +137,7 @@
                             <a href="pages/payment.php" class="nav-link">
                                 <i class="nav-icon fas fa-credit-card"></i>
                                 <p>
-                                    Payment 
+                                    Payment  
                                 </p>
                             </a>
                         </li>
