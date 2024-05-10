@@ -137,7 +137,7 @@
                             <a href="pages/payment.php" class="nav-link">
                                 <i class="nav-icon fas fa-credit-card"></i>
                                 <p>
-                                    Payment
+                                    Payment  
                                 </p>
                             </a>
                         </li>
@@ -163,7 +163,7 @@
                                 <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                         </div><!-- /.col -->
-                    </div><!-- /.row -->     
+                    </div><!-- /.row -->       
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
