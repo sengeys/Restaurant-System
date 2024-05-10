@@ -159,7 +159,7 @@
                                 <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                         </div><!-- /.col -->
-                    </div><!-- /.row -->     
+                    </div><!-- /.row -->       
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
