@@ -137,7 +137,7 @@
                             <a href="pages/payment.php" class="nav-link">
                                 <i class="nav-icon fas fa-credit-card"></i>
                                 <p>
-                                    Payment  
+                                    Payment
                                 </p>
                             </a>
                         </li>
@@ -163,7 +163,7 @@
                                 <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
                         </div><!-- /.col -->
-                    </div><!-- /.row -->       
+                    </div><!-- /.row -->     
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
@@ -288,6 +288,12 @@
     <script src="plugins/summernote/summernote-bs4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard.js"></script>
 </body>
 
 </html>
