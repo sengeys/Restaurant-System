@@ -28,7 +28,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
                             <li class="breadcrumb-item active">Order</li>
                         </ol>
                     </div><!-- /.col -->
@@ -65,6 +65,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
@@ -149,6 +151,27 @@
                                                 </button>
                                             </td>
                                         </tr>
+
+                                        <tr>
+                                            <td>154</td>
+                                            <td>Jack Ma</td>
+                                            <td>017 324 445</td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                    data-target="#modal-default">
+                                                    <i class="nav-icon fas fa-trash"></i>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+
+
                                     </tbody>
                                 </table>
                             </div>
