@@ -149,7 +149,7 @@
                                     <!-- text input -->
                                     <div class="form-group">
                                         <label>Customer ID</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" disabled>
 
                                         <label>Status</label>
                                         <select class="form-control select2" style="width: 100%;">
@@ -161,7 +161,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Payment Date</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" disabled>
 
                                         <label>Amount</label>
                                         <div class="input-group">
