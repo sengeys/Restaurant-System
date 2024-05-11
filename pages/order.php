@@ -40,190 +40,94 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <!-- Small table (Stat box) -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modal-default">
-                                        <i class="nav-icon fas fa-plus"></i>
-                                        Add New
-                                    </button>
-                                </h3>
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm-3" style="width: 200px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                            placeholder="Search">
+                            <h5 class="font-weight-bold text-success">Order Detail</h5>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Order ID</label>
+                                                <input type="text" class="form-control" placeholder="Order ID">
 
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                                <label>Order Date</label>
+                                                <input type="text" class="form-control" placeholder="Order Date">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Customer Name</label>
+                                                <input type="text" class="form-control" placeholder="Customer Name">
+
+                                                <label>Staff Name</label>
+                                                <input type="text" class="form-control" placeholder="Staff Name">
+
+                                                <label>Table Name</label>
+                                                <input type="text" class="form-control" placeholder="Table Name">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="font-weight-bold text-success">Item Detail</h5>
+                            </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Customer ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Contact</th>
+                                            <th>Item Name</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>183</td>
-                                            <td>John Doe</td>
-                                            <td>012 222 423</td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control" disabled></td>
                                             <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
+                                                <button type="button" class="btn btn-danger">
                                                     <i class="nav-icon fas fa-trash"></i>
                                                     Delete
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>219</td>
-                                            <td>Alexander Pierce</td>
-                                            <td>011 234 765</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>657</td>
-                                            <td>Bob Doe</td>
-                                            <td>087 456 875</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>175</td>
-                                            <td>Mike Doe</td>
-                                            <td>017 324 445</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>154</td>
-                                            <td>Jack Ma</td>
-                                            <td>017 324 445</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-
-
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-primary">
+                                                    <i class="nav-icon fas fa-plus"></i>
+                                                    Add New
+                                                </button>
+                                            </td>
+                                            <td colspan="3" class="text-right"><p class="pt-2 font-weight-bold">Total : </p></td>
+                                            <td><input type="text" class="form-control" disabled></td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
-                            <!-- /.card-body -->
+                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                </div>
-                <!-- /.row -->
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+                </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
-
-        <!-- Model -->
-        <div class="modal fade" id="modal-default">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Default Modal</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="">
-                        <div class="modal-body">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="inputCustomerName">Customer Name</label>
-                                    <input type="text" class="form-control" id="inputCustomerName"
-                                        placeholder="Customer Name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputContact">Contact</label>
-                                    <input type="text" class="form-control" id="inputContact" placeholder="Contact">
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-
     </div>
 
     <!-- Main Footer -->

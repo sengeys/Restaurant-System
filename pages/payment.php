@@ -45,12 +45,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modal-default">
-                                        <i class="nav-icon fas fa-plus"></i>
-                                        Add New
-                                    </button>
+                                <h3 class="card-title font-weight-bold text-success">
+                                    Payment
                                 </h3>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm-3" style="width: 200px;">
@@ -70,17 +66,22 @@
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Customer ID</th>
+                                            <th>Payment ID</th>
+                                            <th>Payment Date</th>
                                             <th>Customer Name</th>
-                                            <th>Contact</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>183</td>
-                                            <td>John Doe</td>
-                                            <td>012 222 423</td>
+                                            <td class="pt-3">1001</td>
+                                            <td class="pt-3">10-12-2024</td>
+                                            <td class="pt-3">Seyha</td>
+                                            <td class="pt-3">10</td>
+                                            <td class="pt-3"><span class="p-1 pl-2 pr-2 rounded bg-success">Paid</span>
+                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                     data-target="#modal-default">
@@ -95,46 +96,14 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>219</td>
-                                            <td>Alexander Pierce</td>
-                                            <td>011 234 765</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
                                         <tr>
-                                            <td>657</td>
-                                            <td>Bob Doe</td>
-                                            <td>087 456 875</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>175</td>
-                                            <td>Mike Doe</td>
-                                            <td>017 324 445</td>
+                                            <td class="pt-3">1002</td>
+                                            <td class="pt-3">10-12-2024</td>
+                                            <td class="pt-3">Seyha</td>
+                                            <td class="pt-3">25</td>
+                                            <td class="pt-3"><span class="p-1 pl-2 pr-2 rounded bg-danger">No
+                                                    Paid</span></td>
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                     data-target="#modal-default">
@@ -168,23 +137,45 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Default Modal</h4>
+                        <h4 class="modal-title">Payment</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <form action="">
                         <div class="modal-body">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="inputCustomerName">Customer Name</label>
-                                    <input type="text" class="form-control" id="inputCustomerName"
-                                        placeholder="Customer Name">
-                                </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Customer ID</label>
+                                        <input type="text" class="form-control">
 
-                                <div class="form-group">
-                                    <label for="inputContact">Contact</label>
-                                    <input type="text" class="form-control" id="inputContact" placeholder="Contact">
+                                        <label>Status</label>
+                                        <select class="form-control select2" style="width: 100%;">
+                                            <option selected="selected">Alabama</option>
+                                            <option>Alaska</option>
+                                            <option>California</option>
+                                            <option>Delaware</option>
+                                            <option>Tennessee</option>
+                                            <option>Texas</option>
+                                            <option>Washington</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Payment Date</label>
+                                        <input type="text" class="form-control">
+
+                                        <label>Amount</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-right" value="10" disabled>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.card-body -->
