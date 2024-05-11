@@ -1,6 +1,6 @@
 /*
 SQLyog Enterprise - MySQL GUI v8.18 
-MySQL - 5.5.5-10.4.28-MariaDB : Database - restaurant
+MySQL - 5.5.5-10.4.28-MariaDB : Database - restaurantdb
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 5.5.5-10.4.28-MariaDB : Database - restaurant
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`restaurant` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`restaurantdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
-USE `restaurant`;
+USE `restaurantdb`;
 
 /*Table structure for table `tblcustomer` */
 
@@ -25,9 +25,11 @@ CREATE TABLE `tblcustomer` (
   `cusname` varchar(50) DEFAULT NULL,
   `contact` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`cusid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblcustomer` */
+
+insert  into `tblcustomer`(`cusid`,`cusname`,`contact`) values (1,'General','None'),(2,'Thida','012 232 342');
 
 /*Table structure for table `tblitem` */
 
@@ -38,9 +40,11 @@ CREATE TABLE `tblitem` (
   `itemname` varchar(50) DEFAULT NULL,
   `unitprice` float DEFAULT NULL,
   PRIMARY KEY (`itemid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblitem` */
+
+insert  into `tblitem`(`itemid`,`itemname`,`unitprice`) values (1,'chichend',5),(2,'Khmer Thin Noodle',5),(3,'Soup',2);
 
 /*Table structure for table `tblorder` */
 
@@ -97,9 +101,11 @@ CREATE TABLE `tblstaff` (
   `phone` varchar(50) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`stid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblstaff` */
+
+insert  into `tblstaff`(`stid`,`stname`,`sex`,`phone`,`address`) values (1,'Tonna','Male','012 345 678','Battambang');
 
 /*Table structure for table `tbltable` */
 
@@ -109,9 +115,11 @@ CREATE TABLE `tbltable` (
   `tblid` int(11) NOT NULL AUTO_INCREMENT,
   `tblname` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`tblid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tbltable` */
+
+insert  into `tbltable`(`tblid`,`tblname`) values (1,'General'),(2,'VIP A01');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
