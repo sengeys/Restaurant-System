@@ -1,10 +1,10 @@
 <?php
     Class DBConnection {
         // Data
-        private $host     = "";
-        private $username = "";
+        private $host     = "localhost";
+        private $username = "root";
         private $password = "";
-        private $dbname   = "";
+        private $dbname   = "restaurantdb";
         private $con      = null;
 
         // Method
