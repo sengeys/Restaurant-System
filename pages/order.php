@@ -25,42 +25,42 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0">ORDER</h1>
-                    </div><!-- /.col -->
+                    </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
                             <li class="breadcrumb-item active">Order</li>
                         </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.content-header -->
 
         <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="font-weight-bold text-success">Order Detail</h5>
-                                <form>
+        <form action="order.php" method="post" autocomplete="off">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="font-weight-bold text-success">Order Detail</h5>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <!-- text input -->
                                             <div class="form-group">
-                                                <label>Order ID</label>
-                                                <input type="text" class="form-control" placeholder="Order ID">
+                                                <label>Order ID <span class="text-danger">*</span></label>
+                                                <!-- Order ID -->
+                                                <input required name="orderid" type="text" class="form-control">
 
-                                                <label>Order Date</label>
-                                                <div class="input-group date" id="reservationdatetime"
-                                                    data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input"
-                                                        data-target="#reservationdatetime" />
-                                                    <div class="input-group-append" data-target="#reservationdatetime"
-                                                        data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                
+                                                <label>Order Date <span class="text-danger">*</span></label>
+                                                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                                                    <!-- Order Date -->
+                                                    <input required name="orderdate" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" />
+                                                    <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                                                        <div class="input-group-text">
+                                                            <i class="fa fa-calendar"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -68,22 +68,25 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Customer Name</label>
-                                                <select class="form-control select2" style="width: 100%;">
+                                                <label>Customer Name <span class="text-danger">*</span></label>
+                                                <!-- Customer Name -->
+                                                <select required name="customername" class="form-control select2" style="width: 100%;">
                                                     <option selected="selected">Ganeral</option>
                                                     <option>Chenda</option>
                                                     <option>Jiva</option>
                                                 </select>
 
-                                                <label>Staff Name</label>
-                                                <select class="form-control select2" style="width: 100%;">
+                                                <label>Staff Name <span class="text-danger">*</span></label>
+                                                <!-- Staff Name -->
+                                                <select required name="staffname" class="form-control select2" style="width: 100%;">
                                                     <option selected="selected">Nita</option>
                                                     <option>Chenda</option>
                                                     <option>Jiva</option>
                                                 </select>
 
-                                                <label>Table Name</label>
-                                                <select class="form-control select2" style="width: 100%;">
+                                                <label>Table Name <span class="text-danger">*</span></label>
+                                                <!-- Table Name -->
+                                                <select required name="tablename" class="form-control select2" style="width: 100%;">
                                                     <option selected="selected">Ganeral</option>
                                                     <option>VIP A01</option>
                                                     <option>VIP A02</option>
@@ -92,77 +95,86 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <button type="button" class="btn btn-primary">
-                                    <i class="nav-icon fas fa-plus"></i>
-                                    Add New
-                                </button>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Item Name</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Total</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <select class="form-control select2" style="width: 100%;">
-                                                    <option selected="selected">Chickend</option>
-                                                    <option>Soup</option>
-                                                    <option>Kari</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="text" class="form-control" value="2"></td>
-                                            <td style="min-width: 8rem;">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control text-right" value="10.5">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <!-- Add Row Button -->
+                                    <button type="button" class="btn btn-primary float-right" id="btnAddRow">
+                                        <i class="nav-icon fas fa-plus"></i>
+                                        Add Row
+                                    </button>
+                                </div>
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Item Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="itembody">
+                                            <tr>
+                                                <td style="min-width: 8rem; width: 30%;">
+                                                    <!-- Item Name -->
+                                                    <select required name="itemname[]" class="form-control select2" style="width: 100%;">
+                                                        <option selected="selected">Chickend</option>
+                                                        <option>Soup</option>
+                                                        <option>Kari</option>
+                                                    </select>
+                                                </td>
+                                                <td style="min-width: 8rem; width: 20%;">
+                                                    <!-- Quantity -->
+                                                    <input required name="quantity[]" type="text" class="form-control" value="2">
+                                                </td>
+                                                <td style="min-width: 8rem; width: 20%;">
+                                                    <div class="input-group">
+                                                        <!-- Price -->
+                                                        <input required name="price[]" type="text" class="form-control text-right" value="10.5">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">$</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td style="min-width: 8rem;">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control text-right" value="21"
-                                                        disabled>
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
+                                                </td>
+                                                <td style="min-width: 8rem; width: 20%;">
+                                                    <div class="input-group">
+                                                        <!-- Total -->
+                                                        <input required name="total[]" type="text" class="form-control text-right" value="21" disabled>
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">$</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
+                                                </td>
+                                                <td class="text-right" style="min-width: 8rem; width: 10%;">
+                                                    <!-- Delete Button -->
+                                                    <button type="button" class="btn btn-danger">
+                                                        <i class="nav-icon fas fa-trash"></i>
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="card-footer">
+                                    <table class="table table-hover text-nowrap">
                                         <tr>
-                                            <td colspan="4" class="text-right">
+                                            <td class="text-right border-0" style="width: 80%;">
                                                 <p class="pt-2 font-weight-bold">Total : </p>
                                             </td>
-                                            <td style="min-width: 8rem;">
+                                            <td class="text-right border-0" style="width: 20%; min-width: 10rem;">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control text-right" value="21"
-                                                        disabled>
+                                                    <!-- Grand Total -->
+                                                    <input required name="grandtotal" type="text" class="form-control text-right" value="21" disabled>
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">$</span>
                                                     </div>
@@ -170,21 +182,21 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5" class="border-0">
+                                            <td colspan="2" class="border-0">
+                                                <!-- Submit Button -->
                                                 <button type="button" class="btn btn-success float-right">
                                                     Submit
                                                 </button>
                                             </td>
-
                                         </tr>
-                                    </tfoot>
-                                </table>
+                                    </table>
+                                </div>
                             </div>
-                            <!-- /.card -->
                         </div>
                     </div>
-                </div><!-- /.container-fluid -->
-        </section>
+                </div>
+            </section>
+        </form>
         <!-- /.content -->
     </div>
 
@@ -192,6 +204,7 @@
     <?php include '../layouts/footer.php'; ?>
     <!-- link script -->
     <?php include '../layouts/link-script.php'; ?>
+    
 </body>
 
 </html>
