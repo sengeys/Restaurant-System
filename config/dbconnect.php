@@ -5,20 +5,20 @@
         private $username = "root";
         private $password = "";
         private $dbname   = "restaurantdb";
-        private $con      = null;
+        private $conn      = null;
 
         // Method
-        public function getConnection (){
-            $this->con = new mysqli($this->host, $this->username, $this->password, $this->dbname);
-            return $this->con;
+        public function connect (){
+            $this->conn = new mysqli($this->host, $this->username, $this->password, $this->dbname);
+            return $this->conn;
         }
 
-        public function getClose(){
-            return $this->con->close();
+        public function close(){
+            return $this->conn->close();
         }
 
-        public function getQuery($sql){
-            return $this->con->multi_query($sql);
+        public function query($sql){
+            return $this->conn->multi_query($sql);
         }
     }
 ?>
