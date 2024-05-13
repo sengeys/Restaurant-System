@@ -37,7 +37,7 @@
   $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
-
+    
     //Initialize Select2 Elements
     $('.select2bs4').select2({
       theme: 'bootstrap4'
@@ -119,7 +119,7 @@
 
   // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
   var previewNode = document.querySelector("#template")
-  previewNode.id = ""
+  previewNode.id = "";
   var previewTemplate = previewNode.parentNode.innerHTML
   previewNode.parentNode.removeChild(previewNode)
 
