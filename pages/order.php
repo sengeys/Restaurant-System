@@ -178,21 +178,20 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="itembody">
+                                        <tbody id="itemrow">
                                             <tr>
                                                 <td style="min-width: 8rem; width: 30%;">
                                                     <!-- Item Name -->
                                                     <select required name="itemname[]" class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">---Select Item---</option>
                                                         <?php
                                                             $sql = "SELECT * FROM tblitem";
                                                             $result = mysqli_query($conn, $sql);
                                                             if ($result) {
                                                                 while ($row = mysqli_fetch_array($result)) {
-                                                                    $id = $row["itemid"];
-                                                                    $name = $row["itemname"];
+                                                                    $itemid = $row["itemid"];
+                                                                    $itemname = $row["itemname"];
                                                         ?>
-                                                            <option value="<?php echo $id?>"> <?php echo $name?></option>
+                                                            <option value="<?php echo $itemid?>"> <?php echo $itemname?></option>
                                                         <?php
                                                                 }
                                                             } else {
@@ -236,30 +235,36 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <table class="table table-hover text-nowrap">
-                                        <tr>
-                                            <td class="text-right border-0" style="width: 80%;">
-                                                <p class="pt-2 font-weight-bold">Grand Total : </p>
-                                            </td>
-                                            <td class="text-right border-0" style="width: 20%; min-width: 10rem;">
-                                                <div class="input-group">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <span class="pt-2 float-right">Grand Total : </span>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="input-group" style="min-width: 10rem;">
+                                                    
                                                     <!-- Grand Total -->
                                                     <input required name="grandtotal" type="text" class="form-control text-right" disabled>
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">$</span>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" class="border-0">
-                                                <!-- Submit Button -->
-                                                <button  name="submit" type="submit" class="btn btn-success float-right">
-                                                    Submit
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8"></div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group  float-right">
+                                                <div class="input-group">
+                                                    <!-- Submit Button -->
+                                                    <button  name="submit" type="submit" class="btn btn-success">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -308,66 +313,64 @@
     <script>
         
 
-
         $(document).ready(function () {
-            // Add Row
-            $("#btnAddRow").click(function () {
+            // Add row
+            $("body").on("click", "#btnAddRow", function (){
                 var row = `
-                    <tr>
-                        <td style="min-width: 8rem; width: 30%">
-                            <!-- Item Name -->
-                            <select required name="itemname[]" class="form-control select2" style="width: 100%">
-                                <option selected="selected"></option>
-                                <?php
-                                    $sql = "SELECT * FROM tblitem";
-                                    $result = mysqli_query($conn, $sql);
-                                    if ($result) {
-                                        while ($row = mysqli_fetch_array($result)) {
-                                            $id = $row["itemid"];
-                                            $name = $row["itemname"];
-                                ?>
-                                    <option value="<?php echo $id?>"> <?php echo $name?></option>
-                                <?php
-                                        }
-                                    } else {
-                                        echo "Connection Faild";
+                <tr>
+                    <td style="min-width: 8rem; width: 30%;">
+                        <!-- Item Name -->
+                        <select required name="itemname[]" class="form-control select2 itemname" style="width: 100%;">
+                            <?php
+                                $sql = "SELECT * FROM tblitem";
+                                $result = mysqli_query($conn, $sql);
+                                if ($result) {
+                                    while ($row = mysqli_fetch_array($result)) {
+                                        $itemid = $row["itemid"];
+                                        $itemname = $row["itemname"];
+                            ?>
+                                <option value="<?php echo $itemid?>"> <?php echo $itemname?></option>
+                            <?php
                                     }
-                                ?>
-                            </select>
-                        </td>
-                        <td style="min-width: 8rem; width: 20%">
-                            <!-- Quantity -->
-                            <input required name="quantity[]" type="text" class="form-control quantity" >
-                        </td>
-                        <td style="min-width: 8rem; width: 20%">
-                            <div class="input-group">
-                                <!-- Price -->
-                                <input required name="price[]" type="text" class="form-control text-right price"/>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
+                                } else {
+                                    echo "Connection Faild";
+                                }
+                            ?>
+                        </select>
+                    </td>
+                    <td style="min-width: 8rem; width: 20%;">
+                        <!-- Quantity -->
+                        <input required name="quantity[]" type="text" class="form-control quantity">
+                    </td>
+                    <td style="min-width: 8rem; width: 20%;">
+                        <div class="input-group">
+                            <!-- Price -->
+                            <input required name="price[]" type="text" class="form-control text-right price" value="">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
                             </div>
-                        </td>
-                        <td style="min-width: 8rem; width: 20%">
-                            <div class="input-group">
-                                <!-- Total -->
-                                <input required name="total[]" type="text" class="form-control text-right total" disabled />
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
+                        </div>
+                    </td>
+                    <td style="min-width: 8rem; width: 20%;">
+                        <div class="input-group">
+                            <!-- Total -->
+                            <input required name="total[]" type="text" class="form-control text-right total" disabled>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
                             </div>
-                        </td>
-                        <td class="text-right" style="min-width: 8rem; width: 10%">
-                            <!-- Delete Button -->
-                            <button type="button" class="btn btn-danger" id="btnremoverow">
-                                <i class="nav-icon fas fa-trash"></i>
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
+                        </div>
+                    </td>
+                    <td class="text-right" style="min-width: 8rem; width: 10%;">
+                        <!-- Delete Button -->
+                        <button type="button" class="btn btn-danger" id="btnremoverow">
+                            <i class="nav-icon fas fa-trash"></i>
+                            Delete
+                        </button>
+                    </td>
+                </tr>
                 `;
-
-                $("#itembody").append(row);
+                $("#itemrow").append(row);
+                GrandTotal();
             });
 
             // Remove Row
