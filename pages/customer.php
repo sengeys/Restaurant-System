@@ -7,6 +7,7 @@
     <title>Restaurant | customer</title>
     <!-- link style -->
     <?php include '../layouts/link-style.php'; ?>
+    <?php include("../config/connection.php");?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -46,16 +47,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modal-default">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-new">
                                         <i class="nav-icon fas fa-plus"></i>
                                         Add New
                                     </button>
                                 </h3>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm-3" style="width: 200px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                            placeholder="Search">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
@@ -82,73 +81,36 @@
                                             <td>John Doe</td>
                                             <td>012 222 423</td>
                                             <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
+                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-update">
                                                     <i class="nav-icon fas fa-edit"></i>
                                                     Edit
                                                 </button>
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
                                                     <i class="nav-icon fas fa-trash"></i>
                                                     Delete
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>219</td>
-                                            <td>Alexander Pierce</td>
-                                            <td>011 234 765</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
+                                       
+                                        <?php
+                                            $sql = "select * from tblcustomer";
+                                            $result = $conn->query($sql);
+                                            while($row = $result->fetch_assoc()){
+                                                echo "<tr>";
+                                                echo "<td>".$row["cusid"]."</td>";
+                                                echo "<td>".$row["cusname"]."</td>";
+                                                echo "<td>".$row["contact"]."</td>";
+                                                echo "<td>";
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>657</td>
-                                            <td>Bob Doe</td>
-                                            <td>087 456 875</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>175</td>
-                                            <td>Mike Doe</td>
-                                            <td>017 324 445</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
+                                            }
+                                        ?>
+                                        
+                                        
+                                        
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -164,11 +126,12 @@
         <!-- /.content -->
 
         <!-- Model -->
-        <div class="modal fade" id="modal-default">
+        <!-- Model Add New -->
+        <div class="modal fade" id="modal-add-new">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Default Modal</h4>
+                        <h4 class="modal-title">Add New Customer</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -178,8 +141,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputCustomerName">Customer Name</label>
-                                    <input type="text" class="form-control" id="inputCustomerName"
-                                        placeholder="Customer Name">
+                                    <input type="text" class="form-control" id="inputCustomerName" placeholder="Customer Name">
                                 </div>
 
                                 <div class="form-group">
@@ -192,6 +154,48 @@
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <!-- Model Update -->
+        <div class="modal fade" id="modal-update">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Customer</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="">
+                        <div class="modal-body">
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="inputCustomerName">Customer ID</label>
+                                    <input type="text" class="form-control" id="inputCustomerName" placeholder="Customer ID" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputCustomerName">Customer Name</label>
+                                    <input type="text" class="form-control" id="inputCustomerName" placeholder="Customer Name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputContact">Contact</label>
+                                    <input type="text" class="form-control" id="inputContact" placeholder="Contact">
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
