@@ -38,7 +38,13 @@
         <!-- /.content-header -->
 
         <!-- Connection with Database -->
-        <?php include '../config/connection.php';?>
+        <?php include '../config/connection.php';
+            if (isset($_POST['submit'])) {
+                $grandtotal = $_POST['grandtotal'];
+
+                echo''.$grandtotal.'';
+            }
+        ?>
 
 
         <!-- Main content -->
@@ -90,28 +96,9 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label>Customer Name <span class="text-danger">*</span></label>
-                                                <!-- Customer Name -->
-                                                <select required name="customername" class="form-control select2" style="width: 100%;">
-                                                    <?php
-                                                        $sql = "SELECT * FROM tblcustomer";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        if ($result) {
-                                                            while ($row = mysqli_fetch_array($result)) {
-                                                                $id = $row["cusid"];
-                                                                $name = $row["cusname"];
-                                                    ?>
-                                                        <option value="<?php echo $id?>"> <?php echo $name?></option>
-                                                    <?php
-                                                            }
-                                                        } else {
-                                                            echo "Connection Faild";
-                                                        }
-                                                    ?>
-                                                </select>
 
-                                                <label>Staff Name <span class="text-danger">*</span></label>
                                                 <!-- Staff Name -->
+                                                <label>Staff Name <span class="text-danger">*</span></label>
                                                 <select required name="staffname" class="form-control select2" style="width: 100%;">
                                                     <?php
                                                         $sql = "SELECT * FROM tblstaff";
@@ -130,8 +117,30 @@
                                                     ?>
                                                 </select>
 
-                                                <label>Table Name <span class="text-danger">*</span></label>
+                                                <!-- Customer Name -->
+                                                <label>Customer Name <span class="text-danger">*</span></label>
+                                                <select required name="customername" class="form-control select2" style="width: 100%;">
+                                                    <?php
+                                                        $sql = "SELECT * FROM tblcustomer";
+                                                        $result = mysqli_query($conn, $sql);
+                                                        if ($result) {
+                                                            while ($row = mysqli_fetch_array($result)) {
+                                                                $id = $row["cusid"];
+                                                                $name = $row["cusname"];
+                                                    ?>
+                                                        <option value="<?php echo $id?>"> <?php echo $name?></option>
+                                                    <?php
+                                                            }
+                                                        } else {
+                                                            echo "Connection Faild";
+                                                        }
+                                                    ?>
+                                                </select>
+
+                                                
+
                                                 <!-- Table Name -->
+                                                <label>Table Name <span class="text-danger">*</span></label>
                                                 <select required name="tablename" class="form-control select2" style="width: 100%;">
                                                     <?php
                                                         $sql = "SELECT * FROM tbltable";
@@ -183,6 +192,7 @@
                                                 <td style="min-width: 8rem; width: 30%;">
                                                     <!-- Item Name -->
                                                     <select required name="itemname[]" class="form-control select2" style="width: 100%;">
+                                                        <option value=""></option>
                                                         <?php
                                                             $sql = "SELECT * FROM tblitem";
                                                             $result = mysqli_query($conn, $sql);
@@ -331,6 +341,7 @@
                     <td style="min-width: 8rem; width: 30%;">
                         <!-- Item Name -->
                         <select required name="itemname[]" class="form-control select2 itemname" style="width: 100%;">
+                            <option value=""></option>
                             <?php
                                 $sql = "SELECT * FROM tblitem";
                                 $result = mysqli_query($conn, $sql);
@@ -408,13 +419,14 @@
 
             // Grand Total
             function GrandTotal(){
+
                 var total = 0;
 
                 $(".total").each(function(){
                     total += Number($(this).val());
                 });
 
-                document.getElementsByName("grandtotal")[0].value = total;
+                // document.getElementsByName("grandtotal").value = total;
             }
         });
     </script>
