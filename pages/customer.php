@@ -98,8 +98,8 @@
                                             $result = $conn->query($sql);
                                             while($row = $result->fetch_assoc()){
                                                 echo "<tr>";
-                                                echo "<td>".$row["cusid"]."</td>";
-                                                echo "<td>".$row["cusname"]."</td>";
+                                                echo "<td>".$row["customer_id"]."</td>";
+                                                echo "<td>".$row["customer_name"]."</td>";
                                                 echo "<td>".$row["contact"]."</td>";
                                                 echo "<td>";
 
