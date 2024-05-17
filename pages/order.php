@@ -260,7 +260,7 @@
 
             // list staff to select option
             $.ajax({
-                url: '../config/get/get_staff.php',
+                url: '../config/select/select_staff.php',
                 type: 'POST',
                 dataType: 'json',
                 success: function(data) {
@@ -280,7 +280,7 @@
 
             // list customer to select option
             $.ajax({
-                url: '../config/get/get_customer.php',
+                url: '../config/select/select_customer.php',
                 type: 'POST',
                 dataType: 'json',
                 success: function(data) {
@@ -300,7 +300,7 @@
 
             // list table to select option
             $.ajax({
-                url: '../config/get/get_table.php',
+                url: '../config/select/select_table.php',
                 type: 'POST',
                 dataType: 'json',
                 success: function(data) {
@@ -320,7 +320,7 @@
 
             // list Item to select option
             $.ajax({
-                url: '../config/get/get_item.php',
+                url: '../config/select/select_item.php',
                 type: 'POST',
                 dataType: 'json',
                 success: function(data) {
