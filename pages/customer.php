@@ -12,7 +12,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Preloader -->
-    <?php include '../layouts/preloader.php'; ?>
+    <?php //include '../layouts/preloader.php'; ?>
     <!-- Navbar -->
     <?php include '../layouts/navbar.php'; ?>
     <!-- Main Sidebar Container -->
@@ -75,42 +75,8 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>183</td>
-                                            <td>John Doe</td>
-                                            <td>012 222 423</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-update">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
+                                    <tbody id="row_customer">
                                        
-                                        <?php
-                                            $sql = "select * from tblcustomer";
-                                            $result = $conn->query($sql);
-                                            while($row = $result->fetch_assoc()){
-                                                echo "<tr>";
-                                                echo "<td>".$row["customer_id"]."</td>";
-                                                echo "<td>".$row["customer_name"]."</td>";
-                                                echo "<td>".$row["contact"]."</td>";
-                                                echo "<td>";
-
-
-
-                                            }
-                                        ?>
-                                        
-                                        
-                                        
-                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -210,6 +176,69 @@
     <?php include '../layouts/footer.php'; ?>
     <!-- link script -->
     <?php include '../layouts/link-script.php'; ?>
-</body>
 
+    <script>
+        $(document).ready(function () {
+            // Style Add Row
+            function selectaddrow () {
+                //Initialize Select2 Elements
+                $('.select2').select2();
+                
+                //Initialize Select2 Elements
+                $('.select2bs4').select2({
+                theme: 'bootstrap4'
+                }); 
+            }
+
+            // list staff to select option
+            $.ajax({
+                url: '../config/get/get_staff.php',
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    var select_staff = $('#select_staff');
+                    $.each(data, function(index, staff) {
+                        var row = 
+                        $('<option value=""></option>');
+                        $('<option value=""></option>').val(staff.staff_id).appendTo(row);
+                        $('<option value=""></option>').text(staff.staff_name).appendTo(row);
+                        select_staff.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch data.');
+                }
+            });
+
+            $.ajax({
+                url: '../config/get/get_customer.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var row_customer = $('#row_customer');
+                    $.each(data, function(index, customer) {
+                        var row = $('<tr>');
+                        $('<td>').text(customer.customer_id).appendTo(row);
+                        $('<td>').text(customer.customer_name).appendTo(row);
+                        $('<td>').text(customer.contact).appendTo(row);
+                        $('<td>').html(`
+                            <button type="submit" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-update">
+                                <i class="nav-icon fas fa-edit"></i>
+                                Edit
+                            </button>
+                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
+                                <i class="nav-icon fas fa-trash"></i>
+                                Delete
+                            </button>
+                        `).appendTo(row);
+                        row_customer.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch data.');
+                }
+            });
+        });
+    </script>
+</body>
 </html>
