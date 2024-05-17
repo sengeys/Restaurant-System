@@ -50,7 +50,11 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="font-weight-bold text-success">Order Detail</h5>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="font-weight-bold text-success">Order Detail</h5>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
@@ -78,23 +82,15 @@
 
                                                 <!-- Staff Name -->
                                                 <label>Staff Name <span class="text-danger">*</span></label>
-                                                <select required name="staffname" class="form-control select2" style="width: 100%;">
-                                                        <option value=""></option>
-                                                </select>
+                                                <select required name="staffname" id="select_staff" class="form-control select2" style="width: 100%;"></select>
 
                                                 <!-- Customer Name -->
                                                 <label>Customer Name <span class="text-danger">*</span></label>
-                                                <select required name="customername" class="form-control select2" style="width: 100%;">
-                                                        <option value=""></option>
-                                                </select>
-
-                                                
+                                                <select required name="customername" id="select_customer" class="form-control select2" style="width: 100%;"></select>
 
                                                 <!-- Table Name -->
                                                 <label>Table Name <span class="text-danger">*</span></label>
-                                                <select required name="tablename" class="form-control select2" style="width: 100%;">
-                                                        <option value=""></option>
-                                                </select>
+                                                <select required name="tablename" id="select_table" class="form-control select2" style="width: 100%;"> </select>
                                             </div>
                                         </div>
                                     </div>
@@ -135,9 +131,8 @@
                                             <tr>
                                                 <td style="min-width: 8rem; width: 30%;">
                                                     <!-- Item Name -->
-                                                    <select required name="itemname[]" class="form-control select2" style="width: 100%;">
-                                                        <option value=""></option>
-                                                        <option value=""></option>
+                                                    <select required name="itemname[]" id="select_item" class="form-control select2" style="width: 100%;">
+                                                        <option value="">Select Item</option>
                                                     </select>
                                                 </td>
                                                 <td style="min-width: 8rem; width: 20%;">
@@ -251,7 +246,6 @@
 
     <!-- Script Add Row -->
     <script>
-
         $(document).ready(function () {
             // Style Add Row
             function selectaddrow () {
@@ -264,15 +258,93 @@
                 }); 
             }
 
+            // list staff to select option
+            $.ajax({
+                url: '../config/get/get_staff.php',
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    var select_staff = $('#select_staff');
+                    $.each(data, function(index, staff) {
+                        var row = 
+                        $('<option value=""></option>');
+                        $('<option value=""></option>').val(staff.staff_id).appendTo(row);
+                        $('<option value=""></option>').text(staff.staff_name).appendTo(row);
+                        select_staff.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch data.');
+                }
+            });
+
+            // list customer to select option
+            $.ajax({
+                url: '../config/get/get_customer.php',
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    var select_customer = $('#select_customer');
+                    $.each(data, function(index, customer) {
+                        var row = 
+                        $('<option value=""></option>');
+                        $('<option value=""></option>').val(customer.customer_id).appendTo(row);
+                        $('<option value=""></option>').text(customer.customer_name).appendTo(row);
+                        select_customer.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch data.');
+                }
+            });
+
+            // list table to select option
+            $.ajax({
+                url: '../config/get/get_table.php',
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    var select_table = $('#select_table');
+                    $.each(data, function(index, table) {
+                        var row = 
+                        $('<option value=""></option>');
+                        $('<option value=""></option>').val(table.table_id).appendTo(row);
+                        $('<option value=""></option>').text(table.table_name).appendTo(row);
+                        select_table.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch data.');
+                }
+            });
+
+            // list Item to select option
+            $.ajax({
+                    url: '../config/get/get_item.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(data) {
+                        var select_item = $('#select_item');
+                        $.each(data, function(index, item) {
+                            var row = 
+                            $('<option value=""></option>');
+                            $('<option value=""></option>').val(item.item_id).appendTo(row);
+                            $('<option value=""></option>').text(item.item_name).appendTo(row);
+                            select_item.append(row);
+                        });
+                    },
+                    error: function() {
+                        alert('Failed to fetch data.');
+                    }
+                });
+
             // Add row
             $("body").on("click", "#btnAddRow", function (){
                 var row = `
                 <tr>
                     <td style="min-width: 8rem; width: 30%;">
                         <!-- Item Name -->
-                        <select required name="itemname[]" class="form-control select2 itemname" style="width: 100%;">
-                            <option value=""></option>
-                                <option value=""></option>
+                        <select required name="itemname[]" id="select_item" class="form-control select2 itemname" style="width: 100%;">
                         </select>
                     </td>
                     <td style="min-width: 8rem; width: 20%;">
