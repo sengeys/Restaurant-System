@@ -414,7 +414,7 @@
                     total += Number($(this).val());
                 });
 
-                document.getElementsByName("grandtotal")[0].value = total;
+                document.getElementsByName("grandtotal")[0]  .value = total;
             }
         });
     </script>
