@@ -336,7 +336,6 @@
                 });
 
                 // document.getElementsByName("grandtotal").value = total;
-                document.getElementsByName("grandtotal")[0].value = total;
             }
         });
     </script>
