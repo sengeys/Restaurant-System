@@ -7,11 +7,12 @@
     <title>Restaurant | order</title>
     <!-- link style -->
     <?php include '../layouts/link-style.php'; ?>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Preloader -->
-    <?php include '../layouts/preloader.php'; ?>
+    <?//php include '../layouts/preloader.php'; ?>
     <!-- Navbar -->
     <?php include '../layouts/navbar.php'; ?>
     <!-- Main Sidebar Container -->
@@ -38,17 +39,11 @@
         <!-- /.content-header -->
 
         <!-- Connection with Database -->
-        <?php include '../config/connection.php';
-            if (isset($_POST['submit'])) {
-                $grandtotal = $_POST['grandtotal'];
-
-                echo''.$grandtotal.'';
-            }
-        ?>
 
 
         <!-- Main content -->
         <form action="order.php" method="post" autocomplete="off">
+            
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -61,23 +56,7 @@
                                             <div class="form-group">
                                                 <label>Order ID <span class="text-danger">*</span></label>
                                                 <!-- Order ID -->
-                                                <?php
-                                                    $sql = "SELECT ordid FROM tblorder ORDER BY ordid DESC LIMIT 1";
-                                                    $result = mysqli_query($conn, $sql);
-                                                    if ($result) {
-                                                        while ($row = mysqli_fetch_array($result)) 
-                                                            $id = $row["ordid"];
-                                                ?>
-                                                    <input required name="orderid" type="text" class="form-control" value="<?php echo $id + 1?>">
-                                                <?php
-                                                        
-                                                    } else {
-                                                        echo "Connection Faild";
-                                                    }
-                                                ?>
-                                                
-
-
+                                                <input required name="orderid" type="text" class="form-control" value="">
                                                 <label>Order Date <span class="text-danger">*</span></label>
                                                 <div class="input-group date" id="reservationdatetime"
                                                     data-target-input="nearest">
@@ -100,41 +79,13 @@
                                                 <!-- Staff Name -->
                                                 <label>Staff Name <span class="text-danger">*</span></label>
                                                 <select required name="staffname" class="form-control select2" style="width: 100%;">
-                                                    <?php
-                                                        $sql = "SELECT * FROM tblstaff";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        if ($result) {
-                                                            while ($row = mysqli_fetch_array($result)) {
-                                                                $id = $row["stid"];
-                                                                $name = $row["stname"];
-                                                    ?>
-                                                        <option value="<?php echo $id?>"> <?php echo $name?></option>
-                                                    <?php
-                                                            }
-                                                        } else {
-                                                            echo "Connection Faild";
-                                                        }
-                                                    ?>
+                                                        <option value=""></option>
                                                 </select>
 
                                                 <!-- Customer Name -->
                                                 <label>Customer Name <span class="text-danger">*</span></label>
                                                 <select required name="customername" class="form-control select2" style="width: 100%;">
-                                                    <?php
-                                                        $sql = "SELECT * FROM tblcustomer";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        if ($result) {
-                                                            while ($row = mysqli_fetch_array($result)) {
-                                                                $id = $row["cusid"];
-                                                                $name = $row["cusname"];
-                                                    ?>
-                                                        <option value="<?php echo $id?>"> <?php echo $name?></option>
-                                                    <?php
-                                                            }
-                                                        } else {
-                                                            echo "Connection Faild";
-                                                        }
-                                                    ?>
+                                                        <option value=""></option>
                                                 </select>
 
                                                 
@@ -142,21 +93,7 @@
                                                 <!-- Table Name -->
                                                 <label>Table Name <span class="text-danger">*</span></label>
                                                 <select required name="tablename" class="form-control select2" style="width: 100%;">
-                                                    <?php
-                                                        $sql = "SELECT * FROM tbltable";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        if ($result) {
-                                                            while ($row = mysqli_fetch_array($result)) {
-                                                                $id = $row["tblid"];
-                                                                $name = $row["tblname"];
-                                                    ?>
-                                                        <option value="<?php echo $id?>"> <?php echo $name?></option>
-                                                    <?php
-                                                            }
-                                                        } else {
-                                                            echo "Connection Faild";
-                                                        }
-                                                    ?>
+                                                        <option value=""></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -193,21 +130,7 @@
                                                     <!-- Item Name -->
                                                     <select required name="itemname[]" class="form-control select2" style="width: 100%;">
                                                         <option value=""></option>
-                                                        <?php
-                                                            $sql = "SELECT * FROM tblitem";
-                                                            $result = mysqli_query($conn, $sql);
-                                                            if ($result) {
-                                                                while ($row = mysqli_fetch_array($result)) {
-                                                                    $itemid = $row["itemid"];
-                                                                    $itemname = $row["itemname"];
-                                                        ?>
-                                                            <option value="<?php echo $itemid?>"> <?php echo $itemname?></option>
-                                                        <?php
-                                                                }
-                                                            } else {
-                                                                echo "Connection Faild";
-                                                            }
-                                                        ?>
+                                                        <option value=""></option>
                                                     </select>
                                                 </td>
                                                 <td style="min-width: 8rem; width: 20%;">
@@ -342,21 +265,7 @@
                         <!-- Item Name -->
                         <select required name="itemname[]" class="form-control select2 itemname" style="width: 100%;">
                             <option value=""></option>
-                            <?php
-                                $sql = "SELECT * FROM tblitem";
-                                $result = mysqli_query($conn, $sql);
-                                if ($result) {
-                                    while ($row = mysqli_fetch_array($result)) {
-                                        $itemid = $row["itemid"];
-                                        $itemname = $row["itemname"];
-                            ?>
-                                <option value="<?php echo $itemid?>"> <?php echo $itemname?></option>
-                            <?php
-                                    }
-                                } else {
-                                    echo "Connection Faild";
-                                }
-                            ?>
+                                <option value=""></option>
                         </select>
                     </td>
                     <td style="min-width: 8rem; width: 20%;">
@@ -425,6 +334,8 @@
                 $(".total").each(function(){
                     total += Number($(this).val());
                 });
+
+                // document.getElementsByName("grandtotal").value = total;
             }
         });
     </script>
