@@ -425,8 +425,6 @@
                 $(".total").each(function(){
                     total += Number($(this).val());
                 });
-
-                // document.getElementsByName("grandtotal").value = total;
             }
         });
     </script>
