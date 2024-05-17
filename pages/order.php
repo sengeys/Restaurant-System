@@ -107,11 +107,18 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <!-- Add Row Button -->
-                                    <button type="button" class="btn btn-primary float-right" id="btnAddRow">
-                                        <i class="nav-icon fas fa-plus"></i>
-                                        Add Row
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="font-weight-bold text-success">Item Detail</h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <!-- Add Row Button -->
+                                            <button type="button" class="btn btn-primary float-right" id="btnAddRow">
+                                                <i class="nav-icon fas fa-plus"></i>
+                                                Add Row
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover text-nowrap">
