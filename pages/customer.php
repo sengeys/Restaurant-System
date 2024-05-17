@@ -51,6 +51,7 @@
                                         <i class="nav-icon fas fa-plus"></i>
                                         Add New
                                     </button>
+                                    <a href=""></a>
                                 </h3>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm-3" style="width: 200px;">
@@ -92,21 +93,33 @@
                                                 </button>
                                             </td>
                                         </tr>
+
+                                
+                                            <?php
+                                                $sql = "select * from tblcustomer";
+                                                $result = $conn->query($sql);
+                                                while($row = $result->fetch_assoc()){
+                                                    echo "<tr>
+                                                        <td>$row[cusid]</td>
+                                                        <td>$row[cusname]</td>
+                                                        <td>$row[contact]</td>
+                                                        <td>
+                                                            <a href='' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modal-update'>
+                                                                <i class='nav-icon fas fa-edit'></i>
+                                                                Edit
+                                                            </a>
+                                                            <a href='' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modal-default'>
+                                                                <i class='nav-icon fas fa-trash'></i>
+                                                                Delete
+                                                            </a>
+                                                        </td>
+                                                    
+
+                                                    </tr>";
+                                                }
+                                            ?>
+                                            
                                        
-                                        <?php
-                                            $sql = "select * from tblcustomer";
-                                            $result = $conn->query($sql);
-                                            while($row = $result->fetch_assoc()){
-                                                echo "<tr>";
-                                                echo "<td>".$row["cusid"]."</td>";
-                                                echo "<td>".$row["cusname"]."</td>";
-                                                echo "<td>".$row["contact"]."</td>";
-                                                echo "<td>";
-
-
-
-                                            }
-                                        ?>
                                         
                                         
                                         
