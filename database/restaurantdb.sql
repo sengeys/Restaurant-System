@@ -63,7 +63,7 @@ CREATE TABLE `tblorder` (
 
 /*Data for the table `tblorder` */
 
-insert  into `tblorder`(`order_id`,`date_created`,`staff_id`,`customer_id`,`table_id`,`status`,`total`) values (1,'2024-05-15 00:00:00',1,1,1,'',0),(2,'2024-05-15 00:00:00',1,1,1,'No Paid',0);
+insert  into `tblorder`(`order_id`,`date_created`,`staff_id`,`customer_id`,`table_id`,`status`,`total`) values (1,'2024-05-15 00:00:00',1,1,1,'Paided',16.8),(2,'2024-05-15 00:00:00',1,1,1,'No Paid',20);
 
 /*Table structure for table `tblorderdetail` */
 
@@ -78,6 +78,8 @@ CREATE TABLE `tblorderdetail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblorderdetail` */
+
+insert  into `tblorderdetail`(`order_id`,`item_id`,`quantity`,`price`,`amount`) values (1,2,2,5.6,11.2),(1,3,2,5.6,5.6),(2,2,2,5.6,11.2),(2,1,2,5.6,5.6);
 
 /*Table structure for table `tblpayment` */
 
@@ -122,6 +124,65 @@ CREATE TABLE `tbltable` (
 /*Data for the table `tbltable` */
 
 insert  into `tbltable`(`table_id`,`table_name`) values (1,'General'),(2,'VIP A01');
+
+/*Table structure for table `vieworder` */
+
+DROP TABLE IF EXISTS `vieworder`;
+
+/*!50001 DROP VIEW IF EXISTS `vieworder` */;
+/*!50001 DROP TABLE IF EXISTS `vieworder` */;
+
+/*!50001 CREATE TABLE  `vieworder`(
+ `order_id` int(11) ,
+ `date_created` datetime ,
+ `staff_id` int(11) ,
+ `staff_name` varchar(50) ,
+ `customer_id` int(11) ,
+ `customer_name` varchar(50) ,
+ `table_id` int(11) ,
+ `table_name` varchar(50) ,
+ `status` varchar(50) ,
+ `total` float 
+)*/;
+
+/*Table structure for table `vieworderdetail` */
+
+DROP TABLE IF EXISTS `vieworderdetail`;
+
+/*!50001 DROP VIEW IF EXISTS `vieworderdetail` */;
+/*!50001 DROP TABLE IF EXISTS `vieworderdetail` */;
+
+/*!50001 CREATE TABLE  `vieworderdetail`(
+ `order_id` int(11) ,
+ `date_created` datetime ,
+ `staff_id` int(11) ,
+ `staff_name` varchar(50) ,
+ `customer_id` int(11) ,
+ `customer_name` varchar(50) ,
+ `table_id` int(11) ,
+ `table_name` varchar(50) ,
+ `STATUS` varchar(50) ,
+ `total` float ,
+ `item_id` int(11) ,
+ `item_name` varchar(50) ,
+ `quantity` int(11) ,
+ `unit_price` float ,
+ `amount` float 
+)*/;
+
+/*View structure for view vieworder */
+
+/*!50001 DROP TABLE IF EXISTS `vieworder` */;
+/*!50001 DROP VIEW IF EXISTS `vieworder` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vieworder` AS select `tblorder`.`order_id` AS `order_id`,`tblorder`.`date_created` AS `date_created`,`tblstaff`.`staff_id` AS `staff_id`,`tblstaff`.`staff_name` AS `staff_name`,`tblcustomer`.`customer_id` AS `customer_id`,`tblcustomer`.`customer_name` AS `customer_name`,`tbltable`.`table_id` AS `table_id`,`tbltable`.`table_name` AS `table_name`,`tblorder`.`status` AS `status`,`tblorder`.`total` AS `total` from (((`tblorder` join `tblstaff` on(`tblorder`.`staff_id` = `tblstaff`.`staff_id`)) join `tblcustomer` on(`tblorder`.`customer_id` = `tblcustomer`.`customer_id`)) join `tbltable` on(`tblorder`.`table_id` = `tbltable`.`table_id`)) order by `tblorder`.`order_id` */;
+
+/*View structure for view vieworderdetail */
+
+/*!50001 DROP TABLE IF EXISTS `vieworderdetail` */;
+/*!50001 DROP VIEW IF EXISTS `vieworderdetail` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vieworderdetail` AS select `tblorder`.`order_id` AS `order_id`,`tblorder`.`date_created` AS `date_created`,`tblstaff`.`staff_id` AS `staff_id`,`tblstaff`.`staff_name` AS `staff_name`,`tblcustomer`.`customer_id` AS `customer_id`,`tblcustomer`.`customer_name` AS `customer_name`,`tbltable`.`table_id` AS `table_id`,`tbltable`.`table_name` AS `table_name`,`tblorder`.`status` AS `STATUS`,`tblorder`.`total` AS `total`,`tblitem`.`item_id` AS `item_id`,`tblitem`.`item_name` AS `item_name`,`tblorderdetail`.`quantity` AS `quantity`,`tblitem`.`unit_price` AS `unit_price`,`tblorderdetail`.`amount` AS `amount` from (((((`tblorderdetail` join `tblorder` on(`tblorderdetail`.`order_id` = `tblorder`.`order_id`)) join `tblstaff` on(`tblorder`.`staff_id` = `tblstaff`.`staff_id`)) join `tblcustomer` on(`tblorder`.`customer_id` = `tblcustomer`.`customer_id`)) join `tbltable` on(`tblorder`.`table_id` = `tbltable`.`table_id`)) join `tblitem` on(`tblorderdetail`.`item_id` = `tblitem`.`item_id`)) order by `tblorderdetail`.`order_id` */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
