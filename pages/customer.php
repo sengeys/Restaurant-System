@@ -190,28 +190,8 @@
                 }); 
             }
 
-            // list staff to select option
             $.ajax({
-                url: '../config/get/get_staff.php',
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                    var select_staff = $('#select_staff');
-                    $.each(data, function(index, staff) {
-                        var row = 
-                        $('<option value=""></option>');
-                        $('<option value=""></option>').val(staff.staff_id).appendTo(row);
-                        $('<option value=""></option>').text(staff.staff_name).appendTo(row);
-                        select_staff.append(row);
-                    });
-                },
-                error: function() {
-                    alert('Failed to fetch data.');
-                }
-            });
-
-            $.ajax({
-                url: '../config/get/get_customer.php',
+                url: '../config/select/select_customer.php',
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
