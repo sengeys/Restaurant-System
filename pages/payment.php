@@ -68,56 +68,15 @@
                                         <tr>
                                             <th>Payment ID</th>
                                             <th>Payment Date</th>
+                                            <th>Staff Name</th>
                                             <th>Customer Name</th>
                                             <th>Amount</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="pt-3">1001</td>
-                                            <td class="pt-3">10-12-2024</td>
-                                            <td class="pt-3">Seyha</td>
-                                            <td class="pt-3">10</td>
-                                            <td class="pt-3"><span class="p-1 pl-2 pr-2 rounded bg-success">Paid</span>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="pt-3">1002</td>
-                                            <td class="pt-3">10-12-2024</td>
-                                            <td class="pt-3">Seyha</td>
-                                            <td class="pt-3">25</td>
-                                            <td class="pt-3"><span class="p-1 pl-2 pr-2 rounded bg-danger">No
-                                                    Paid</span></td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
+                                    <tbody id="row_payment">
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -148,13 +107,13 @@
                                 <div class="col-sm-6">
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Customer ID</label>
+                                        <label>Customer Name</label>
                                         <input type="text" class="form-control" disabled>
 
                                         <label>Status</label>
                                         <select class="form-control select2" style="width: 100%;">
                                             <option selected="selected">No Paid</option>
-                                            <option>Paid</option>
+                                            <option>Paided</option>
                                         </select>
                                     </div>
                                 </div>
@@ -193,6 +152,60 @@
     <?php include '../layouts/footer.php'; ?>
     <!-- link script -->
     <?php include '../layouts/link-script.php'; ?>
+
+    
+    <script>
+        $(document).ready(function () {
+            // Style Add Row
+            function selectaddrow () {
+                //Initialize Select2 Elements
+                $('.select2').select2();
+                
+                //Initialize Select2 Elements
+                $('.select2bs4').select2({
+                theme: 'bootstrap4'
+                }); 
+            }
+
+            $.ajax({
+                url: '../config/select/select_payment.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var row_payment = $('#row_payment');
+                    $.each(data, function(index, payment) {
+                        var row = $('<tr>');
+                        $('<td class="pt-3">').text(payment.order_id).appendTo(row);
+                        $('<td class="pt-3">').text(payment.date_created).appendTo(row);
+                        $('<td class="pt-3">').text(payment.staff_name).appendTo(row);
+                        $('<td class="pt-3">').text(payment.customer_name).appendTo(row);
+                        $('<td class="pt-3">').text(payment.total).appendTo(row);
+
+                        if (payment.status == "Paided"){
+                            $('<td class="pt-3">').html(`<span class="p-1 pl-2 pr-2 rounded bg-success">${payment.status}</span>`).appendTo(row);
+                        }else{
+                            $('<td class="pt-3">').html(`<span class="p-1 pl-2 pr-2 rounded bg-danger">${payment.status}</span>`).appendTo(row);
+                        }
+
+                        $('<td>').html(`
+                            <button type="submit" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-default">
+                                <i class="nav-icon fas fa-edit"></i>
+                                Edit
+                            </button>
+                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
+                                <i class="nav-icon fas fa-trash"></i>
+                                Delete
+                            </button>
+                        `).appendTo(row);
+                        row_payment.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch data.');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
