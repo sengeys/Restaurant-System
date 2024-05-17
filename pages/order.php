@@ -320,23 +320,23 @@
 
             // list Item to select option
             $.ajax({
-                    url: '../config/get/get_item.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function(data) {
-                        var select_item = $('#select_item');
-                        $.each(data, function(index, item) {
-                            var row = 
-                            $('<option value=""></option>');
-                            $('<option value=""></option>').val(item.item_id).appendTo(row);
-                            $('<option value=""></option>').text(item.item_name).appendTo(row);
-                            select_item.append(row);
-                        });
-                    },
-                    error: function() {
-                        alert('Failed to fetch data.');
-                    }
-                });
+                url: '../config/get/get_item.php',
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    var select_item = $('#select_item');
+                    $.each(data, function(index, item) {
+                        var row = 
+                        $('<option value=""></option>');
+                        $('<option value=""></option>').val(item.item_id).appendTo(row);
+                        $('<option value=""></option>').text(item.item_name).appendTo(row);
+                        select_item.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch data.');
+                }
+            });
 
             // Add row
             $("body").on("click", "#btnAddRow", function (){
@@ -344,7 +344,7 @@
                 <tr>
                     <td style="min-width: 8rem; width: 30%;">
                         <!-- Item Name -->
-                        <select required name="itemname[]" id="select_item" class="form-control select2 itemname" style="width: 100%;">
+                        <select required name="itemname[]" class="form-control select2 itemname" style="width: 100%;">
                         </select>
                     </td>
                     <td style="min-width: 8rem; width: 20%;">
