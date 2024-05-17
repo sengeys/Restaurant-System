@@ -4,7 +4,7 @@
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
     try {
-        $sql = "SELECT tblorders.order_id, orders.customer_name, orders.order_date,  tblorderdetails.item_id, tblorderdetails.quantity 
+        $sql = "SELECT tblorders.order_id, tblorders.customer_name, orders.order_date,  tblorderdetails.item_id, tblorderdetails.quantity 
             FROM tblorder
             LEFT JOIN tblorderdetails ON tblorders.order_id = tblorderdetails.order_id
             ORDER BY tblorders.order_id";
