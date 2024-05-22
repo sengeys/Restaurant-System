@@ -70,17 +70,17 @@
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Customer ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Contact</th>
+                                            <th>Item ID</th>
+                                            <th>Item Name</th>
+                                            <th>Unit Price</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>183</td>
-                                            <td>John Doe</td>
-                                            <td>012 222 423</td>
+                                            <td>001</td>
+                                            <td>Instant Noodle</td>
+                                            <td>$1</td>
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                     data-target="#modal-default">
@@ -96,9 +96,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>219</td>
-                                            <td>Alexander Pierce</td>
-                                            <td>011 234 765</td>
+                                            <td>002</td>
+                                            <td>Roost Beef</td>
+                                            <td>$25</td>
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                     data-target="#modal-default">
@@ -114,9 +114,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>657</td>
-                                            <td>Bob Doe</td>
-                                            <td>087 456 875</td>
+                                            <td>003</td>
+                                            <td>Meet Bun(Bao)</td>
+                                            <td>$1</td>
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                     data-target="#modal-default">
@@ -132,9 +132,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>175</td>
-                                            <td>Mike Doe</td>
-                                            <td>017 324 445</td>
+                                            <td>004</td>
+                                            <td>Americano</td>
+                                            <td>$2</td>
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                     data-target="#modal-default">
@@ -177,14 +177,14 @@
                         <div class="modal-body">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputCustomerName">Customer Name</label>
-                                    <input type="text" class="form-control" id="inputCustomerName"
-                                        placeholder="Customer Name">
+                                    <label for="inputCustomerName">Item Name</label>
+                                    <input type="text" class="form-control" id="inputItemName"
+                                        placeholder="Item Name">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputContact">Contact</label>
-                                    <input type="text" class="form-control" id="inputContact" placeholder="Contact">
+                                    <label for="inputContact">Unit Price</label>
+                                    <input type="text" class="form-control" id="inputUnitPrice" placeholder="Unit Price">
                                 </div>
                             </div>
                             <!-- /.card-body -->
