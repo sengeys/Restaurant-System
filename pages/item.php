@@ -7,6 +7,7 @@
     <title>Restaurant | Item</title>
     <!-- link style -->
     <?php include '../layouts/link-style.php'; ?>
+    <?php include("../config/connection.php");?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
