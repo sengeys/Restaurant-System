@@ -51,6 +51,7 @@
                                         <i class="nav-icon fas fa-plus"></i>
                                         Add New
                                     </button>
+                                    <a href=""></a>
                                 </h3>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm-3" style="width: 200px;">
@@ -82,73 +83,43 @@
                                             <td>Instant Noodle</td>
                                             <td>$1</td>
                                             <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
+                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-update">
                                                     <i class="nav-icon fas fa-edit"></i>
                                                     Edit
                                                 </button>
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
                                                     <i class="nav-icon fas fa-trash"></i>
                                                     Delete
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>002</td>
-                                            <td>Roost Beef</td>
-                                            <td>$25</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
+                                        <?php
+                                                $sql = "select * from tblitem";
+                                                $result = $conn->query($sql);
+                                                while($row = $result->fetch_assoc()){
+                                                    echo "<tr>
+                                                        <td>$row[item_id]</td>
+                                                        <td>$row[item_name]</td>
+                                                        <td>$row[unit_price]</td>
+                                                        <td>
+                                                            <a href='' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modal-update'>
+                                                                <i class='nav-icon fas fa-edit'></i>
+                                                                Edit
+                                                            </a>
+                                                            <a href='' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modal-default'>
+                                                                <i class='nav-icon fas fa-trash'></i>
+                                                                Delete
+                                                            </a>
+                                                        </td>
+                                                    
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>003</td>
-                                            <td>Meet Bun(Bao)</td>
-                                            <td>$1</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
+                                                    </tr>";
+                                                }
+                                            ?>
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>004</td>
-                                            <td>Cupacino</td>
-                                            <td>$2</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -163,12 +134,12 @@
         </section>
         <!-- /.content -->
 
-        <!-- Model -->
-        <div class="modal fade" id="modal-default">
+        <!-- Model Add New-->
+        <div class="modal fade" id="modal-add-new">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Default Modal</h4>
+                        <h4 class="modal-title">Add New Item</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -177,13 +148,13 @@
                         <div class="modal-body">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputCustomerName">Item Name</label>
+                                    <label for="inputItemName">Item Name</label>
                                     <input type="text" class="form-control" id="inputItemName"
                                         placeholder="Item Name">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputContact">Unit Price</label>
+                                    <label for="inputUnitPrice">Unit Price</label>
                                     <input type="text" class="form-control" id="inputUnitPrice" placeholder="Unit Price">
                                 </div>
                             </div>
@@ -201,6 +172,50 @@
         </div>
         <!-- /.modal -->
 
+    </div>
+
+    <!-- Model Update -->
+    <div class="modal fade" id="modal-update">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Item</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="">
+                        <div class="modal-body">
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="inputItemID">Item ID</label>
+                                    <input type="text" class="form-control" id="inputItemID" placeholder="Item ID" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputItemName">Item Name</label>
+                                    <input type="text" class="form-control" id="inputItemName" placeholder="Item Name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputUnitPrice">Unit Price</label>
+                                    <input type="text" class="form-control" id="inputUnitPrice" placeholder="Unit Price">
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </div>
 
     <!-- Main Footer -->
