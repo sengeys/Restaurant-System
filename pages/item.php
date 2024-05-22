@@ -89,7 +89,7 @@
                                                     Edit
                                                 </button>
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete">
                                                     <i class="nav-icon fas fa-trash"></i>
                                                     Delete
                                                 </button>
@@ -209,6 +209,40 @@
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <!-- Model Update -->
+    <div class="modal fade" id="modal-delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Item</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="">
+                        <div class="modal-body">
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="ItemDelete">Do you want to delete this item?</label>
+                                </div>
+
+                                
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Delete</button>
                         </div>
                     </form>
                 </div>
