@@ -133,7 +133,7 @@
                                         </tr>
                                         <tr>
                                             <td>004</td>
-                                            <td>Americano</td>
+                                            <td>Cupacino</td>
                                             <td>$2</td>
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
