@@ -48,7 +48,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modal-default">
+                                        data-target="#modal-add-new">
                                         <i class="nav-icon fas fa-plus"></i>
                                         Add New
                                     </button>
@@ -62,7 +62,7 @@
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
-                                            </button>
+                                            </button>   
                                         </div>
                                     </div>
                                 </div>
