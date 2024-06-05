@@ -11,7 +11,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Preloader -->
-    <?php include '../layouts/preloader.php'; ?>
+    <?php //include '../layouts/preloader.php'; ?>
     <!-- Navbar -->
     <?php include '../layouts/navbar.php'; ?>
     <!-- Main Sidebar Container -->
@@ -46,16 +46,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modal-default">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-insert">
                                         <i class="nav-icon fas fa-plus"></i>
                                         Add New
                                     </button>
                                 </h3>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm-3" style="width: 200px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                            placeholder="Search">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
@@ -76,79 +74,8 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>001</td>
-                                            <td>Instant Noodle</td>
-                                            <td>$1</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>002</td>
-                                            <td>Roost Beef</td>
-                                            <td>$25</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>003</td>
-                                            <td>Meet Bun(Bao)</td>
-                                            <td>$1</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>004</td>
-                                            <td>Cupacino</td>
-                                            <td>$2</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#modal-default">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
+                                    <tbody id="row_item">
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -163,37 +90,97 @@
         </section>
         <!-- /.content -->
 
-        <!-- Model -->
-        <div class="modal fade" id="modal-default">
+        <!-- Model Insert -->
+        <div class="modal fade" id="modal-insert">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Default Modal</h4>
+                        <h4 class="modal-title">Insert Item</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="">
-                        <div class="modal-body">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="inputCustomerName">Item Name</label>
-                                    <input type="text" class="form-control" id="inputItemName"
-                                        placeholder="Item Name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputContact">Unit Price</label>
-                                    <input type="text" class="form-control" id="inputUnitPrice" placeholder="Unit Price">
-                                </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="itemname">Item Name</label>
+                                <input type="text" class="form-control" id="itemname" placeholder="Item Name" required name="itemname">
                             </div>
-                            <!-- /.card-body -->
+
+                            <div class="form-group">
+                                <label for="unitprice">Unit Price</label>
+                                <input type="text" class="form-control" id="unitprice" placeholder="Unit Price" required name="unitprice">
+                            </div>
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                        <!-- /.card-body -->
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="insert_btn" name="insert_btn" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!-- Model Update -->
+        <div class="modal fade" id="modal-update">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Item</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="itemid">Item ID</label>
+                                <input type="text" class="form-control" id="edit_itemid" placeholder="Item ID" disabled>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="itemname">Item Name</label>
+                                <input type="text" class="form-control" id="edit_itemname" placeholder="Item Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="uniprice">Unit Price</label>
+                                <input type="text" class="form-control" id="edit_unitprice" placeholder="Unit Price">
+                            </div>
                         </div>
-                    </form>
+                        <!-- /.card-body -->
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="update_btn" name="update_btn"  data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!-- Model Delete -->
+        <div class="modal fade" id="modal-delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Insert Item</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h4 class="text-center">Do you want to delete?</h4>
+                    <input type="hidden" id="delete_itemid">
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="deletebtn" name="deletebtn" data-dismiss="modal">Save</button>
+                    </div>
                 </div>
                 <!-- /.modal-content -->
             </div>
@@ -207,6 +194,149 @@
     <?php include '../layouts/footer.php'; ?>
     <!-- link script -->
     <?php include '../layouts/link-script.php'; ?>
+
+    <!-- JQuery -->
+    <script>
+        $(document).ready(function () {
+            // Call Function
+            LoadDataToTable();
+            
+            SelecDataUpdate();
+            UpdateData();
+
+            SelecDataDelete();
+            DeleteData();
+
+            //Alert
+            function AlertSubmit(status, icon, title){
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if (status == 1){
+                    Toast.fire({
+                    icon: icon,
+                    title: title
+                    });
+                }
+                else{
+                    Toast.fire({
+                    icon: 'error',
+                    title: 'Error'
+                    });
+                }
+            }
+
+            // Load Data To Table
+            function LoadDataToTable(){
+                $.ajax({
+                    url: '../config/select/select_item.php',
+                    type: 'POST',
+                    success: function(data) {
+                        $("#row_item").html(data);
+                    },
+                    error: function() {
+                        alert('Failed to fetch data.');
+                    }
+                });
+            }
+
+            
+            // Insert item
+            $("#insert_btn").on("click", function(e){
+                var itemname = $("#itemname").val();
+                var unitprice = $("#unitprice").val();
+
+                $.ajax({
+                    url: '../config/insert/insert_item.php',
+                    method: 'POST',
+                    data: {item_name: itemname, unit_price: unitprice},
+                    success:function(data){
+                        LoadDataToTable();
+                        AlertSubmit(data,"success","Data Inserted Successfully!");
+                    }
+                });
+            });
+
+            // Get Data Update
+            function SelecDataUpdate(){
+                $(document).on("click", "#edti_btn", function(){
+                    var id = $(this).attr('data-id');
+
+                    $.ajax({
+                        url: '../config/search/search_item.php',
+                        method: 'POST',
+                        data: {item_id: id},
+                        dataType: 'JSON',
+                        success:function(data){
+                            $('#modal-update').modal('show');
+                            $('#edit_itemid').val(data.item_id);
+                            $('#edit_itemname').val(data.item_name);
+                            $('#edit_unitprice').val(data.unit_price);
+                        }
+                    });
+                });
+            }
+
+            // Update Item
+            function UpdateData(){
+                $(document).on("click", "#update_btn", function(){
+                    var item_id = $("#edit_itemid").val();
+                    var itemname = $("#edit_itemname").val();
+                    var unitprice = $("#edit_unitprice").val();
+
+                    $.ajax({
+                        url: '../config/update/update_item.php',
+                        method: 'POST',
+                        data: {item_id: item_id, item_name: itemname, unit_price: unitprice},
+                        success:function(data){
+                            LoadDataToTable();
+                            AlertSubmit(data,"success","Data Updated Successfully!");
+                        }
+                    });
+                });
+            }
+
+            // Get Data Delete
+            function SelecDataDelete(){
+                $(document).on("click", "#delete_btn", function(){
+                    var id = $(this).attr('data-id');
+
+                    $.ajax({
+                        url: '../config/search/search_item.php',
+                        method: 'POST',
+                        data: {item_id: id},
+                        dataType: 'JSON',
+                        success:function(data){
+                            $('#modal-delete').modal('show');
+                            $('#delete_itemid').val(data.item_id);
+                        }
+                    });
+                });
+            }
+
+            // Delete Item
+            function DeleteData(){
+                $(document).on("click", "#deletebtn", function(){
+                    var item_id = $("#delete_itemid").val();
+
+                    $.ajax({
+                        url: '../config/delete/delete_item.php',
+                        method: 'POST',
+                        data: {item_id: item_id},
+                        success:function(data){
+                            LoadDataToTable();
+                            AlertSubmit(data,"success","Data Deleted Successfully!");
+                        }
+                    });
+                });
+            }
+
+        });
+    </script>
 </body>
 
 </html>
