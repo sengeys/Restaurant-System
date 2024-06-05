@@ -179,6 +179,9 @@
 
     <script>
         $(document).ready(function () {
+            // Call Function
+            LoadDataToTable();
+
             // Style Add Row
             function selectaddrow () {
                 //Initialize Select2 Elements
@@ -190,34 +193,37 @@
                 }); 
             }
 
-            $.ajax({
-                url: '../config/select/select_customer.php',
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    var row_customer = $('#row_customer');
-                    $.each(data, function(index, customer) {
-                        var row = $('<tr>');
-                        $('<td>').text(customer.customer_id).appendTo(row);
-                        $('<td>').text(customer.customer_name).appendTo(row);
-                        $('<td>').text(customer.contact).appendTo(row);
-                        $('<td>').html(`
-                            <button type="submit" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-update">
-                                <i class="nav-icon fas fa-edit"></i>
-                                Edit
-                            </button>
-                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
-                                <i class="nav-icon fas fa-trash"></i>
-                                Delete
-                            </button>
-                        `).appendTo(row);
-                        row_customer.append(row);
-                    });
-                },
-                error: function() {
-                    alert('Failed to fetch data.');
-                }
-            });
+            // Show list data
+            function LoadDataToTable(){
+                $.ajax({
+                    url: '../config/select/select_customer.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        var row_customer = $('#row_customer');
+                        $.each(data, function(index, customer) {
+                            var row = $('<tr>');
+                            $('<td>').text(customer.customer_id).appendTo(row);
+                            $('<td>').text(customer.customer_name).appendTo(row);
+                            $('<td>').text(customer.contact).appendTo(row);
+                            $('<td>').html(`
+                                <button type="submit" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-update">
+                                    <i class="nav-icon fas fa-edit"></i>
+                                    Edit
+                                </button>
+                                <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
+                                    <i class="nav-icon fas fa-trash"></i>
+                                    Delete
+                                </button>
+                            `).appendTo(row);
+                            row_customer.append(row);
+                        });
+                    },
+                    error: function() {
+                        alert('Failed to fetch data.');
+                    }
+                });
+            }
         });
     </script>
 </body>
