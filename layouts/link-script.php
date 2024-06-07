@@ -30,22 +30,22 @@
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../dist/js/pages/dashboard.js"></script>
+<!-- <script src="../dist/js/pages/dashboard.js"></script> -->
 <!-- SweetAlert2 -->
 <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="../plugins/toastr/toastr.min.js"></script>
 
 <!-- Page specific script -->
-<script>
+<!-- <script>
   $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
+    // //Initialize Select2 Elements
+    // $('.select2').select2()
     
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
+    // //Initialize Select2 Elements
+    // $('.select2bs4').select2({
+    //   theme: 'bootstrap4'
+    // })
 
     //Datemask dd/mm/yyyy
     $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
@@ -170,4 +170,4 @@
     myDropzone.removeAllFiles(true)
   }
   // DropzoneJS Demo Code End
-</script>
+</script> -->

@@ -45,20 +45,23 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-insert">
-                                        <i class="nav-icon fas fa-plus"></i>
-                                        Add New
-                                    </button>
-                                </h3>
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm-3" style="width: 200px;">
-                                        <input type="text" name="search" id="search" class="form-control float-right" placeholder="Search">
+                                <div class="d-flex flex-wrap">
+                                    <div class="p-2">
+                                        <button type="button" class="btn btn-primary" id="add_new_btn" style="min-width: 105px;">
+                                            <i class="nav-icon fas fa-plus"></i>
+                                            Add New
+                                        </button>
+                                    </div>
 
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                    <div class="p-2 ml-auto">
+                                        <div class="input-group input-group-sm-3" style="min-width: 200px;">
+                                            <input type="text" name="search" id="search" class="form-control float-right" placeholder="Search">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +74,7 @@
                                             <th>Item ID</th>
                                             <th>Item Name</th>
                                             <th>Unit Price</th>
-                                            <th>Action</th>
+                                            <th style="width: 10%;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="row_item">
@@ -112,11 +115,10 @@
                                 <input type="text" class="form-control" id="unitprice" placeholder="Unit Price" required name="unitprice">
                             </div>
                         </div>
-                        <!-- /.card-body -->
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="insert_btn" name="insert_btn" data-dismiss="modal">Save</button>
+                        <button type="submit" class="btn btn-primary" id="insert_btn">Insert</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -152,11 +154,10 @@
                                 <input type="text" class="form-control" id="edit_unitprice" placeholder="Unit Price">
                             </div>
                         </div>
-                        <!-- /.card-body -->
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="update_btn" name="update_btn"  data-dismiss="modal">Save</button>
+                        <button type="submit" class="btn btn-primary" id="update_btn" name="update_btn">Update</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -170,7 +171,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Insert Item</h4>
+                        <h4 class="modal-title">Delete Item</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -179,7 +180,7 @@
                     <input type="hidden" id="delete_itemid">
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="deletebtn" name="deletebtn" data-dismiss="modal">Save</button>
+                        <button type="submit" class="btn btn-primary" id="deletebtn" name="deletebtn">Delete</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -247,6 +248,10 @@
             });
         }
 
+        // open modal
+        $("#add_new_btn").on("click", function(){
+            $('#modal-insert').modal('show');
+        });
         
         // Insert item
         $("#insert_btn").on("click", function(e){
@@ -262,11 +267,13 @@
                     AlertSubmit(data,"success","Data Inserted Successfully!");
                 }
             });
+
+            $('#modal-insert').modal('hide');
         });
 
         // Get Data Update
         function SelecDataUpdate(){
-            $(document).on("click", "#edti_btn", function(){
+            $(document).on("click", "#edit_btn", function(){
                 var id = $(this).attr('data-id');
 
                 $.ajax({
@@ -300,6 +307,7 @@
                         AlertSubmit(data,"success","Data Updated Successfully!");
                     }
                 });
+                $('#modal-update').modal('hide');
             });
         }
 
@@ -335,6 +343,8 @@
                         AlertSubmit(data,"success","Data Deleted Successfully!");
                     }
                 });
+
+                $('#modal-delete').modal('hide');
             });
         }
 

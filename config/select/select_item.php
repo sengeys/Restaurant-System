@@ -17,7 +17,7 @@
                     <td> <?php echo $result['item_name'] ?></td>
                     <td> <?php echo "$ " . $result['unit_price'] ?></td>
                     <td> 
-                        <button type="button" id="edti_btn" class="btn btn-warning btn-sm" data-id="<?php echo $result['item_id'] ?>">
+                        <button type="button" id="edit_btn" class="btn btn-warning btn-sm" data-id="<?php echo $result['item_id'] ?>">
                             <i class="nav-icon fas fa-edit"></i>
                             Edit
                         </button>
