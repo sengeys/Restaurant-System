@@ -1,5 +1,5 @@
 <?php
-    include '../connection.php';
+    include '../database/connection.php';
     // Enable error reporting
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 

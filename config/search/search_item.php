@@ -1,6 +1,6 @@
 <?php
     // include connection db
-     include('../connection.php');
+     include('../database/connection.php');
 
      // get item
     $id = $_POST['item_id'];

@@ -1,6 +1,6 @@
 <?php
     // include connection db
-     include('../connection.php');
+     include('../database/connection.php');
 
     // SQL query to select all customers
     $sql = "SELECT * FROM tblstaff";

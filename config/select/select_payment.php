@@ -1,6 +1,6 @@
 <?php
     // include connection db
-     include('../connection.php');
+     include('../database/connection.php');
 
     // SQL query to select all customers
     $sql = "SELECT order_id, date_created, tblstaff.staff_id, staff_name, tblcustomer.customer_id, customer_name, total, status
