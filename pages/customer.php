@@ -11,7 +11,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Preloader -->
-    <?php //include '../layouts/preloader.php'; ?>
+    <?php include '../layouts/preloader.php'; ?>
     <!-- Navbar -->
     <?php include '../layouts/navbar.php'; ?>
     <!-- Main Sidebar Container -->
@@ -45,20 +45,23 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-insert">
-                                        <i class="nav-icon fas fa-plus"></i>
-                                        Add New
-                                    </button>
-                                </h3>
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm-3" style="width: 200px;">
-                                        <input type="text" id="search" name="search" class="form-control float-right" placeholder="Search">
+                                <div class="d-flex flex-wrap">
+                                    <div class="p-2">
+                                        <button type="button" class="btn btn-primary" id="add_new_btn" style="min-width: 105px;">
+                                            <i class="nav-icon fas fa-plus"></i>
+                                            Add New
+                                        </button>
+                                    </div>
 
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                    <div class="p-2 ml-auto">
+                                        <div class="input-group input-group-sm-3" style="min-width: 200px;">
+                                            <input type="text" name="search" id="search" class="form-control float-right" placeholder="Search">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +74,7 @@
                                             <th>Customer ID</th>
                                             <th>Customer Name</th>
                                             <th>Contact</th>
-                                            <th>Action</th>
+                                            <th style="width: 10%;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="row_customer">
@@ -117,7 +120,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="insert_btn">Save</button>
+                        <button type="submit" class="btn btn-primary" id="insert_btn">Insert</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -157,7 +160,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="update_btn">Save</button>
+                        <button type="submit" class="btn btn-primary" id="update_btn">Update</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -187,7 +190,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="delete_submit">Save</button>
+                        <button type="submit" class="btn btn-primary" id="delete_submit">Delete</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -255,6 +258,11 @@
             });
         }
 
+        // open modal
+        $("#add_new_btn").on("click", function(){
+            $('#modal-insert').modal('show');
+        });
+
         
         // Insert item
         $("#insert_btn").on("click", function(e){
@@ -270,6 +278,7 @@
                     AlertSubmit(data,"success","Data Inserted Successfully!");
                 }
             });
+            $('#modal-insert').modal('hide');
         });
 
         // Get Data Update
@@ -308,6 +317,7 @@
                         AlertSubmit(data,"success","Data Updated Successfully!");
                     }
                 });
+                $('#modal-update').modal('hide');
             });
         }
 
@@ -343,6 +353,8 @@
                         AlertSubmit(data,"success","Data Deleted Successfully!");
                     }
                 });
+
+                $('#modal-delete').modal('hide');
             });
         }
 

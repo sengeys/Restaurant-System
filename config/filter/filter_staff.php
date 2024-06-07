@@ -2,8 +2,21 @@
     // include connection db
      include('../database/connection.php');
 
+     // Get Data
+    $search_gender = $_POST['search_gender'];
+    $search_address = $_POST['search_address'];
+
     // SQL query to select all customers
-    $sql = "SELECT * FROM tblstaff";
+
+    $sql = "SELECT * FROM tblstaff WHERE 1=1";
+
+    if ($search_gender != '') {
+        $sql .= " AND sex = '$search_gender'";
+    }
+
+    if ($search_address != '') {
+        $sql .= " AND address = '$search_address'";
+    }
 
     $fetch_query = mysqli_query($conn, $sql);
 
