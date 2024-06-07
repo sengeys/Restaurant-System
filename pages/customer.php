@@ -47,14 +47,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-new">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-insert">
                                         <i class="nav-icon fas fa-plus"></i>
                                         Add New
                                     </button>
                                 </h3>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm-3" style="width: 200px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                        <input type="text" id="search" name="search" class="form-control float-right" placeholder="Search">
 
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
@@ -92,41 +92,40 @@
         <!-- /.content -->
 
         <!-- Model -->
-        <!-- Model Add New -->
-        <div class="modal fade" id="modal-add-new">
+        <!-- Model Insert -->
+        <div class="modal fade" id="modal-insert">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add New Customer</h4>
+                        <h4 class="modal-title">Insert Customer</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="">
-                        <div class="modal-body">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="inputCustomerName">Customer Name</label>
-                                    <input type="text" class="form-control" id="inputCustomerName" placeholder="Customer Name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputContact">Contact</label>
-                                    <input type="text" class="form-control" id="inputContact" placeholder="Contact">
-                                </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="customer_name">Customer Name</label>
+                                <input type="text" class="form-control" id="customer_name" required name="customer_name" placeholder="Customer Name">
                             </div>
-                            <!-- /.card-body -->
+
+                            <div class="form-group">
+                                <label for="contact">Contact</label>
+                                <input type="text" class="form-control" id="contact" required name="contact" placeholder="Contact">
+                            </div>
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="insert_btn">Save</button>
+                    </div>
                 </div>
                 <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
         </div>
+        <!-- /.modal-->
 
         <!-- Model Update -->
         <div class="modal fade" id="modal-update">
@@ -138,38 +137,66 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="">
-                        <div class="modal-body">
-                            <div class="card-body">
-
-                                <div class="form-group">
-                                    <label for="inputCustomerName">Customer ID</label>
-                                    <input type="text" class="form-control" id="inputCustomerName" placeholder="Customer ID" disabled>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputCustomerName">Customer Name</label>
-                                    <input type="text" class="form-control" id="inputCustomerName" placeholder="Customer Name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputContact">Contact</label>
-                                    <input type="text" class="form-control" id="inputContact" placeholder="Contact">
-                                </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="customer_id">Customer ID</label>
+                                <input type="text" class="form-control" id="edit_customer_id" required name="edit_customer_id" placeholder="Customer ID" disabled>
                             </div>
-                            <!-- /.card-body -->
+
+                            <div class="form-group">
+                                <label for="customer_name">Customer Name</label>
+                                <input type="text" class="form-control" id="edit_customer_name" required name="edit_customer_name" placeholder="Customer Name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact">Contact</label>
+                                <input type="text" class="form-control" id="edit_contact" required name="edit_contact" placeholder="Contact">
+                            </div>
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
-                    </form>
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="update_btn">Save</button>
+                    </div>
                 </div>
                 <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal -->
+        <!-- /.modal-->
+
+        
+        <!-- Model Delete -->
+        <div class="modal fade" id="modal-delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Customer</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <h4 class="text-center">Do you want to delete?</h4>
+                            <input type="hidden" class="form-control" id="delete_customer_id" required name="delete_customer_id" placeholder="Customer ID" disabled>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="delete_submit">Save</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal-->
+        
     </div>
 
     <!-- Main Footer -->
@@ -177,54 +204,165 @@
     <!-- link script -->
     <?php include '../layouts/link-script.php'; ?>
 
+    <!-- JQuery -->
     <script>
-        $(document).ready(function () {
-            // Call Function
+        $(document).ready(function(){
+            // Call Function : Loat Data To Table
             LoadDataToTable();
+            
+            // Call Function : Update Data
+            SelecDataUpdate();
+            UpdateData();
 
-            // Style Add Row
-            function selectaddrow () {
-                //Initialize Select2 Elements
-                $('.select2').select2();
-                
-                //Initialize Select2 Elements
-                $('.select2bs4').select2({
-                theme: 'bootstrap4'
-                }); 
-            }
+            //Call Function : Delete Data
+            SelecDataDelete();
+            DeleteData();
 
-            // Show list data
-            function LoadDataToTable(){
-                $.ajax({
-                    url: '../config/select/select_customer.php',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        var row_customer = $('#row_customer');
-                        $.each(data, function(index, customer) {
-                            var row = $('<tr>');
-                            $('<td>').text(customer.customer_id).appendTo(row);
-                            $('<td>').text(customer.customer_name).appendTo(row);
-                            $('<td>').text(customer.contact).appendTo(row);
-                            $('<td>').html(`
-                                <button type="submit" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-update">
-                                    <i class="nav-icon fas fa-edit"></i>
-                                    Edit
-                                </button>
-                                <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
-                                    <i class="nav-icon fas fa-trash"></i>
-                                    Delete
-                                </button>
-                            `).appendTo(row);
-                            row_customer.append(row);
-                        });
-                    },
-                    error: function() {
-                        alert('Failed to fetch data.');
-                    }
+            // Call Function : Live Search
+            LiveSearch();
+        });
+
+        //Alert
+        function AlertSubmit(status, icon, title){
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            if (status == 1){
+                Toast.fire({
+                icon: icon,
+                title: title
                 });
             }
+            else{
+                Toast.fire({
+                icon: 'error',
+                title: 'Error'
+                });
+            }
+        }
+
+        // Load Data To Table
+        function LoadDataToTable(){
+            $.ajax({
+                url: '../config/select/select_customer.php',
+                type: 'POST',
+                success: function(data) {
+                    $("#row_customer").html(data);
+                },
+            });
+        }
+
+        
+        // Insert item
+        $("#insert_btn").on("click", function(e){
+            var customer_name = $("#customer_name").val();
+            var contact = $("#contact").val();
+
+            $.ajax({
+                url: '../config/insert/insert_customer.php',
+                method: 'POST',
+                data: {customer_name: customer_name, contact: contact},
+                success:function(data){
+                    LoadDataToTable();
+                    AlertSubmit(data,"success","Data Inserted Successfully!");
+                }
+            });
         });
+
+        // Get Data Update
+        function SelecDataUpdate(){
+            $(document).on("click", "#edit_btn", function(){
+                var id = $(this).attr('data-id');
+
+                $.ajax({
+                    url: '../config/search/search_customer.php',
+                    method: 'POST',
+                    data: {customer_id: id},
+                    dataType: 'JSON',
+                    success:function(data){
+                        $('#modal-update').modal('show');
+                        $('#edit_customer_id').val(data.customer_id);
+                        $('#edit_customer_name').val(data.customer_name);
+                        $('#edit_contact').val(data.contact);
+                    }
+                });
+            });
+        }
+
+        // Update Item
+        function UpdateData(){
+            $(document).on("click", "#update_btn", function(){
+                var customer_id = $("#edit_customer_id").val();
+                var customer_name = $("#edit_customer_name").val();
+                var contact = $("#edit_contact").val();
+
+                $.ajax({
+                    url: '../config/update/update_customer.php',
+                    method: 'POST',
+                    data: {customer_id: customer_id, customer_name: customer_name, contact: contact},
+                    success:function(data){
+                        LoadDataToTable();
+                        AlertSubmit(data,"success","Data Updated Successfully!");
+                    }
+                });
+            });
+        }
+
+        // Get Data Delete
+        function SelecDataDelete(){
+            $(document).on("click", "#delete_btn", function(){
+                var id = $(this).attr('data-id');
+
+                $.ajax({
+                    url: '../config/search/search_customer.php',
+                    method: 'POST',
+                    data: {customer_id: id},
+                    dataType: 'JSON',
+                    success:function(data){
+                        $('#modal-delete').modal('show');
+                        $('#delete_customer_id').val(data.customer_id);
+                    }
+                });
+            });
+        }
+
+        // Delete Item
+        function DeleteData(){
+            $(document).on("click", "#delete_submit", function(){
+                var customer_id = $("#delete_customer_id").val();
+
+                $.ajax({
+                    url: '../config/delete/delete_customer.php',
+                    method: 'POST',
+                    data: {customer_id: customer_id},
+                    success:function(data){
+                        LoadDataToTable();
+                        AlertSubmit(data,"success","Data Deleted Successfully!");
+                    }
+                });
+            });
+        }
+
+        // Live Search
+        function LiveSearch(){
+            $(document).on("keyup","#search",function(){
+                var search_data = $(this).val();
+                
+                $.ajax({
+                    url: '../config/livesearch/live_search_customer.php',
+                    method: 'POST',
+                    data: {search: search_data},
+                    success:function(data){
+                        $("#row_customer").html(data);
+                    }
+                });
+            });
+        }
+
     </script>
 </body>
 </html>
