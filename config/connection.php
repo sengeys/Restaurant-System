@@ -1,14 +1,15 @@
 <?php
-    $servername = "localhost";
+    $hostname = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "restaurantdb";
+    $database = "restaurantdb";
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($hostname, $username, $password, $database);
+
 
     // Check connection
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        die("Connection Field " . $conn->connect_error);
     }
 ?>
