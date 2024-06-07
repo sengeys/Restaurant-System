@@ -2,8 +2,11 @@
     // include connection db
      include('../database/connection.php');
 
+    // Get Data
+    $search = $_POST['search'];
+
     // SQL query to select all customers
-    $sql = "SELECT * FROM tbltable";
+    $sql = "SELECT * FROM tbltable WHERE table_id like '{$search}%' OR table_name like '{$search}%'";
 
     $fetch_query = mysqli_query($conn, $sql);
 

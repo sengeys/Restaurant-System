@@ -45,18 +45,22 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title font-weight-bold text-success">
-                                    Payment
-                                </h3>
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm-3" style="width: 200px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                            placeholder="Search">
+                                <div class="d-flex flex-wrap">
+                                    <div class="pt-3">
+                                        <h3 class="card-title font-weight-bold text-success">
+                                            Payment
+                                        </h3>
+                                    </div>
 
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                    <div class="p-2 ml-auto">
+                                        <div class="input-group input-group-sm-3" style="min-width: 200px;">
+                                            <input type="text" name="search" id="search" class="form-control float-right" placeholder="Search">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -206,6 +210,7 @@
             });
         });
     </script>
+    
 </body>
 
 </html>

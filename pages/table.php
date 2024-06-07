@@ -87,12 +87,11 @@
                     </div>
                 </div>
                 <!-- /.row -->
-                <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
 
-        <!-- Model -->
+        <!-- Model Insert -->
         <div class="modal fade" id="modal-insert">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -109,11 +108,71 @@
                                 <input type="text" class="form-control" id="table_name" name="table_name" placeholder="Table Name">
                             </div>
                         </div>
-                        <!-- /.card-body -->
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" id="insert_submit">Insert</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!-- Model Update -->
+        <div class="modal fade" id="modal-update">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Table</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="edit_table_id">Table ID</label>
+                                <input type="text" class="form-control" id="edit_table_id" name="edit_table_id" placeholder="Table ID" disabled>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit_table_name">Table Name</label>
+                                <input type="text" class="form-control" id="edit_table_name" name="edit_table_name" placeholder="Table Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="update_submit">Update</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+         <!-- Model Delete -->
+         <div class="modal fade" id="modal-delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Table</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <h4 class="text-center">Do you want to delete?</h4>
+                            <input type="hidden" class="form-control" id="delete_table_id" name="delete_table_id">
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="delete_submit">Delete</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -136,15 +195,15 @@
             LoadDataToTable();
             
             // Call Function : Update Data
-            //SelecDataUpdate();
-            //UpdateData();
+            SelecDataUpdate();
+            UpdateData();
 
             // Call Function : Delete Data
-            //SelecDataDelete();
-            //DeleteData();
+            SelecDataDelete();
+            DeleteData();
 
             // Call Function : Live Search
-            //LiveSearch();
+            LiveSearch();
         });
 
         //Alert
@@ -173,129 +232,126 @@
         // Load Data To Table
         function LoadDataToTable(){
             $.ajax({
-                url: '../config/select/select_item.php',
+                url: '../config/select/select_table.php',
                 type: 'POST',
                 success: function(data) {
-                    $("#row_item").html(data);
+                    $("#row_table").html(data);
                 },
             });
         }
 
-        // // open modal
-        // $("#add_new_btn").on("click", function(){
-        //     $('#modal-insert').modal('show');
-        // });
+        // open modal
+        $("#add_new_btn").on("click", function(){
+            $('#modal-insert').modal('show');
+        });
         
-        // // Insert item
-        // $("#insert_btn").on("click", function(e){
-        //     var itemname = $("#itemname").val();
-        //     var unitprice = $("#unitprice").val();
+        // Insert item
+        $("#insert_submit").on("click", function(e){
+            var table_name = $("#table_name").val();
 
-        //     $.ajax({
-        //         url: '../config/insert/insert_item.php',
-        //         method: 'POST',
-        //         data: {item_name: itemname, unit_price: unitprice},
-        //         success:function(data){
-        //             LoadDataToTable();
-        //             AlertSubmit(data,"success","Data Inserted Successfully!");
-        //         }
-        //     });
+            $.ajax({
+                url: '../config/insert/insert_table.php',
+                method: 'POST',
+                data: {table_name: table_name},
+                success:function(data){
+                    LoadDataToTable();
+                    AlertSubmit(data,"success","Data Inserted Successfully!");
+                }
+            });
 
-        //     $('#modal-insert').modal('hide');
-        // });
+            $('#modal-insert').modal('hide');
+        });
 
-        // // Get Data Update
-        // function SelecDataUpdate(){
-        //     $(document).on("click", "#edit_btn", function(){
-        //         var id = $(this).attr('data-id');
+        // Get Data Update
+        function SelecDataUpdate(){
+            $(document).on("click", "#edit_btn", function(){
+                var id = $(this).attr('data-id');
 
-        //         $.ajax({
-        //             url: '../config/search/search_item.php',
-        //             method: 'POST',
-        //             data: {item_id: id},
-        //             dataType: 'JSON',
-        //             success:function(data){
-        //                 $('#modal-update').modal('show');
-        //                 $('#edit_itemid').val(data.item_id);
-        //                 $('#edit_itemname').val(data.item_name);
-        //                 $('#edit_unitprice').val(data.unit_price);
-        //             }
-        //         });
-        //     });
-        // }
+                $.ajax({
+                    url: '../config/search/search_table.php',
+                    method: 'POST',
+                    data: {table_id: id},
+                    dataType: 'JSON',
+                    success:function(data){
+                        $('#modal-update').modal('show');
+                        $('#edit_table_id').val(data.table_id);
+                        $('#edit_table_name').val(data.table_name);
+                    }
+                });
+            });
+        }
 
-        // // Update Item
-        // function UpdateData(){
-        //     $(document).on("click", "#update_btn", function(){
-        //         var item_id = $("#edit_itemid").val();
-        //         var itemname = $("#edit_itemname").val();
-        //         var unitprice = $("#edit_unitprice").val();
+        // Update Item
+        function UpdateData(){
+            $(document).on("click", "#update_submit", function(){
+                var table_id = $("#edit_table_id").val();
+                var table_name = $("#edit_table_name").val();
 
-        //         $.ajax({
-        //             url: '../config/update/update_item.php',
-        //             method: 'POST',
-        //             data: {item_id: item_id, item_name: itemname, unit_price: unitprice},
-        //             success:function(data){
-        //                 LoadDataToTable();
-        //                 AlertSubmit(data,"success","Data Updated Successfully!");
-        //             }
-        //         });
-        //         $('#modal-update').modal('hide');
-        //     });
-        // }
+                $.ajax({
+                    url: '../config/update/update_table.php',
+                    method: 'POST',
+                    data: {table_id: table_id, table_name: table_name},
+                    success:function(data){
+                        LoadDataToTable();
+                        AlertSubmit(data,"success","Data Updated Successfully!");
+                    }
+                });
+                $('#modal-update').modal('hide');
+            });
+        }
 
-        // // Get Data Delete
-        // function SelecDataDelete(){
-        //     $(document).on("click", "#delete_btn", function(){
-        //         var id = $(this).attr('data-id');
+        // Get Data Delete
+        function SelecDataDelete(){
+            $(document).on("click", "#delete_btn", function(){
+                var id = $(this).attr('data-id');
 
-        //         $.ajax({
-        //             url: '../config/search/search_item.php',
-        //             method: 'POST',
-        //             data: {item_id: id},
-        //             dataType: 'JSON',
-        //             success:function(data){
-        //                 $('#modal-delete').modal('show');
-        //                 $('#delete_itemid').val(data.item_id);
-        //             }
-        //         });
-        //     });
-        // }
+                $.ajax({
+                    url: '../config/search/search_table.php',
+                    method: 'POST',
+                    data: {table_id: id},
+                    dataType: 'JSON',
+                    success:function(data){
+                        $('#modal-delete').modal('show');
+                        $('#delete_table_id').val(data.table_id);
+                    }
+                });
+            });
+        }
 
-        // // Delete Item
-        // function DeleteData(){
-        //     $(document).on("click", "#deletebtn", function(){
-        //         var item_id = $("#delete_itemid").val();
+        // Delete Item
+        function DeleteData(){
+            $(document).on("click", "#delete_submit", function(){
+                var table_id = $("#delete_table_id").val();
 
-        //         $.ajax({
-        //             url: '../config/delete/delete_item.php',
-        //             method: 'POST',
-        //             data: {item_id: item_id},
-        //             success:function(data){
-        //                 LoadDataToTable();
-        //                 AlertSubmit(data,"success","Data Deleted Successfully!");
-        //             }
-        //         });
+                $.ajax({
+                    url: '../config/delete/delete_table.php',
+                    method: 'POST',
+                    data: {table_id: table_id},
+                    success:function(data){
+                        LoadDataToTable();
+                        AlertSubmit(data,"success","Data Deleted Successfully!");
+                    }
+                });
 
-        //         $('#modal-delete').modal('hide');
-        //     });
-        // }
+                $('#modal-delete').modal('hide');
+            });
+        }
 
-        // // Live Search
-        // function LiveSearch(){
-        //     $(document).on("keyup","#search",function(){
-        //         var search_data = $(this).val();
+        // Live Search
+        function LiveSearch(){
+            $(document).on("keyup","#search",function(){
+                var search_data = $(this).val();
                 
-        //         $.ajax({
-        //             url: '../config/livesearch/live_search_item.php',
-        //             method: 'POST',
-        //             data: {search: search_data},
-        //             success:function(data){
-        //                 $("#row_item").html(data);
-        //             }
-        //         });
-        //     });
-        // }
+                $.ajax({
+                    url: '../config/livesearch/live_search_table.php',
+                    method: 'POST',
+                    data: {search: search_data},
+                    success:function(data){
+                        $("#row_table").html(data);
+                    }
+                });
+            });
+        }
 
     </script>
 </body>
