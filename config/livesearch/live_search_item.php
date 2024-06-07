@@ -1,6 +1,6 @@
 <?php
     // include connection db
-     include('../connection.php');
+     include('../database/connection.php');
 
     // Get Data
     $search = $_POST['search'];
