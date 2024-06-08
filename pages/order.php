@@ -56,7 +56,7 @@
                                             <!-- Order Date -->
                                             <label>Order Date <span class="text-danger">*</span></label>
                                             <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                                <input required name="orderdate" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" />
+                                                <input id="order_date" name="order_date" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" />
                                                 <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
                                                     <div class="input-group-text">
                                                         <i class="fa fa-calendar"></i>
@@ -67,7 +67,6 @@
                                             <!-- Staff Name -->
                                             <label>Staff Name <span class="text-danger">*</span></label>
                                             <select id="staff_id" name="staff_id" class="form-control select2" style="width: 100%;">
-
                                             </select>
                                         </div>
                                     </div>
@@ -235,13 +234,47 @@
             $('.select2').select2();
 
             // Call Function : Loat Data To Box
-            SelectDataToBox ();
+            SelectDataToBoxOrderDetail ();
         });
 
-        function SelectDataToBox (){
+        // Loat Data To Box Order Detail
+        function SelectDataToBoxOrderDetail (){
             // staff
+            $.ajax({
+                url: '../config/order/get_staff_to_box.php',
+                type: 'POST',
+                success: function(data) {
+                    $("#staff_id").html(data);
+                },
+            });
+
+            // customer
+            $.ajax({
+                url: '../config/order/get_customer_to_box.php',
+                type: 'POST',
+                success: function(data) {
+                    $("#customer_id").html(data);
+                },
+            });
+
+            // customer
+            $.ajax({
+                url: '../config/order/get_table_to_box.php',
+                type: 'POST',
+                success: function(data) {
+                    $("#table_id").html(data);
+                },
+            });
+        }
+
+        // Loat Data To Box Item Detail
+        function SelectDataToBoxItemDetail (){
+            // Item
             
         }
+
+
+
      </script>
 </body>
 
