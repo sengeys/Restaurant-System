@@ -2,8 +2,11 @@
     // include connection db
      include('../database/connection.php');
 
+     // Get Data
+    $search = $_POST['search'];
+
     // SQL query to select all customers
-    $sql = "SELECT * FROM vpayment ORDER BY order_id DESC";
+    $sql = "SELECT * FROM vpayment WHERE order_id like '{$search}%' OR customer_name like '{$search}%' ORDER BY order_id DESC";
 
     $fetch_query = mysqli_query($conn, $sql);
 
