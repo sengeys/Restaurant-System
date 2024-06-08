@@ -259,6 +259,7 @@
                 }
             });
 
+            $("#table_name").val("");
             $('#modal-insert').modal('hide');
         });
 
