@@ -46,16 +46,17 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex flex-wrap">
+
                                     <div class="p-2">
                                         <button type="button" class="btn btn-primary" id="add_new_btn" style="min-width: 105px;">
                                             <i class="nav-icon fas fa-plus"></i>
                                             Add New
                                         </button>
                                     </div>
-                                    <div class="pt-2">
-                                        <div class="d-flex mb-2" style="min-width: 220px;">
-                                            <label for="filter_gender" class="pt-2 pr-2"> <i class="nav-icon fas fa-filter"></i> Gender</label>
-                                            <select id="filter_gender" name="filter_gender" class="form-control select2" style="width: 100px;">
+                                    <div class="pt-2 flex-fill">
+                                        <div class="d-flex pl-2" style="min-width: 220px;">
+                                            <label for="filter_gender" class="pt-2 pr-2 d-flex"> <i class="nav-icon fas fa-filter pt-1"></i> Gender</label>
+                                            <select id="filter_gender" name="filter_gender" class="form-control select2" style="width: 100%;">
                                                 <option value="" selected>All</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
@@ -63,10 +64,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="pt-2">
-                                        <div class="d-flex mb-2" style="min-width: 295px;">
-                                            <label for="filter_address" class="pt-2 pr-2"> <i class="nav-icon fas fa-filter"></i> Address </span></label>
-                                            <select id="filter_address" name="filter_address" class="form-control select2" style="width: 180px;">
+                                    <div class="pt-2 flex-fill">
+                                        <div class="d-flex pl-2" style="min-width: 220px;">
+                                            <label for="filter_address" class="pt-2 pr-2 d-flex"> <i class="nav-icon fas fa-filter pt-1"></i> Address </span></label>
+                                            <select id="filter_address" name="filter_address" class="form-control select2" style="width: 100%;">
                                                 <option value="" selected>All</option>
                                                 <option value="Phnom Penh">Phnom Penh</option>
                                                 <option value="Banteay Meanchey">Banteay Meanchey</option>
@@ -97,10 +98,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="p-2 ml-auto">
-                                        <div class="input-group input-group-sm-3" style="min-width: 200px;">
+                                    <div class="p-2 flex-fill">
+                                        <div class="input-group input-group-sm-3 ml-auto"  style="min-width: 150px;">
                                             <input type="text" name="search" id="search" class="form-control float-right" placeholder="Search">
-
                                             <div class="input-group-append">
                                                 <button type="submit" class="btn btn-default">
                                                     <i class="fas fa-search"></i>

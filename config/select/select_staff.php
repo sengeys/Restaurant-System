@@ -3,7 +3,7 @@
      include('../database/connection.php');
 
     // SQL query to select all customers
-    $sql = "SELECT * FROM tblstaff";
+    $sql = "SELECT * FROM tblstaff ORDER BY tblstaff.staff_id DESC";
 
     $fetch_query = mysqli_query($conn, $sql);
 
