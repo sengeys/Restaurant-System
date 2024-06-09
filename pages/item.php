@@ -78,50 +78,9 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>001</td>
-                                            <td>Instant Noodle</td>
-                                            <td>$1</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-update">
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                    Edit
-                                                </button>
-
-                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                                $sql = "select * from tblitem";
-                                                $result = $conn->query($sql);
-                                                while($row = $result->fetch_assoc()){
-                                                    echo "<tr>
-                                                        <td>$row[item_id]</td>
-                                                        <td>$row[item_name]</td>
-                                                        <td>$row[unit_price]</td>
-                                                        <td>
-                                                            <a href='' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modal-update'>
-                                                                <i class='nav-icon fas fa-edit'></i>
-                                                                Edit
-                                                            </a>
-                                                            <a href='' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modal-default'>
-                                                                <i class='nav-icon fas fa-trash'></i>
-                                                                Delete
-                                                            </a>
-                                                        </td>
-                                                    
-
-                                                    </tr>";
-                                                }
-                                            ?>
-
-
-
-                                    </tbody>
+                                    <tbody id="row_customer">
+                                       
+                                       </tbody>
                                 </table>
                             </div>
                             <!-- /.card-body -->
@@ -257,6 +216,50 @@
     <?php include '../layouts/footer.php'; ?>
     <!-- link script -->
     <?php include '../layouts/link-script.php'; ?>
+
+    <script>
+        $(document).ready(function () {
+            // Style Add Row
+            function selectaddrow () {
+                //Initialize Select2 Elements
+                $('.select2').select2();
+                
+                //Initialize Select2 Elements
+                $('.select2bs4').select2({
+                theme: 'bootstrap4'
+                }); 
+            }
+
+            $.ajax({
+                url: '../config/select/select_item.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var row_item = $('#row_item');
+                    $.each(data, function(index, item) {
+                        var row = $('<tr>');
+                        $('<td>').text(item.item_id).appendTo(row);
+                        $('<td>').text(item.item_name).appendTo(row);
+                        $('<td>').text(item.unit_price).appendTo(row);
+                        $('<td>').html(`
+                            <button type="submit" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-update">
+                                <i class="nav-icon fas fa-edit"></i>
+                                Edit
+                            </button>
+                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
+                                <i class="nav-icon fas fa-trash"></i>
+                                Delete
+                            </button>
+                        `).appendTo(row);
+                        row_item.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Failed to fetch data.');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

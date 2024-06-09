@@ -6,12 +6,12 @@
     $sql = "SELECT * FROM tblitem";
     $result = $conn->query($sql);
 
-    $customers = array();
+    $items = array();
 
     if ($result->num_rows > 0) {
         // Fetch all customers data
         while($row = $result->fetch_assoc()) {
-            $customers[] = $row;
+            $items[] = $row;
         }
     } else {
         echo "0 results";
@@ -19,5 +19,5 @@
     $conn->close();
 
     // Return the data as JSON
-    echo json_encode($customers);
+    echo json_encode($items);
 ?>
