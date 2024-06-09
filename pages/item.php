@@ -78,7 +78,7 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="row_customer">
+                                    <tbody id="row_item">
                                        
                                        </tbody>
                                 </table>
