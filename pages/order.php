@@ -54,7 +54,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <!-- Order Date -->
-                                            <label>Order Date <span class="text-danger">*</span></label>
+                                            <label for="order_date">Order Date <span class="text-danger">*</span></label>
                                             <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                                 <input id="order_date" name="order_date" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" />
                                                 <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
@@ -65,7 +65,7 @@
                                             </div>
 
                                             <!-- Staff Name -->
-                                            <label>Staff Name <span class="text-danger">*</span></label>
+                                            <label for="staff_id">Staff Name <span class="text-danger">*</span></label>
                                             <select id="staff_id" name="staff_id" class="form-control select2" style="width: 100%;">
                                             </select>
                                         </div>
@@ -73,11 +73,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <!-- Customer Name -->
-                                            <label>Customer Name <span class="text-danger">*</span></label>
+                                            <label for="customer_id">Customer Name <span class="text-danger">*</span></label>
                                             <select id="customer_id" name="customer_id" class="form-control select2" style="width: 100%;"></select>
 
                                             <!-- Table Name -->
-                                            <label>Table Name <span class="text-danger">*</span></label>
+                                            <label for="table_id">Table Name <span class="text-danger">*</span></label>
                                             <select id="table_id" name="table_id"  class="form-control select2" style="width: 100%;"> </select>
                                         </div>
                                     </div>
@@ -116,43 +116,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="row_item_detail">
-                                        <tr>
-                                            <td style="min-width: 8rem; width: 30%;">
-                                                <!-- Item Name -->
-                                                <select id="item_id" name="item_id" class="form-control select2" style="width: 100%;">
-                                                    <option value="">Select Item</option>
-                                                </select>
-                                            </td>
-                                            <td style="min-width: 8rem; width: 20%;">
-                                                <!-- Quantity -->
-                                                <input id="quantity" name="quantity" type="text" class="form-control quantity">
-                                            </td>
-                                            <td style="min-width: 8rem; width: 20%;">
-                                                <div class="input-group">
-                                                    <!-- Price -->
-                                                    <input id="price" name="price" type="text" class="form-control text-right price" value="">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td style="min-width: 8rem; width: 20%;">
-                                                <div class="input-group">
-                                                    <!-- Total -->
-                                                    <input id="total" name="total" type="text" class="form-control text-right total" disabled>
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="text-right" style="min-width: 8rem; width: 10%;">
-                                                <!-- Delete Button -->
-                                                <button type="button" id="delete_btn" class="btn btn-danger">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -229,19 +193,81 @@
 
     <!-- JQuery -->
      <script>
-        $(document).ready(function () {
+        $(document).ready(function(){
+            // Call Function : style
+            SelectionStyle();
+            SelectDataTimePicker();
+
+            // Call Function :
+            LoadDataToBox();
+            AddRowItemDetail();
+        });
+
+        // Function : Style
+        function SelectionStyle(){
             //Initialize Select2 Elements
             $('.select2').select2();
 
-            // Call Function : Loat Data To Box
-            SelectDataToBoxOrderDetail ();
-        });
+        }
 
-        // Loat Data To Box Order Detail
-        function SelectDataToBoxOrderDetail (){
+        // Function : Date Time Picker
+        function SelectDataTimePicker(){
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
+            //Money Euro
+            $('[data-mask]').inputmask();
+
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'L'
+            });
+
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+            //Date range picker
+            $('#reservation').daterangepicker();
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY hh:mm A'
+            }
+            });
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+            {
+                ranges   : {
+                'Today'       : [moment(), moment()],
+                'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate  : moment()
+            },
+
+            function (start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+            );
+
+            //Timepicker
+            $('#timepicker').datetimepicker({
+            format: 'LT'
+            });
+        }
+
+        // Function : Load Data To Box Order Detail
+        function LoadDataToBox(){
             // staff
             $.ajax({
-                url: '../config/order/get_staff_to_box.php',
+                url: '../config/select/get_to_box/get_staff_to_box.php',
                 type: 'POST',
                 success: function(data) {
                     $("#staff_id").html(data);
@@ -250,7 +276,7 @@
 
             // customer
             $.ajax({
-                url: '../config/order/get_customer_to_box.php',
+                url: '../config/select/get_to_box/get_customer_to_box.php',
                 type: 'POST',
                 success: function(data) {
                     $("#customer_id").html(data);
@@ -259,7 +285,7 @@
 
             // customer
             $.ajax({
-                url: '../config/order/get_table_to_box.php',
+                url: '../config/select/get_to_box/get_table_to_box.php',
                 type: 'POST',
                 success: function(data) {
                     $("#table_id").html(data);
@@ -267,15 +293,47 @@
             });
         }
 
-        // Loat Data To Box Item Detail
-        function SelectDataToBoxItemDetail (){
-            // Item
-            
+
+        // Function : Add New Row Item Detail
+        function AddRowItemDetail(){
+            $(document).on("click", "#add_new_btn", function(){
+                $.ajax({
+                    url: '../config/select/select_order.php',
+                    type: 'POST',
+                    success: function(data) {
+                        var html = '';
+                        html += '<tr>';
+                        html += '<td style="min-width: 8rem; width: 30%;">';
+                        html += '<select name="item_id[]" class="form-control select2"  style="width: 100%;">' + data + '</select> </td>';
+        
+                        html += '<td style="min-width: 8rem; width: 20%;">';
+                        html += '<input name="quantity[]" type="text" class="form-control quantity"> </td>';
+        
+                        html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
+                        html += '<input name="price[]" type="text" class="form-control text-right price" value="">';
+                        html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
+        
+                        html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
+                        html += '<input name="total[]" type="text" class="form-control text-right total" disabled>';
+                        html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
+        
+                        html += '<td class="text-right" style="min-width: 8rem; width: 10%;">';
+                        html += '<button type="button" id="delete_btn" name="delete_btn" class="btn btn-danger"> <i class="nav-icon fas fa-trash"></i> Delete </button> </td>';
+                        html += '</tr>';
+
+                        $("#row_item_detail").append(html);
+                        SelectionStyle();
+                    }
+                });
+            });
+
+            $(document).on("click", "#delete_btn", function(){
+                $(this).closest("tr").remove();
+            });
         }
 
 
 
      </script>
 </body>
-
 </html>

@@ -1,9 +1,9 @@
 <?php
     // include connection db
-     include('../database/connection.php');
+     include('../../database/connection.php');
 
     // SQL query to select all customers
-    $sql = "SELECT * FROM tbltable";
+    $sql = "SELECT * FROM tblcustomer";
 
     $fetch_query = mysqli_query($conn, $sql);
 
@@ -12,7 +12,7 @@
     if ($row > 0){
         while($result = mysqli_fetch_array($fetch_query)){
             ?>
-                <option value="<?php echo $result['table_id'] ?>"><?php echo $result['table_name'] ?></option>
+                <option value="<?php echo $result['customer_id'] ?>"><?php echo $result['customer_name'] ?></option>
             <?php
         }
     }
