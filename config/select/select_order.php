@@ -1,49 +1,18 @@
 <?php
-    include '../database/connection.php';
-    // Enable error reporting
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    // include connection db
+     include('../database/connection.php');
 
-    try {
-        $sql = "SELECT tblorders.order_id, tblorders.customer_name, orders.order_date,  tblorderdetails.item_id, tblorderdetails.quantity 
-            FROM tblorder
-            LEFT JOIN tblorderdetails ON tblorders.order_id = tblorderdetails.order_id
-            ORDER BY tblorders.order_id";
+    // SQL query to select all customers
+    $sql = "SELECT * FROM tblitem";
 
-        $result = $conn->query($sql);
+    $fetch_query = mysqli_query($conn, $sql);
 
-        $orders = [];
-        $orderDetailsMap = [];
+    $row = mysqli_num_rows($fetch_query);
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                if (!isset($orderDetailsMap[$row['order_id']])) {
-                    $orderDetailsMap[$row['order_id']] = [
-                        'order_id' => $row['order_id'],
-                        'customer_id' => $row['customer_id'],
-                        'date_created' => $row['date_created'],
-                        'details' => []
-                    ];
-                }
-
-                if ($row['item_id'] !== null && $row['quantity'] !== null) {
-                    $orderDetailsMap[$row['order_id']]['details'][] = [
-                        'item_id' => $row['item_id'],
-                        'quantity' => $row['quantity']
-                    ];
-                }
-            }
-
-            foreach ($orderDetailsMap as $order) {
-                $orders[] = $order;
-            }
+    if ($row > 0){
+        while($result = mysqli_fetch_array($fetch_query)){
+            echo "<option value='". $result['item_id'] ."'> " . $result['item_name'] . " </option>";
         }
-
-        // Output JSON
-        // header('Content-Type: application/javascript');
-        echo json_encode($orders);
-
-    } catch (Exception $e) {
-        echo json_encode(['error' => $e->getMessage()]);
     }
 
     $conn->close();
