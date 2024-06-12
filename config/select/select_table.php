@@ -1,10 +1,9 @@
 <?php
     // include connection db
-     include('../database/connection.php');
-
-
-     try{
-        $conn = new mysqli($hostname, $username, $password, $database);
+    
+    
+    try{
+         include('../database/connection.php');
 
         // SQL query to select all customers
         $sql = "SELECT * FROM tbltable ORDER BY tbltable.table_id DESC";

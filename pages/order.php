@@ -11,6 +11,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
     <!-- Preloader -->
     <?//php include '../layouts/preloader.php'; ?>
     <!-- Navbar -->
@@ -333,6 +334,7 @@
         }
 
 
+        
 
      </script>
 </body>

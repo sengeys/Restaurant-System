@@ -1,10 +1,9 @@
 <?php
     // include connection db
-    include('../database/connection.php');
-
+    
     try{
-        $conn = new mysqli($hostname, $username, $password, $database);
-
+        include('../database/connection.php');
+        
         // SQL query to select all customers
         $sql = "SELECT * FROM vpayment ORDER BY order_id DESC";
 
@@ -59,8 +58,8 @@
         $conn->close();
     }catch(Exception $ex){
         echo "<tr>";
-            echo "<td colspan='6' align='center' class='bg-danger'>Connection Database Field.</td>";
-            echo "</tr>";
+        echo "<td colspan='6' align='center' class='bg-danger'> Connection Database Field.</td>";
+        echo "</tr>";
     }
 
     
