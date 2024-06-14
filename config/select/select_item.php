@@ -7,14 +7,6 @@
         // SQL query to select all customers
         $sql = "SELECT * FROM tblitem ORDER BY tblitem.item_id DESC";
 
-<<<<<<< HEAD
-    $items = array();
-
-    if ($result->num_rows > 0) {
-        // Fetch all customers data
-        while($row = $result->fetch_assoc()) {
-            $items[] = $row;
-=======
         $fetch_query = mysqli_query($conn, $sql);
 
         $row = mysqli_num_rows($fetch_query);
@@ -43,7 +35,6 @@
                 echo "<tr>";
                 echo "<td colspan='4' align='center'> No Found</td>";
                 echo "</tr>";
->>>>>>> ff077085cac443833562a1485cd9ae1bec4ac027
         }
         $conn->close();
     }catch(Exception $ex){
@@ -51,12 +42,4 @@
         echo "<td colspan='4' align='center' class='bg-danger'> Connection Database Field</td>";
         echo "</tr>";
     }
-<<<<<<< HEAD
-    $conn->close();
-
-    // Return the data as JSON
-    echo json_encode($items);
 ?>
-=======
-?>
->>>>>>> ff077085cac443833562a1485cd9ae1bec4ac027
