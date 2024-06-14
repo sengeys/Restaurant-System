@@ -11,6 +11,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
     <!-- Preloader -->
     <?//php include '../layouts/preloader.php'; ?>
     <!-- Navbar -->
@@ -38,205 +39,152 @@
         </div>
         <!-- /.content-header -->
 
-        <!-- Connection with Database -->
-
-
-        <!-- Main content -->
-        <form action="order.php" method="post" autocomplete="off">
-            
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h5 class="font-weight-bold text-success">Order Detail</h5>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Order ID <span class="text-danger">*</span></label>
-                                                <!-- Order ID -->
-                                                <input required name="orderid" type="text" class="form-control" value="">
-                                                <label>Order Date <span class="text-danger">*</span></label>
-                                                <div class="input-group date" id="reservationdatetime"
-                                                    data-target-input="nearest">
-                                                    <!-- Order Date -->
-                                                    <input required name="orderdate" type="text"
-                                                        class="form-control datetimepicker-input"
-                                                        data-target="#reservationdatetime" />
-                                                    <div class="input-group-append" data-target="#reservationdatetime"
-                                                        data-toggle="datetimepicker">
-                                                        <div class="input-group-text">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-
-                                                <!-- Staff Name -->
-                                                <label>Staff Name <span class="text-danger">*</span></label>
-                                                <select required name="staffname" id="select_staff" class="form-control select2" style="width: 100%;"></select>
-
-                                                <!-- Customer Name -->
-                                                <label>Customer Name <span class="text-danger">*</span></label>
-                                                <select required name="customername" id="select_customer" class="form-control select2" style="width: 100%;"></select>
-
-                                                <!-- Table Name -->
-                                                <label>Table Name <span class="text-danger">*</span></label>
-                                                <select required name="tablename" id="select_table" class="form-control select2" style="width: 100%;"> </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <h5 class="font-weight-bold text-success">Item Detail</h5>
-                                        </div>
-                                        <div class="col-6">
-                                            <!-- Add Row Button -->
-                                            <button type="button" class="btn btn-primary float-right" id="btnAddRow">
-                                                <i class="nav-icon fas fa-plus"></i>
-                                                Add Row
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>Item Name</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Total</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="itemrow">
-                                            <tr>
-                                                <td style="min-width: 8rem; width: 30%;">
-                                                    <!-- Item Name -->
-                                                    <select required name="itemname[]" id="select_item" class="form-control select2" style="width: 100%;">
-                                                        <option value="">Select Item</option>
-                                                    </select>
-                                                </td>
-                                                <td style="min-width: 8rem; width: 20%;">
-                                                    <!-- Quantity -->
-                                                    <input required name="quantity[]" type="text" class="form-control quantity">
-                                                </td>
-                                                <td style="min-width: 8rem; width: 20%;">
-                                                    <div class="input-group">
-                                                        <!-- Price -->
-                                                        <input required name="price[]" type="text" class="form-control text-right price" value="">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">$</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td style="min-width: 8rem; width: 20%;">
-                                                    <div class="input-group">
-                                                        <!-- Total -->
-                                                        <input required name="total[]" type="text" class="form-control text-right total" disabled>
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">$</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-right" style="min-width: 8rem; width: 10%;">
-                                                    <!-- Delete Button -->
-                                                    <button type="button" class="btn btn-danger" id="btnremoverow">
-                                                        <i class="nav-icon fas fa-trash"></i>
-                                                        Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <span class="pt-2 float-right">Grand Total : </span>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <div class="input-group" style="min-width: 10rem;">
-                                                    
-                                                    <!-- Grand Total -->
-                                                    <input required name="grandtotal" type="text" class="form-control text-right" disabled>
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-8"></div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group  float-right">
-                                                <div class="input-group">
-                                                    <!-- Submit Button -->
-                                                    <button  name="submit" type="submit" class="btn btn-success">
-                                                        Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Model -->
-            <div class="modal fade" id="modal-remove">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Delete</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="">
-                            <div class="modal-body">
+        <!-- Main content -->            
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
                                 <div class="row">
-                                    Do you want to delete?
+                                    <div class="col-12">
+                                        <h5 class="font-weight-bold text-success">Order Detail</h5>
+                                    </div>
                                 </div>
-                                <!-- /.card-body -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <!-- Order Date -->
+                                            <label for="order_date">Order Date <span class="text-danger">*</span></label>
+                                            <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                                                <input id="order_date" name="order_date" type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" />
+                                                <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                                                    <div class="input-group-text">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Staff Name -->
+                                            <label for="staff_id">Staff Name <span class="text-danger">*</span></label>
+                                            <select id="staff_id" name="staff_id" class="form-control select2" style="width: 100%;">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <!-- Customer Name -->
+                                            <label for="customer_id">Customer Name <span class="text-danger">*</span></label>
+                                            <select id="customer_id" name="customer_id" class="form-control select2" style="width: 100%;"></select>
+
+                                            <!-- Table Name -->
+                                            <label for="table_id">Table Name <span class="text-danger">*</span></label>
+                                            <select id="table_id" name="table_id"  class="form-control select2" style="width: 100%;"> </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Delete</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h5 class="font-weight-bold text-success">Item Detail</h5>
+                                    </div>
+                                    <div class="col-6">
+                                        <!-- Add Row Button -->
+                                        <button type="button" class="btn btn-primary float-right" id="add_new_btn">
+                                            <i class="nav-icon fas fa-plus"></i>
+                                            Add Row
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="row_item_detail">
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <span class="pt-2 float-right">Grand Total : </span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="input-group" style="min-width: 10rem;">
+                                                <!-- Grand Total -->
+                                                <input id="grand_total" name="grand_total" type="text" class="form-control text-right" disabled>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">$</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8"></div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group  float-right">
+                                            <div class="input-group">
+                                                <!-- Submit Button -->
+                                                <button type="submit" id="insert_submit"  name="insert_submit" class="btn btn-success">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.modal -->
-        </form>
-        <!-- /.content -->
+        </section>
+
+        <!-- Model -->
+        <div class="modal fade" id="modal-delete">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            Do you want to delete?
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="delete_submit">Delete</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    <!-- /.content -->
     </div>
 
     <!-- Main Footer -->
@@ -244,181 +192,150 @@
     <!-- link script -->
     <?php include '../layouts/link-script.php'; ?>
 
-    <!-- Script Add Row -->
-    <script>
-        $(document).ready(function () {
-            // Style Add Row
-            function selectaddrow () {
-                //Initialize Select2 Elements
-                $('.select2').select2();
-                
-                //Initialize Select2 Elements
-                $('.select2bs4').select2({
-                theme: 'bootstrap4'
-                }); 
-            }
+    <!-- JQuery -->
+     <script>
+        $(document).ready(function(){
+            // Call Function : style
+            SelectionStyle();
+            SelectDataTimePicker();
 
-            // list staff to select option
-            $.ajax({
-                url: '../config/select/select_staff.php',
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                    var select_staff = $('#select_staff');
-                    $.each(data, function(index, staff) {
-                        var row = 
-                        $('<option value=""></option>');
-                        $('<option value=""></option>').val(staff.staff_id).appendTo(row);
-                        $('<option value=""></option>').text(staff.staff_name).appendTo(row);
-                        select_staff.append(row);
-                    });
-                },
-                error: function() {
-                    alert('Failed to fetch data.');
-                }
-            });
-
-            // list customer to select option
-            $.ajax({
-                url: '../config/select/select_customer.php',
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                    var select_customer = $('#select_customer');
-                    $.each(data, function(index, customer) {
-                        var row = 
-                        $('<option value=""></option>');
-                        $('<option value=""></option>').val(customer.customer_id).appendTo(row);
-                        $('<option value=""></option>').text(customer.customer_name).appendTo(row);
-                        select_customer.append(row);
-                    });
-                },
-                error: function() {
-                    alert('Failed to fetch data.');
-                }
-            });
-
-            // list table to select option
-            $.ajax({
-                url: '../config/select/select_table.php',
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                    var select_table = $('#select_table');
-                    $.each(data, function(index, table) {
-                        var row = 
-                        $('<option value=""></option>');
-                        $('<option value=""></option>').val(table.table_id).appendTo(row);
-                        $('<option value=""></option>').text(table.table_name).appendTo(row);
-                        select_table.append(row);
-                    });
-                },
-                error: function() {
-                    alert('Failed to fetch data.');
-                }
-            });
-
-            // list Item to select option
-            $.ajax({
-                url: '../config/select/select_item.php',
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                    var select_item = $('#select_item');
-                    $.each(data, function(index, item) {
-                        var row = 
-                        $('<option value=""></option>');
-                        $('<option value=""></option>').val(item.item_id).appendTo(row);
-                        $('<option value=""></option>').text(item.item_name).appendTo(row);
-                        select_item.append(row);
-                    });
-                },
-                error: function() {
-                    alert('Failed to fetch data.');
-                }
-            });
-
-            // Add row
-            $("body").on("click", "#btnAddRow", function (){
-                var row = `
-                <tr>
-                    <td style="min-width: 8rem; width: 30%;">
-                        <!-- Item Name -->
-                        <select required name="itemname[]" class="form-control select2 itemname" style="width: 100%;">
-                        </select>
-                    </td>
-                    <td style="min-width: 8rem; width: 20%;">
-                        <!-- Quantity -->
-                        <input required name="quantity[]" type="text" class="form-control quantity">
-                    </td>
-                    <td style="min-width: 8rem; width: 20%;">
-                        <div class="input-group">
-                            <!-- Price -->
-                            <input required name="price[]" type="text" class="form-control text-right price" value="">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="min-width: 8rem; width: 20%;">
-                        <div class="input-group">
-                            <!-- Total -->
-                            <input required name="total[]" type="text" class="form-control text-right total" disabled>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-right" style="min-width: 8rem; width: 10%;">
-                        <!-- Delete Button -->
-                        <button type="button" class="btn btn-danger" id="btnremoverow">
-                            <i class="nav-icon fas fa-trash"></i>
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-                `;
-                $("#itemrow").append(row);
-                GrandTotal();
-                selectaddrow ();
-            });
-
-            // Remove Row
-            $("body").on("click", "#btnremoverow", function () {
-                $(this).closest("tr").remove();
-                GrandTotal();
-            });
-
-            // Input Quantity
-            $("body").on("keyup", ".quantity", function () {
-                var quantity = Number($(this).val());
-                var price    = Number($(this).closest("tr").find(".price").val());
-                $(this).closest("tr").find(".total").val(price * quantity);
-                GrandTotal();
-            });
-
-            // Input Price
-            $("body").on("keyup", ".price", function () {
-                var price    = Number($(this).val());
-                var quantity = Number($(this).closest("tr").find(".quantity").val());
-                $(this).closest("tr").find(".total").val(price * quantity);
-                GrandTotal();
-            });
-
-            // Grand Total
-            function GrandTotal(){
-
-                var total = 0;
-
-                $(".total").each(function(){
-                    total += Number($(this).val());
-                });
-
-                // document.getElementsByName("grandtotal").value = total;
-            }
+            // Call Function :
+            LoadDataToBox();
+            AddRowItemDetail();
         });
-    </script>
 
+        // Function : Style
+        function SelectionStyle(){
+            //Initialize Select2 Elements
+            $('.select2').select2();
+
+        }
+
+        // Function : Date Time Picker
+        function SelectDataTimePicker(){
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
+            //Money Euro
+            $('[data-mask]').inputmask();
+
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'L'
+            });
+
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+            //Date range picker
+            $('#reservation').daterangepicker();
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY hh:mm A'
+            }
+            });
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+            {
+                ranges   : {
+                'Today'       : [moment(), moment()],
+                'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate  : moment()
+            },
+
+            function (start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+            );
+
+            //Timepicker
+            $('#timepicker').datetimepicker({
+            format: 'LT'
+            });
+        }
+
+        // Function : Load Data To Box Order Detail
+        function LoadDataToBox(){
+            // staff
+            $.ajax({
+                url: '../config/select/get_to_box/get_staff_to_box.php',
+                type: 'POST',
+                success: function(data) {
+                    $("#staff_id").html(data);
+                },
+            });
+
+            // customer
+            $.ajax({
+                url: '../config/select/get_to_box/get_customer_to_box.php',
+                type: 'POST',
+                success: function(data) {
+                    $("#customer_id").html(data);
+                },
+            });
+
+            // customer
+            $.ajax({
+                url: '../config/select/get_to_box/get_table_to_box.php',
+                type: 'POST',
+                success: function(data) {
+                    $("#table_id").html(data);
+                },
+            });
+        }
+
+
+        // Function : Add New Row Item Detail
+        function AddRowItemDetail(){
+            $(document).on("click", "#add_new_btn", function(){
+                $.ajax({
+                    url: '../config/select/select_order.php',
+                    type: 'POST',
+                    success: function(data) {
+                        var html = '';
+                        html += '<tr>';
+                        html += '<td style="min-width: 8rem; width: 30%;">';
+                        html += '<select name="item_id[]" class="form-control select2"  style="width: 100%;">' + data + '</select> </td>';
+        
+                        html += '<td style="min-width: 8rem; width: 20%;">';
+                        html += '<input name="quantity[]" type="text" class="form-control quantity"> </td>';
+        
+                        html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
+                        html += '<input name="price[]" type="text" class="form-control text-right price" value="">';
+                        html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
+        
+                        html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
+                        html += '<input name="total[]" type="text" class="form-control text-right total" disabled>';
+                        html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
+        
+                        html += '<td class="text-right" style="min-width: 8rem; width: 10%;">';
+                        html += '<button type="button" id="delete_btn" name="delete_btn" class="btn btn-danger"> <i class="nav-icon fas fa-trash"></i> Delete </button> </td>';
+                        html += '</tr>';
+
+                        $("#row_item_detail").append(html);
+                        SelectionStyle();
+                    }
+                });
+            });
+
+            $(document).on("click", "#delete_btn", function(){
+                $(this).closest("tr").remove();
+            });
+        }
+
+
+        
+
+     </script>
 </body>
-
 </html>

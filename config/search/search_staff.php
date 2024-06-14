@@ -2,17 +2,19 @@
     // include connection db
      include('../database/connection.php');
 
+     // get item
+    $id = $_POST['staff_id'];
+
     // SQL query to select all customers
-    $sql = "SELECT * FROM tblitem";
+    $sql = "SELECT * FROM tblstaff WHERE staff_id = $id";
 
     $fetch_query = mysqli_query($conn, $sql);
 
     $row = mysqli_num_rows($fetch_query);
 
     if ($row > 0){
-        while($result = mysqli_fetch_array($fetch_query)){
-            echo "<option value='". $result['item_id'] ."'> " . $result['item_name'] . " </option>";
-        }
+        $result = mysqli_fetch_array($fetch_query);
+        echo json_encode($result);
     }
 
     $conn->close();

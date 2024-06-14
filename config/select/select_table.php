@@ -1,23 +1,48 @@
 <?php
     // include connection db
-     include('../connection.php');
+    
+    
+    try{
+         include('../database/connection.php');
 
-    // SQL query to select all customers
-    $sql = "SELECT * FROM tbltable";
-    $result = $conn->query($sql);
+        // SQL query to select all customers
+        $sql = "SELECT * FROM tbltable ORDER BY tbltable.table_id DESC";
 
-    $customers = array();
+        $fetch_query = mysqli_query($conn, $sql);
 
-    if ($result->num_rows > 0) {
-        // Fetch all customers data
-        while($row = $result->fetch_assoc()) {
-            $customers[] = $row;
+        $row = mysqli_num_rows($fetch_query);
+
+        if ($row > 0){
+            while($result = mysqli_fetch_array($fetch_query)){
+                ?>
+                    <tr>
+                        <td> <?php echo $result['table_id'] ?></td>
+                        <td> <?php echo $result['table_name'] ?></td>
+                        <td> 
+                            <button type="button" id="edit_btn" class="btn btn-warning btn-sm" data-id="<?php echo $result['table_id'] ?>">
+                                <i class="nav-icon fas fa-edit"></i>
+                                Edit
+                            </button>
+                            <button type="submit" id="delete_btn" class="btn btn-danger btn-sm" data-id="<?php echo $result['table_id'] ?>">
+                                <i class="nav-icon fas fa-trash"></i>
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                <?php
+            }
+        }else{
+            echo "<tr>";
+            echo "<td colspan='3' align='center'> No Found</td>";
+            echo "</tr>";
         }
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
 
-    // Return the data as JSON
-    echo json_encode($customers);
+        $conn->close();
+     }catch(Exception $ex){
+        echo "<tr>";
+        echo "<td colspan='3' align='center' class='bg-danger'> Connnection Database Field.</td>";
+        echo "</tr>";
+     }
+
+    
 ?>
