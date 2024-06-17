@@ -98,14 +98,17 @@
                                     </div>
                                     <div class="col-6">
                                         <!-- Add Row Button -->
-                                        <button type="button" class="btn btn-primary float-right" id="add_new_btn">
+                                        <button type="button" class="btn btn-primary float-right" id="add_new_btn" name="add_new_btn">
                                             <i class="nav-icon fas fa-plus"></i>
                                             Add Row
                                         </button>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="card-body table-responsive p-0">
+                                <span id="error"></span>
+                                <form id="form_item">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
@@ -116,11 +119,14 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
+                                    
                                     <tbody id="row_item_detail">
 
                                     </tbody>
                                 </table>
+                            </form>
                             </div>
+                            
 
                             <div class="card-footer">
                                 <div class="row">
@@ -145,7 +151,7 @@
                                         <div class="form-group  float-right">
                                             <div class="input-group">
                                                 <!-- Submit Button -->
-                                                <button type="submit" id="insert_submit"  name="insert_submit" class="btn btn-success">
+                                                <button type="button" name="insert_submit" id="insert_submit" class="btn btn-success">
                                                     Submit
                                                 </button>
                                             </div>
@@ -202,6 +208,7 @@
             // Call Function :
             LoadDataToBox();
             AddRowItemDetail();
+
         });
 
         // Function : Style
@@ -297,29 +304,31 @@
 
         // Function : Add New Row Item Detail
         function AddRowItemDetail(){
+            var i = 0;
             $(document).on("click", "#add_new_btn", function(){
                 $.ajax({
                     url: '../config/select/select_order.php',
                     type: 'POST',
                     success: function(data) {
+                        i++;
                         var html = '';
-                        html += '<tr>';
+                        html += '<tr id = "row'+i+'">';
                         html += '<td style="min-width: 8rem; width: 30%;">';
-                        html += '<select name="item_id[]" class="form-control select2"  style="width: 100%;">' + data + '</select> </td>';
+                        html += '<select name="item_id[]" class="form-control select2 item_id" style="width: 100%;">' + data + '</select> </td>';
         
                         html += '<td style="min-width: 8rem; width: 20%;">';
-                        html += '<input name="quantity[]" type="text" class="form-control quantity"> </td>';
+                        html += '<input name="quantity[]" type="number" class="form-control quantity"> </td>';
         
                         html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
                         html += '<input name="price[]" type="text" class="form-control text-right price" value="">';
                         html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
         
                         html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
-                        html += '<input name="total[]" type="text" class="form-control text-right total" disabled>';
+                        html += '<input name="total[]" type="text" class="form-control text-right total">';
                         html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
         
                         html += '<td class="text-right" style="min-width: 8rem; width: 10%;">';
-                        html += '<button type="button" id="delete_btn" name="delete_btn" class="btn btn-danger"> <i class="nav-icon fas fa-trash"></i> Delete </button> </td>';
+                        html += '<button type="button" name="remove" id="'+ i +'" class="btn btn-danger delete_btn"> <i class="nav-icon fas fa-trash"></i> Delete </button> </td>';
                         html += '</tr>';
 
                         $("#row_item_detail").append(html);
@@ -328,14 +337,129 @@
                 });
             });
 
-            $(document).on("click", "#delete_btn", function(){
-                $(this).closest("tr").remove();
+            
+
+            $(document).on("click", ".delete_btn", function(){
+                var btn_id = $(this).attr('id');
+                $('#row'+btn_id+'').remove();
+                i--;
             });
+
+            
+            $('#insert_submit').click(function(){
+                var order_date = $("#order_date").val();
+                var staff_id = $("#staff_id").val();
+                var customer_id = $("#customer_id").val();
+                var table_id = $("#table_id").val();
+
+
+                $.ajax({
+                    url: '../config/insert/insert_order.php',
+                    type: 'POST',
+                    data: {order_date: order_date, staff_id: staff_id, customer_id: customer_id, table_id: table_id},
+                    success: function(data) {
+                        console.log(data);
+
+                        var form_item = $('#form_item').serialize();
+
+                        $.ajax({
+                            url: '../config/insert/insert_order_detail.php',
+                            type: 'POST',
+                            data: form_item,
+                            success: function(data2) {
+                                console.log(data2);
+                                $("#form_item")[0].reset();
+                            },
+                        });
+                    },
+                });
+
+                
+
+                
+
+            });
+
+            
         }
 
-
-        
 
      </script>
 </body>
 </html>
+
+<!-- 
+<script>
+$(document).ready(function(){
+ 
+ $(document).on('click', '.add', function(){
+  var html = '';
+  html += '<tr>';
+  html += '<td><input type="text" name="item_name[]" class="form-control item_name" /></td>';
+  html += '<td><input type="text" name="item_quantity[]" class="form-control item_quantity" /></td>';
+  html += '<td><select name="item_unit[]" class="form-control item_unit"><option value="">Select Unit</option><?php //echo fill_unit_select_box($connect); ?></select></td>';
+  html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
+  $('#item_table').append(html);
+ });
+ 
+ $(document).on('click', '.remove', function(){
+  $(this).closest('tr').remove();
+ });
+ 
+ $('#insert_form').on('submit', function(event){
+  event.preventDefault();
+  var error = '';
+  $('.item_name').each(function(){
+   var count = 1;
+   if($(this).val() == '')
+   {
+    error += "<p>Enter Item Name at "+count+" Row</p>";
+    return false;
+   }
+   count = count + 1;
+  });
+  
+  $('.item_quantity').each(function(){
+   var count = 1;
+   if($(this).val() == '')
+   {
+    error += "<p>Enter Item Quantity at "+count+" Row</p>";
+    return false;
+   }
+   count = count + 1;
+  });
+  
+  $('.item_unit').each(function(){
+   var count = 1;
+   if($(this).val() == '')
+   {
+    error += "<p>Select Unit at "+count+" Row</p>";
+    return false;
+   }
+   count = count + 1;
+  });
+  var form_data = $(this).serialize();
+  if(error == '')
+  {
+   $.ajax({
+    url:"insert.php",
+    method:"POST",
+    data:form_data,
+    success:function(data)
+    {
+     if(data == 'ok')
+     {
+      $('#item_table').find("tr:gt(0)").remove();
+      $('#error').html('<div class="alert alert-success">Item Details Saved</div>');
+     }
+    }
+   });
+  }
+  else
+  {
+   $('#error').html('<div class="alert alert-danger">'+error+'</div>');
+  }
+ });
+ 
+});
+</script> -->
