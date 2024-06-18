@@ -4,8 +4,10 @@
     try{
         include('../database/connection.php');
         
+        $search = $_POST['search'];
+
         // SQL query to select all customers
-        $sql = "SELECT * FROM vpayment ORDER BY order_id DESC";
+        $sql = "SELECT * FROM vpayment WHERE status = '$search' ORDER BY order_id DESC";
 
         $fetch_query = mysqli_query($conn, $sql);
 

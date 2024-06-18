@@ -13,7 +13,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
     <!-- Preloader -->
-    <?//php include '../layouts/preloader.php'; ?>
+    <?php include '../layouts/preloader.php'; ?>
     <!-- Navbar -->
     <?php include '../layouts/navbar.php'; ?>
     <!-- Main Sidebar Container -->
@@ -38,7 +38,7 @@
             </div>
         </div>
         <!-- /.content-header -->
-
+       
         <!-- Main content -->            
         <section class="content">
             <div class="container-fluid">
@@ -98,14 +98,17 @@
                                     </div>
                                     <div class="col-6">
                                         <!-- Add Row Button -->
-                                        <button type="button" class="btn btn-primary float-right" id="add_new_btn">
+                                        <button type="button" class="btn btn-primary float-right" id="add_new_btn" name="add_new_btn">
                                             <i class="nav-icon fas fa-plus"></i>
                                             Add Row
                                         </button>
                                     </div>
                                 </div>
                             </div>
+                            <form id="form_item">
                             <div class="card-body table-responsive p-0">
+                                <span id="error"></span>
+                                
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
@@ -116,11 +119,13 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
+                                    
                                     <tbody id="row_item_detail">
 
                                     </tbody>
                                 </table>
                             </div>
+                            </form>
 
                             <div class="card-footer">
                                 <div class="row">
@@ -131,7 +136,7 @@
                                         <div class="form-group">
                                             <div class="input-group" style="min-width: 10rem;">
                                                 <!-- Grand Total -->
-                                                <input id="grand_total" name="grand_total" type="text" class="form-control text-right" disabled>
+                                                <input id="grand_total" name="grand_total" type="text" class="form-control text-right grand_total" disabled>
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">$</span>
                                                 </div>
@@ -145,7 +150,7 @@
                                         <div class="form-group  float-right">
                                             <div class="input-group">
                                                 <!-- Submit Button -->
-                                                <button type="submit" id="insert_submit"  name="insert_submit" class="btn btn-success">
+                                                <button type="submit" name="insert_submit" id="insert_submit" class="btn btn-success">
                                                     Submit
                                                 </button>
                                             </div>
@@ -153,12 +158,12 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- Model -->
         <div class="modal fade" id="modal-delete">
             <div class="modal-dialog">
@@ -187,6 +192,7 @@
     <!-- /.content -->
     </div>
 
+
     <!-- Main Footer -->
     <?php include '../layouts/footer.php'; ?>
     <!-- link script -->
@@ -202,6 +208,7 @@
             // Call Function :
             LoadDataToBox();
             AddRowItemDetail();
+
         });
 
         // Function : Style
@@ -264,6 +271,29 @@
             });
         }
 
+        //Alert
+        function AlertSubmit(status, icon, title){
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            if (status == 1){
+                Toast.fire({
+                icon: icon,
+                title: title
+                });
+            }
+            else{
+                Toast.fire({
+                icon: 'error',
+                title: 'Error'
+                });
+            }
+        }
+
         // Function : Load Data To Box Order Detail
         function LoadDataToBox(){
             // staff
@@ -297,45 +327,216 @@
 
         // Function : Add New Row Item Detail
         function AddRowItemDetail(){
+            var i = 0;
             $(document).on("click", "#add_new_btn", function(){
                 $.ajax({
                     url: '../config/select/select_order.php',
                     type: 'POST',
                     success: function(data) {
+                        i++;
                         var html = '';
-                        html += '<tr>';
+                        html += '<tr id = "row'+i+'">';
                         html += '<td style="min-width: 8rem; width: 30%;">';
-                        html += '<select name="item_id[]" class="form-control select2"  style="width: 100%;">' + data + '</select> </td>';
+                        html += '<select id="'+ i +'" name="item_id[]" class="form-control select2 item_id" style="width: 100%;">' + data + '</select> </td>';
         
                         html += '<td style="min-width: 8rem; width: 20%;">';
-                        html += '<input name="quantity[]" type="text" class="form-control quantity"> </td>';
+                        html += '<input id="quantity'+ i +'" name="quantity[]" type="number" class="form-control quantity"> </td>';
         
                         html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
-                        html += '<input name="price[]" type="text" class="form-control text-right price" value="">';
+                        html += '<input id="price'+ i +'" name="price[]" type="text" class="form-control text-right price" value="">';
                         html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
         
                         html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
-                        html += '<input name="total[]" type="text" class="form-control text-right total" disabled>';
+                        html += '<input id="total'+ i +'" name="total[]" type="text" class="form-control text-right total">';
                         html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
         
                         html += '<td class="text-right" style="min-width: 8rem; width: 10%;">';
-                        html += '<button type="button" id="delete_btn" name="delete_btn" class="btn btn-danger"> <i class="nav-icon fas fa-trash"></i> Delete </button> </td>';
+                        html += '<button type="button" name="remove" id="'+ i +'" class="btn btn-danger delete_btn"> <i class="nav-icon fas fa-trash"></i> Delete </button> </td>';
                         html += '</tr>';
 
                         $("#row_item_detail").append(html);
                         SelectionStyle();
+                        calc_total();
                     }
                 });
             });
 
-            $(document).on("click", "#delete_btn", function(){
+            $("#row_item_detail").on("click", ".delete_btn", function ()
+            {
                 $(this).closest("tr").remove();
+                i--;
+                calc_total();
             });
+
+            $("#row_item_detail").on("input", ".quantity", function () {
+                var qty = parseFloat($(this).val());
+                var unit_price = parseFloat($(this).closest("tr").find(".price").val());
+                var total = $(this).closest("tr").find(".total");
+                total.val(unit_price * qty);
+                calc_total();
+            });
+
+            $("#row_item_detail").on("input", ".price", function () {
+                var unit_price = parseFloat($(this).val());
+                var qty = parseFloat($(this).closest("tr").find(".quantity").val());
+                var total = $(this).closest("tr").find(".total");
+                total.val(unit_price * qty);
+
+                calc_total();
+            });
+
+            function calc_total() {
+                var sum = 0;
+                $(".total").each(function () {
+                    sum += parseFloat($(this).val());
+                });
+
+                $(".grand_total").val(sum);
+
+                var amounts = sum;
+                $(document).on("change keyup blur", "#quantity", function() 
+                {
+                    $(".grand_total").val(amounts);
+                });
+            }
+           
+            $(document).on("change", ".item_id", function(){
+                var btn_id = $(this).attr('id');
+                var item_id = $('#'+btn_id+'').val();
+
+                $.ajax({
+                    url: '../config/search/search_item.php',
+                    method: 'POST',
+                    data: {item_id: item_id},
+                    dataType: 'JSON',
+                    success:function(data){
+                        var quantity = 1;
+                        var price    = data.unit_price;
+
+                        $('#quantity'+btn_id+'').val(quantity);
+                        $('#price'+btn_id+'').val(price);
+                        $('#total'+btn_id+'').val(quantity * price);
+
+                        var sum = 0;
+                        for (var j = 1; j <= i; j ++){
+                            
+                            sum += Number($('#total'+j+'').val());
+                        }
+                        $('#grand_total').val(sum);
+                    }
+                });
+            });
+            
+            $('#insert_submit').click(function(){
+                var order_date = $("#order_date").val();
+                var staff_id = $("#staff_id").val();
+                var customer_id = $("#customer_id").val();
+                var table_id = $("#table_id").val();
+                var total    = $("#grand_total").val();
+
+                $.ajax({
+                    url: '../config/insert/insert_order.php',
+                    type: 'POST',
+                    data: {order_date: order_date, staff_id: staff_id, customer_id: customer_id, table_id: table_id, total: total},
+                    success: function(data) {
+                        console.log(data);
+
+                        var form_item = $('#form_item').serialize();
+
+                        $.ajax({
+                            url: '../config/insert/insert_order_detail.php',
+                            type: 'POST',
+                            data: form_item,
+                            success: function(data2) {
+                                console.log(data2);
+                                $("#form_item")[0].reset();
+                                AlertSubmit(data2,"success","Data Inserted Successfully!");
+                            },
+                        });
+                    },
+                });
+            });
+
+            
         }
 
-
-        
 
      </script>
 </body>
 </html>
+
+<!-- 
+<script>
+$(document).ready(function(){
+ 
+ $(document).on('click', '.add', function(){
+  var html = '';
+  html += '<tr>';
+  html += '<td><input type="text" name="item_name[]" class="form-control item_name" /></td>';
+  html += '<td><input type="text" name="item_quantity[]" class="form-control item_quantity" /></td>';
+  html += '<td><select name="item_unit[]" class="form-control item_unit"><option value="">Select Unit</option><?php //echo fill_unit_select_box($connect); ?></select></td>';
+  html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
+  $('#item_table').append(html);
+ });
+ 
+ $(document).on('click', '.remove', function(){
+  $(this).closest('tr').remove();
+ });
+ 
+ $('#insert_form').on('submit', function(event){
+  event.preventDefault();
+  var error = '';
+  $('.item_name').each(function(){
+   var count = 1;
+   if($(this).val() == '')
+   {
+    error += "<p>Enter Item Name at "+count+" Row</p>";
+    return false;
+   }
+   count = count + 1;
+  });
+  
+  $('.item_quantity').each(function(){
+   var count = 1;
+   if($(this).val() == '')
+   {
+    error += "<p>Enter Item Quantity at "+count+" Row</p>";
+    return false;
+   }
+   count = count + 1;
+  });
+  
+  $('.item_unit').each(function(){
+   var count = 1;
+   if($(this).val() == '')
+   {
+    error += "<p>Select Unit at "+count+" Row</p>";
+    return false;
+   }
+   count = count + 1;
+  });
+  var form_data = $(this).serialize();
+  if(error == '')
+  {
+   $.ajax({
+    url:"insert.php",
+    method:"POST",
+    data:form_data,
+    success:function(data)
+    {
+     if(data == 'ok')
+     {
+      $('#item_table').find("tr:gt(0)").remove();
+      $('#error').html('<div class="alert alert-success">Item Details Saved</div>');
+     }
+    }
+   });
+  }
+  else
+  {
+   $('#error').html('<div class="alert alert-danger">'+error+'</div>');
+  }
+ });
+ 
+});
+</script> -->
