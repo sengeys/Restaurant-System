@@ -54,7 +54,7 @@
                                             <select id="filter_status" name="filter_status" class="form-control select2" style="width: 175px;">
                                                 <option value="" selected>All</option>
                                                 <option value="No Paid">No Paid</option>
-                                                <option value="Paided">Paided</option>
+                                                <option value="Paid">Paid</option>
                                             </select>
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@
                                     <label>Status</label>
                                     <select class="form-control select2" id="edit_status" style="width: 100%;">
                                         <option vlaue="No Paid">No Paid</option>
-                                        <option value="Paided">Paided</option>
+                                        <option value="Paid">Paid</option>
                                     </select>
                                 </div>
                             </div>
