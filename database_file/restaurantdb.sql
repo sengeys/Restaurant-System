@@ -59,11 +59,11 @@ CREATE TABLE `tblorder` (
   `status` varchar(50) DEFAULT NULL,
   `total` float DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblorder` */
 
-insert  into `tblorder`(`order_id`,`date_created`,`staff_id`,`customer_id`,`table_id`,`status`,`total`) values (1,'2024-06-18 07:23:00',1,1,1,'No Paid',24);
+insert  into `tblorder`(`order_id`,`date_created`,`staff_id`,`customer_id`,`table_id`,`status`,`total`) values (1,'2024-06-18 07:23:00',1,1,1,'Paid',24),(2,'2024-06-18 08:16:00',2,1,1,'Paid',12),(3,'2024-06-18 14:16:00',1,1,1,'No Paid',16);
 
 /*Table structure for table `tblorderdetail` */
 
@@ -79,7 +79,7 @@ CREATE TABLE `tblorderdetail` (
 
 /*Data for the table `tblorderdetail` */
 
-insert  into `tblorderdetail`(`order_id`,`item_id`,`quantity`,`price`,`amount`) values (1,3,2,2,4),(1,1,1,5,5),(1,2,3,5,15);
+insert  into `tblorderdetail`(`order_id`,`item_id`,`quantity`,`price`,`amount`) values (1,3,2,2,4),(1,1,1,5,5),(1,2,3,5,15),(2,3,1,2,2),(2,1,2,5,10),(3,2,2,5,10),(3,3,3,2,6);
 
 /*Table structure for table `tblpayment` */
 
