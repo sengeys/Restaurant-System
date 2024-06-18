@@ -21,7 +21,7 @@
                         <td> <?php echo "$ " .  number_format( $result['total'], 2, '.', ''); ?></td>
 
                         <?php
-                            if ($result['status'] == "Paided"){
+                            if ($result['status'] == "Paid"){
                                 echo '<td class="pt-3"><span class="p-1 pl-2 pr-2 rounded bg-success"> '. $result['status'] .' </span></td>';
                             }else{
                                 echo '<td class="pt-3"><span class="p-1 pl-2 pr-2 rounded bg-danger"> '. $result['status'] .' </span></td>';
