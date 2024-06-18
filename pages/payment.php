@@ -50,8 +50,8 @@
                                     
                                     <div class="pt-2 flex-fill">
                                         <div class="d-flex">
-                                            <label for="filter_gender" class="pt-2 pr-2 d-flex"> <i class="nav-icon fas fa-filter pt-1"></i> Gender</label>
-                                            <select id="filter_gender" name="filter_gender" class="form-control select2" style="width: 175px;">
+                                            <label for="filter_status" class="pt-2 pr-2 d-flex"> <i class="nav-icon fas fa-filter pt-1"></i> Gender</label>
+                                            <select id="filter_status" name="filter_status" class="form-control select2" style="width: 175px;">
                                                 <option value="" selected>All</option>
                                                 <option value="No Paid">No Paid</option>
                                                 <option value="Paided">Paided</option>
@@ -182,6 +182,77 @@
         </div>
         <!-- /.modal -->
 
+        <!-- Model Detail -->
+        <div class="modal fade" id="modal-detail">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Detail Payment</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <ul class="list-unstyled" id="orderleft">
+                                        <li><span class = "text-bold">Date</span>: Dara</li>
+                                        <li><span class = "text-bold">Customer Name</span>: Dara</li>
+                                        <li><span class = "text-bold">Staff Name</span>: Dara</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <ul class="list-unstyled" id="orderright">
+                                        <li class="text-right"><span class = "text-bold">Order No</span>: Dara</li>
+                                        <li class="text-right"><span class = "text-bold">Table</span>: Dara</li>
+                                        <li class="text-right"><span class = "text-bold">Stutus</span>: Dara</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Item</th>
+                                        <th>Unit Price</th>
+                                        <th>Quantity</th>
+                                        <th>SubTotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="row_detail">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>soup</td>
+                                        <td>$12.00</td>
+                                        <td>2</td>
+                                        <td>$24.00</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan='4' class="text-right text-bold">Total : </td>
+                                        <td id="grand_total">$24.00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
     </div>
 
     <!-- Main Footer -->
@@ -208,6 +279,13 @@
 
             // Call Function : Live Search
             LiveSearch();
+
+            // Call Function : Filter Status
+            FilterData();
+
+            SelecDataPrint();
+
+            SelecDataDetail();
         });
 
         
@@ -340,6 +418,106 @@
             });
         }
 
+        //Function : Filter
+        function FilterData(){
+            $("#filter_status").on("change",function(){
+                var search = $("#filter_status").val();
+
+                console.log(search);
+
+                if (search == ""){
+                    LoadDataToTable();
+                }else{
+                    $.ajax({
+                        url: '../config/filter/filter_payment.php',
+                        method: 'POST',
+                        data: {search: search,},
+                        success:function(data){
+                            $("#row_payment").html(data);
+                        }
+                    });
+                }
+            });
+        }
+
+        // Print
+        function SelecDataPrint(){
+            $(document).on("click", "#print_btn", function(){
+                var id = $(this).attr('data-id');
+                printPage(id);
+                console.log(id);
+            });
+        }
+
+        function printPage(id) {
+            var printWindow = window.open('../report/print_order.php?id='+id+'');
+            printWindow.addEventListener('load', function() {
+                printWindow.print();
+            }, true);
+        }
+
+        // Get Data Detail
+        function SelecDataDetail(){
+            $(document).on("click", "#show_detail_btn", function(){
+                var id = $(this).attr('data-id');
+
+                $.ajax({
+                    url: '../config/select/select_order_detail.php',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: {id:id},
+                    success: function(data) {
+                        $('#modal-detail').modal('show');
+                        try {
+                            console.log(data);
+                            
+                            var orders = JSON.parse(JSON.stringify(data));
+
+                            var orderleft = '';
+                            var orderright = '';
+                            var orderdetail = '';
+                            var ordertotal = '';
+                            orders.forEach(order => {
+
+                                orderleft += '<li><span class = "text-bold">Date</span>: '+order.order_date+'</li>';
+                                orderleft += '<li><span class = "text-bold">Customer Name</span>:'+order.customer_name+'</li>';
+                                orderleft += '<li><span class = "text-bold">Staff Name</span>: '+order.staff_name+'</li>';
+
+                                orderright += '<li class="text-right"><span class = "text-bold">Order No</span>: '+order.order_id+'</li>';
+                                orderright += '<li class="text-right"><span class = "text-bold">Table</span>: '+order.table_name+'</li>';
+                                orderright += '<li class="text-right"><span class = "text-bold">Stutus</span>: '+order.status+'</li>';
+
+                                ordertotal += order.total;
+                                
+
+                                let index = 1;
+                                order.details.forEach(detail => {
+                                    orderdetail += '<tr>';
+                                    orderdetail += '<td>'+index+'</td>';
+                                    orderdetail += '<td>'+detail.item_name+'</td>';
+                                    orderdetail += '<td>$'+detail.unit_price+'</td>';
+                                    orderdetail += '<td>'+detail.quantity+'</td>';
+                                    orderdetail += '<td>$'+detail.amount+'</td>';
+                                    orderdetail += '</tr>';
+                                    index ++;
+                                });
+
+                                $('#orderleft').html(orderleft);
+                                $('#orderright').html(orderright);
+                                $('#row_detail').html(orderdetail);
+                                
+                               
+                                $('#grand_total').text('$' + ordertotal);
+                            });
+
+                        } catch (error) {
+                            console.error('Error parsing JSON:', error);
+                            console.error('Raw response:', data);
+                        }
+                    }
+                });
+            });
+        }
 
     </script>
     

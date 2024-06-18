@@ -32,7 +32,7 @@
                     $insert_query = mysqli_query($conn, $sql);
                 }
             }
-            echo $last_id;
+            echo '1';
         }else{
             echo "-1";
         }

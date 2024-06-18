@@ -38,14 +38,6 @@
                                 <i class="nav-icon fas fa-eye"></i>
                                 Show Detail
                             </button>
-                            <button type="button" id="edit_btn" class="btn btn-warning btn-sm" data-id="<?php echo $result['order_id'] ?>">
-                                <i class="nav-icon fas fa-edit"></i>
-                                Edit
-                            </button>
-                            <button type="submit" id="delete_btn" class="btn btn-danger btn-sm" data-id="<?php echo $result['order_id'] ?>">
-                                <i class="nav-icon fas fa-trash"></i>
-                                Delete
-                            </button>
                         </td>
                     </tr>
                 <?php
