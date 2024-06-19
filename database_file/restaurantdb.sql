@@ -195,7 +195,7 @@ INNER JOIN tblorder ON tblorderdetail.order_id = tblorder.order_id
 INNER JOIN tblstaff ON tblorder.staff_id = tblstaff.staff_id
 INNER JOIN tblcustomer ON tblorder.customer_id = tblcustomer.customer_id
 INNER JOIN tbltable ON tblorder.table_id = tbltable.table_id
-INNER JOIN tblitem ON tblorderdetail.item_id = tblitem.item_id
+INNER JOIN tblitem ON tblorderdetail.item_id = tblitem.item_id;
 
 -- Select the vieworderdetail view
 SELECT * FROM vieworderdetail;
