@@ -193,27 +193,23 @@
                         </button>
                 </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <!-- text input -->
-                                <div class="form-group">
-                                    <ul class="list-unstyled" id="orderleft">
-                                        <li><span class = "text-bold">Date</span>: Dara</li>
-                                        <li><span class = "text-bold">Customer Name</span>: Dara</li>
-                                        <li><span class = "text-bold">Staff Name</span>: Dara</li>
-                                    </ul>
-                                </div>
+                        <div class="row card-header">
+                            <div class="flex-fill">
+                                <ul class="list-unstyled" id="orderleft">
+                                    <li><span class = "text-bold">Date</span>: Dara</li>
+                                    <li><span class = "text-bold">Customer Name</span>: Dara</li>
+                                    <li><span class = "text-bold">Staff Name</span>: Dara</li>
+                                </ul>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <ul class="list-unstyled" id="orderright">
-                                        <li class="text-right"><span class = "text-bold">Order No</span>: Dara</li>
-                                        <li class="text-right"><span class = "text-bold">Table</span>: Dara</li>
-                                        <li class="text-right"><span class = "text-bold">Stutus</span>: Dara</li>
-                                    </ul>
-                                </div>
+                            <div class="flex-fill">
+                                <ul class="list-unstyled float-right tex-right" id="orderright">
+                                    <li class="text-right"><span class = "text-bold">Order No</span>: Dara</li>
+                                    <li class="text-right"><span class = "text-bold">Table</span>: Dara</li>
+                                    <li class="text-right"><span class = "text-bold">Stutus</span>: Dara</li>
+                                </ul> 
                             </div>
                         </div>
+
                         <div class="row card-body table-responsive">
                             <table class="table table-hover text-nowrap">
                                 <thead>
@@ -340,7 +336,7 @@
                         $('#edit_payment_date').val(data.date_created);
                         $('#edit_customer_name').val(data.customer_name);
                         $('#edit_amount').val(data.total);
-                        $('#edit_status').val(data.status).change();
+                        $('#edit_status').val(data.STATUS).change();
                     }
                 });
             });

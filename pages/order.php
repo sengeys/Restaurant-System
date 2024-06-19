@@ -343,11 +343,11 @@
                         html += '<input id="quantity'+ i +'" name="quantity[]" type="number" class="form-control quantity"> </td>';
         
                         html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
-                        html += '<input id="price'+ i +'" name="price[]" type="text" class="form-control text-right price" value="">';
+                        html += '<input id="price'+ i +'" name="price[]" type="number" class="form-control text-right price" value="">';
                         html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
         
                         html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
-                        html += '<input id="total'+ i +'" name="total[]" type="text" class="form-control text-right total">';
+                        html += '<input id="total'+ i +'" name="total[]" type="number" class="form-control text-right total" disabled>';
                         html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
         
                         html += '<td class="text-right" style="min-width: 8rem; width: 10%;">';
