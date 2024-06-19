@@ -1,10 +1,10 @@
 
 -- Create the database
--- CREATE DATABASE restaurantdb;
+-- CREATE DATABASE nicerestaurantdb;
 
 -- select the database
 
--- USE restaurantdb;
+-- USE nicerestaurantdb;
 
 
 -- Create the staff table
