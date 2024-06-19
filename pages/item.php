@@ -113,7 +113,7 @@
 
                             <div class="form-group">
                                 <label for="unitprice">Unit Price</label>
-                                <input type="text" class="form-control" id="unitprice" placeholder="Unit Price" required name="unitprice">
+                                <input type="number" class="form-control" id="unitprice" placeholder="Unit Price" required name="unitprice">
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
 
                             <div class="form-group">
                                 <label for="uniprice">Unit Price</label>
-                                <input type="text" class="form-control" id="edit_unitprice" placeholder="Unit Price">
+                                <input type="number" class="form-control" id="edit_unitprice" placeholder="Unit Price">
                             </div>
                         </div>
                     </div>
