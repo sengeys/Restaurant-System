@@ -35,7 +35,7 @@
 
     <style>
         .wrapper {
-            margin-top: 80px;
+            margin-top: 25vh;
             margin-bottom: 80px;
         }
 
@@ -86,6 +86,10 @@
         .go{
             color: #2BC48B;
         }
+
+        .hcenter{
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -94,7 +98,7 @@
     <div class="wrapper">
         <form class="form-signin">
 
-            <h2 class="form-signin-heading">Please click <span class="go"> Go </span>to open system</h2>
+            <h3 class="form-signin-heading hcenter">Please click <span class="go"> Go </span>to open system</h3>
 
             <!-- <div data-mdb-input-init class="form-outline mb-4">
                 <input type="email" id="email" class="form-control" />
