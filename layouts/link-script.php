@@ -36,6 +36,9 @@
 <!-- Toastr -->
 <script src="../plugins/toastr/toastr.min.js"></script>
 
+<script>
+  
+</script>
 <!-- Page specific script -->
 <!-- <script>
   $(function () {

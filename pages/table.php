@@ -55,7 +55,7 @@
                                     </div>
 
                                     <div class="p-2 ml-auto">
-                                        <div class="input-group input-group-sm-3" style="min-width: 200px;">
+                                        <div class="input-group input-group-sm-3" style="max-width: 190px;">
                                             <input type="text" name="search" id="search" class="form-control float-right" placeholder="Search">
 
                                             <div class="input-group-append">
@@ -294,8 +294,8 @@
                     method: 'POST',
                     data: {table_id: table_id, table_name: table_name},
                     success:function(data){
-                        LoadDataToTable();
                         AlertSubmit(data,"success","Data Updated Successfully!");
+                        LoadDataToTable();
                     }
                 });
                 $('#modal-update').modal('hide');

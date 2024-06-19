@@ -32,7 +32,7 @@ try {
                 $orderDetailsMap[$row['order_id']]['details'][] = [
                     'item_name' => $row['item_name'],
                     'quantity' => $row['quantity'],
-                    'unit_price' => number_format( $row['unit_price'], 2, '.', ''),
+                    'unit_price' => number_format( $row['price'], 2, '.', ''),
                     'amount' => number_format( $row['amount'], 2, '.', ''),
                 ];
             }
