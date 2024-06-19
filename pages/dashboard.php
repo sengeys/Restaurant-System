@@ -177,7 +177,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row card-body table-responsive">
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
@@ -227,7 +227,9 @@
 
  <!-- Query -->
  <script>
+        
         $(document).ready(function () {
+
             //Initialize Select2 Elements
             $('.select2').select2();
 

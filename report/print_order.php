@@ -38,7 +38,7 @@
                     $tr .= "<tr>";
                     $tr .= "<td> " . $i ." </td>";
                     $tr .= "<td> " . $result['item_name'] ." </td>";
-                    $tr .= "<td> $" . number_format($result['unit_price'], 2, '.', '') ." </td>";
+                    $tr .= "<td> $" . number_format($result['price'], 2, '.', '') ." </td>";
                     $tr .= "<td> " . $result['quantity'] ." </td>";
                     $tr .= "<td class = 'text-end'> $" . number_format($result['amount'], 2, '.', '') ." </td>";
                     $tr .= "</tr>";

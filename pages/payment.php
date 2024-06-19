@@ -111,7 +111,7 @@
                         </button>
                 </div>
                     <div class="modal-body">
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-sm-6">
                                 <!-- text input -->
                                 <div class="form-group">
@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row card-body table-responsive">
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
