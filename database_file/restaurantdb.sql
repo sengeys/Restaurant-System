@@ -25,6 +25,29 @@ INSERT INTO tblstaff (staff_name, sex, phone, address) VALUES
 SELECT * FROM tblstaff;
 
 
+-- Create the user table
+CREATE TABLE tbluser(
+	user_id 	INT,
+	email		VARCHAR(100),
+	pass_word	VARCHAR(100),
+     
+	UNIQUE (user_id),
+	UNIQUE (email),
+	FOREIGN KEY (user_id)	REFERENCES tblstaff (staff_id)
+);
+
+-- Insert the user table
+INSERT INTO tbluser (user_id, email, pass_word) VALUES 
+	(1, 'admin@gmail.com', 'admin'),
+
+-- Select the user table
+SELECT * FROM tbluser INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id;
+
+-- Select the user table for login page
+SELECT * FROM tbluser WHERE email = 'admin@gmail.com' AND pass_word = 'admin';
+
+
+
 
 
 -- Create the customer table

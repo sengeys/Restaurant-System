@@ -32,11 +32,18 @@
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
 
     <style>
+        body{
+            padding: 50px;
+        }
         .wrapper {
-            margin-top: 25vh;
-            margin-bottom: 80px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .form-signin {
@@ -90,31 +97,38 @@
         .hcenter{
             text-align: center;
         }
+
+        .hleft{
+            text-align: left;
+        }
     </style>
 </head>
 
 <body>
-
     <div class="wrapper">
-        <form class="form-signin">
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="dist/img/RestaurantLogo.png" alt="RestaurantLogo" height="60" width="60">
+        </div>
 
-            <h3 class="form-signin-heading hcenter">Please click <span class="go"> Go </span>to open system</h3>
+        <form id="login_form" class="form-signin">
+            <h3 class="form-signin-heading hcenter">Please<span class="go"> Login </span>to open system</h3>
 
-            <!-- <div data-mdb-input-init class="form-outline mb-4">
-                <input type="email" id="email" class="form-control" />
+            <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label" for="email">Email address</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enmail address" required />
             </div>
 
             <div data-mdb-input-init class="form-outline mb-4">
-                <input type="password" id="password" class="form-control" />
                 <label class="form-label" for="password">Password</label>
-            </div> -->
+                <input type="password" id="password" name="password" class="form-control"  placeholder="Password" required />
+            </div>
 
+            <h5 class="form-signin-heading hleft">Don't have an account? <a href="pages/register.php"><span class="go">Register now</span></a></h5>
+            
             <!-- Submit button -->
-            <a href="pages/dashboard.php">
-                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Go</button>
-            </a>
-        </form>
+            <input type="submit" value="Login Now" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4"  placeholder="Password" />
+        </form>      
     </div>
 
 
@@ -149,6 +163,57 @@
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="plugins/toastr/toastr.min.js"></script>
+
+    <!-- JQuer -->
+     <script>
+        $('#login_form').submit( (e) => {
+            e.preventDefault();
+            var form = $('#login_form').serialize();
+
+            $.ajax({
+                url: 'config/account/search_login.php',
+                method: 'POST',
+                data: form,
+                success: function(response){
+                    var data = JSON.parse(response);
+
+                    if (data.status == "success"){
+                        window.location = "pages/dashboard.php";
+
+                    }else{
+                        AlertSubmit(data.status, data.message);
+
+                    }
+                }
+            });
+        });
+
+        function AlertSubmit(icon, title){
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            if (icon == "success"){
+                Toast.fire({
+                icon: icon,
+                title: title
+                });
+            }
+            else{
+                Toast.fire({
+                icon:  icon,
+                title: title
+                });
+            }
+        }
+     </script>
 </body>
 
 </html>

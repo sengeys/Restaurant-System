@@ -47,13 +47,12 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex flex-wrap">
-
-                                    <div class="p-2">
-                                        <button type="button" class="btn btn-primary" id="add_new_btn" style="min-width: 105px;">
-                                            <i class="nav-icon fas fa-plus"></i>
-                                            Add New
-                                        </button>
-                                    </div>
+                                    <?php
+                                        if ($_SESSION['user_id'] == 1){
+                                            echo '<div class="p-2"> <button type="button" class="btn btn-primary" id="add_new_btn" style="min-width: 105px;">';
+                                            echo '<i class="nav-icon fas fa-plus"></i> Add New </button></div>';                                                    
+                                        }
+                                    ?>
                                     <div class="pt-2 flex-fill">
                                         <div class="d-flex pl-2" style="min-width: 220px;">
                                             <label for="filter_gender" class="pt-2 pr-2 d-flex"> <i class="nav-icon fas fa-filter pt-1"></i> Gender</label>
@@ -121,7 +120,12 @@
                                             <th>Gender</th>
                                             <th>Phone</th>
                                             <th>Address</th>
-                                            <th style="width: 10%;">Action</th>
+                                            <?php 
+                                                if ($_SESSION['user_id'] == 1){
+                                                    echo "<th style='width: 10%;'>Action</th>";
+                                                }
+                                            ?>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody id="row_staff">
@@ -154,7 +158,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="staff_name">Staff Name <span class="text-danger">*</span></label>
-                                <input type="text" id="staff_name" name="staff_name" class="form-control" placeholder="Customer Name">
+                                <input type="text" id="staff_name" name="staff_name" class="form-control" placeholder="Staff Name">
                             </div>
 
                             <div class="form-group">
@@ -227,12 +231,12 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="edit_staff_id">Staff ID</span></label>
-                                <input type="text" id="edit_staff_id" name="edit_staff_id" class="form-control" placeholder="Customer Name" disabled>
+                                <input type="text" id="edit_staff_id" name="edit_staff_id" class="form-control" placeholder="Staff ID" disabled>
                             </div>
 
                             <div class="form-group">
                                 <label for="edit_staff_name">Staff Name</span></label>
-                                <input type="text" id="edit_staff_name" name="edit_staff_name" class="form-control" placeholder="Customer Name">
+                                <input type="text" id="edit_staff_name" name="edit_staff_name" class="form-control" placeholder="Staff Name">
                             </div>
 
                             <div class="form-group">

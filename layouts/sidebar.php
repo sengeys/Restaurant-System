@@ -1,3 +1,32 @@
+<?php
+    try{
+        // include connection db
+        include('../config/database/connection.php');
+
+        $staff_name = "";
+
+        if($_SESSION['user_id']){
+            $user_id = $_SESSION['user_id'];
+
+            $sql = "SELECT * FROM tbluser INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id WHERE user_id = " . $user_id;
+
+            $fetch_query = mysqli_query($conn, $sql);
+
+            $row = mysqli_num_rows($fetch_query);
+
+            if ($row > 0){
+                $result = mysqli_fetch_array($fetch_query);
+
+                $staff_name = $result['staff_name'];
+            }
+        }
+        
+        $conn->close();
+    }catch(Exception $ex){
+
+    }
+?>
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -12,10 +41,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="../dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">SUON SENGEY</a>
+                <a href="myaccount.php" class="d-block"><?php echo $staff_name;?></a>
             </div>
         </div>
 
@@ -43,7 +72,7 @@
 
                 <li class="nav-item">
                     <a href="../pages/item.php" class="nav-link">
-                        <i class="nav-icon fas fa-box"></i>
+                        <i class="nav-icon fa-brands fa-product-hunt"></i>
                         <p>
                             Item
                         </p>
@@ -52,7 +81,7 @@
 
                 <li class="nav-item">
                     <a href="../pages/staff.php" class="nav-link">
-                        <i class="nav-icon fas fa-users-cog"></i>
+                        <i class="nav-icon fas fa-user-group"></i>
                         <p>
                             Staff
                         </p>
@@ -61,7 +90,7 @@
 
                 <li class="nav-item">
                     <a href="../pages/table.php" class="nav-link">
-                        <i class="nav-icon fas fa-columns"></i>
+                        <i class="nav-icon fas fa-table"></i>
                         <p>
                             Table
                         </p>
@@ -86,28 +115,27 @@
                     </a>
                 </li>
 
-                <!-- <li class="nav-item">
-                    <a href="../pages/payment.php" class="nav-link">
-                        <i class="nav-icon fas fa-wrench"></i>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-gear"></i>
                         Setting
-                        <i class="right fas fa-angle-left"></i>
-
+                        <i class="right fas fa-angle-right"></i>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>User</p>
+                            <a href="../pages/myaccount.php" class="nav-link">
+                                <i class="nav-icon fas fa-circle-user"></i>
+                                <p>My Account</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./index2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                            <a href="../pages/logout.php" class="nav-link">
+                            <i class="nav-icon fas fa-share-from-square"></i>
                                 <p>Logout</p>
                             </a>
                         </li>
                     </ul>
-                </li> -->
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
