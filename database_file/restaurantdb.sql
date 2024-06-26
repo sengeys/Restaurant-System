@@ -17,9 +17,7 @@ CREATE TABLE tblstaff (
 
 -- Insert the staff table
 INSERT INTO tblstaff (staff_name, sex, phone, address) VALUES
-('General', 'Male', 'None', 'Battambang'),
-('Admin', 'Male', '012 123 456', 'Battambang'),
-('Owner', 'Female', '012 789 012', 'Battambang');
+('Admin', 'Male', '012 123 456', 'Battambang');
 
 -- Select the staff table
 SELECT * FROM tblstaff;
@@ -46,8 +44,20 @@ SELECT * FROM tbluser INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id
 -- Select the user table for login page
 SELECT * FROM tbluser WHERE email = 'admin@gmail.com' AND pass_word = 'admin';
 
+-- Create the user view
+CREATE VIEW viewuser AS
+SELECT
+    tbluser.user_id,
+    tbluser.email,
+    tbluser.pass_word,
 
+    tblstaff.staff_name,
+    tblstaff.sex,
+    tblstaff.phone,
+    tblstaff.address
 
+FROM tbluser
+INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id;
 
 
 -- Create the customer table
