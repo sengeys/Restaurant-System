@@ -18,6 +18,7 @@
             }
         }
 
+
         $count = count($_POST['item_id']);
 
         if ($count > 0){
@@ -28,7 +29,7 @@
                     $price      = $_POST['price'][$i];
                     $total      = $_POST['total'][$i];
 
-                    $sql = "INSERT INTO tblorderdetail SET order_id = $last_id, item_id = $item_id, quantity = $quantity, price = $price, amount = $total";
+                    $sql = "INSERT INTO tblorderdetail SET order_id = $last_id, item_id = $item_id, price = $price, quantity = $quantity, amount = $total";
                     $insert_query = mysqli_query($conn, $sql);
                 }
             }

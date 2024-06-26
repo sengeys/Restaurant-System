@@ -116,7 +116,7 @@
 
             <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label" for="email">Email address</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Enmail address" required />
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required />
             </div>
 
             <div data-mdb-input-init class="form-outline mb-4">
@@ -127,7 +127,7 @@
             <h5 class="form-signin-heading hleft">Don't have an account? <a href="pages/register.php"><span class="go">Register now</span></a></h5>
             
             <!-- Submit button -->
-            <input type="submit" value="Login Now" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4"  placeholder="Password" />
+            <input type="submit" value="Login Now" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4"/>
         </form>      
     </div>
 

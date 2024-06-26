@@ -15,7 +15,9 @@
         
         if ($row > 0){
             while($result = mysqli_fetch_array($fetch_query)){
+                
                 if ($_SESSION['user_id'] == 1){
+                    if ($result['staff_id'] > 1){
                     ?>
                     <tr>
                         <td> <?php echo $result['staff_id'] ?></td>
@@ -29,20 +31,17 @@
                                 <i class="nav-icon fas fa-edit"></i>
                                 Edit
                             </button>
+                            <button type="submit" id="delete_btn" class="btn btn-danger btn-sm" data-id="<?php echo $result['staff_id'] ?>">
+                                <i class="nav-icon fas fa-trash"></i>
+                                Delete
+                            </button>
                             <?php
-                                if ($result['staff_id'] > 1){
-                                    ?>
-                                    <button type="submit" id="delete_btn" class="btn btn-danger btn-sm" data-id="<?php echo $result['staff_id'] ?>">
-                                        <i class="nav-icon fas fa-trash"></i>
-                                        Delete
-                                    </button>
-                                    <?php
                                 }
                             ?>
                         </td>
                     </tr>
                     <?php
-                    }else{
+                    }else if ($result['staff_id'] > 1){
                         ?>
                         <tr>
                             <td> <?php echo $result['staff_id'] ?></td>

@@ -19,6 +19,8 @@
 
                 $staff_name = $result['staff_name'];
             }
+        }else{
+            header("location:../index.php");
         }
         
         $conn->close();
