@@ -47,13 +47,12 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex flex-wrap">
-
-                                    <div class="p-2">
-                                        <button type="button" class="btn btn-primary" id="add_new_btn" style="min-width: 105px;">
-                                            <i class="nav-icon fas fa-plus"></i>
-                                            Add New
-                                        </button>
-                                    </div>
+                                    <?php
+                                        if ($_SESSION['user_id'] == 1){
+                                            echo '<div class="p-2"> <button type="button" class="btn btn-primary" id="add_new_btn" style="min-width: 105px;">';
+                                            echo '<i class="nav-icon fas fa-plus"></i> Add New </button></div>';                                                    
+                                        }
+                                    ?>
                                     <div class="pt-2 flex-fill">
                                         <div class="d-flex pl-2" style="min-width: 220px;">
                                             <label for="filter_gender" class="pt-2 pr-2 d-flex"> <i class="nav-icon fas fa-filter pt-1"></i> Gender</label>
@@ -101,7 +100,7 @@
 
                                     <div class="p-2 flex-fill">
                                         <div class="input-group input-group-sm-3 ml-auto"  style="min-width: 150px;">
-                                            <input type="text" name="search" id="search" class="form-control float-right" placeholder="Search">
+                                        <!-- <input type="text" name="search_staff" id="search_staff" class="form-control float-right" placeholder="Search"> -->
                                             <div class="input-group-append">
                                                 <button type="submit" class="btn btn-default">
                                                     <i class="fas fa-search"></i>
@@ -121,7 +120,12 @@
                                             <th>Gender</th>
                                             <th>Phone</th>
                                             <th>Address</th>
-                                            <th style="width: 10%;">Action</th>
+                                            <?php 
+                                                if ($_SESSION['user_id'] == 1){
+                                                    echo "<th style='width: 10%;'>Action</th>";
+                                                }
+                                            ?>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody id="row_staff">
@@ -154,7 +158,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="staff_name">Staff Name <span class="text-danger">*</span></label>
-                                <input type="text" id="staff_name" name="staff_name" class="form-control" placeholder="Customer Name">
+                                <input type="text" id="staff_name" name="staff_name" class="form-control" placeholder="Staff Name">
                             </div>
 
                             <div class="form-group">
@@ -200,6 +204,15 @@
                                     <option value="Tboung Khmum">Tboung Khmum</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="email">Email</span></label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</span></label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
@@ -227,12 +240,12 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="edit_staff_id">Staff ID</span></label>
-                                <input type="text" id="edit_staff_id" name="edit_staff_id" class="form-control" placeholder="Customer Name" disabled>
+                                <input type="hidden" id="edit_staff_id" name="edit_staff_id" class="form-control" placeholder="Staff ID" disabled>
                             </div>
 
                             <div class="form-group">
                                 <label for="edit_staff_name">Staff Name</span></label>
-                                <input type="text" id="edit_staff_name" name="edit_staff_name" class="form-control" placeholder="Customer Name">
+                                <input type="text" id="edit_staff_name" name="edit_staff_name" class="form-control" placeholder="Staff Name">
                             </div>
 
                             <div class="form-group">
@@ -277,6 +290,16 @@
                                     <option value="Steung Treng">Steung Treng</option>
                                     <option value="Tboung Khmum">Tboung Khmum</option>
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit_email">Email</span></label>
+                                <input type="email" id="edit_email" name="edit_email" class="form-control" placeholder="Email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit_password">Password</span></label>
+                                <input type="password" id="edit_password" name="edit_password" class="form-control" placeholder="Password">
                             </div>
                         </div>
                     </div>
@@ -349,6 +372,7 @@
 
             // Call Function : Filter
             FilterData();
+
         });
 
         //Alert
@@ -397,11 +421,13 @@
             var gender = $("#gender").val();
             var phone = $("#phone").val();
             var address = $("#address").val();
+            var email = $("#email").val();
+            var password = $("#password").val();
 
             $.ajax({
                 url: '../config/insert/insert_staff.php',
                 method: 'POST',
-                data: {staff_name: staff_name, gender: gender, phone: phone, address: address},
+                data: {staff_name: staff_name, gender: gender, phone: phone, address: address,email:email, password: password },
                 success:function(data){
                     LoadDataToTable();
                     AlertSubmit(data,"success","Data Inserted Successfully!");
@@ -415,19 +441,21 @@
         function SelecDataUpdate(){
             $(document).on("click", "#edit_btn", function(){
                 var id = $(this).attr('data-id');
-                
+
                 $.ajax({
-                    url: '../config/search/search_staff.php',
+                    url: '../config/search/search_user.php',
                     method: 'POST',
-                    data: {staff_id: id},
+                    data: {user_id: id},
                     dataType: 'JSON',
                     success:function(data){
                         $('#modal-update').modal('show');
-                        $('#edit_staff_id').val(data.staff_id);
+                        $('#edit_staff_id').val(data.user_id);
                         $('#edit_staff_name').val(data.staff_name);
                         $('#edit_gender').val(data.sex).change();
                         $('#edit_phone').val(data.phone);
+                        $('#edit_email').val(data.email);
                         $('#edit_address').val(data.address).change();
+                        $('#edit_password').val(data.pass_word);
                     }
                 });
             });
@@ -436,16 +464,18 @@
         // Update Item
         function UpdateData(){
             $(document).on("click", "#update_submit", function(){
-                var staff_id   = $('#edit_staff_id').val();
-                var staff_name = $("#edit_staff_name").val();
+                var user_id    = $('#edit_staff_id').val();
+                var full_name  = $("#edit_staff_name").val();
                 var gender     = $("#edit_gender").val();
                 var phone      = $("#edit_phone").val();
+                var email      = $("#edit_email").val();
                 var address    = $("#edit_address").val();
+                var password   = $("#edit_password").val();
 
                 $.ajax({
                     url: '../config/update/update_staff.php',
                     method: 'POST',
-                    data: {staff_id: staff_id, staff_name: staff_name, gender: gender, phone: phone, address: address},
+                    data: {user_id: user_id, full_name: full_name, gender: gender, phone: phone, email: email, address: address, password: password},
                     success:function(data){
                         LoadDataToTable();
                         AlertSubmit(data,"success","Data Updated Successfully!");
@@ -494,7 +524,7 @@
 
         // Live Search
         function LiveSearch(){
-            $(document).on("keyup","#search",function(){
+            $(document).on("keyup","#search_staff",function(){
                 var search_data = $(this).val();
                 $.ajax({
                     url: '../config/livesearch/live_search_staff.php',

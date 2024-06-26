@@ -1,10 +1,12 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Restaurant | Dashboard</title>
+    <title>Restaurant | Dashboard </title>
 
     <!-- link style -->
     <?php include '../layouts/link-style.php'; ?>
@@ -55,7 +57,7 @@
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
+                                <a href="order.php" class="small-box-footer">More order <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -71,7 +73,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
+                                <a href="staff.php" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -87,7 +89,7 @@
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
+                                <a href="item.php" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
@@ -103,7 +105,7 @@
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
+                                <a href="payment.php" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>

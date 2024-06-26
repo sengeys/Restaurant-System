@@ -347,7 +347,7 @@
                         html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
         
                         html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
-                        html += '<input id="total'+ i +'" name="total[]" type="number" class="form-control text-right total" disabled>';
+                        html += '<input id="total'+ i +'" name="total[]" type="number" class="form-control text-right total">';
                         html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
         
                         html += '<td class="text-right" style="min-width: 8rem; width: 10%;">';
@@ -449,7 +449,6 @@
                             data: form_item,
                             success: function(data2) {
                                 console.log(data2);
-                                $("#form_item")[0].reset();
                                 AlertSubmit(data2,"success","Data Inserted Successfully!");
                             },
                         });
@@ -464,79 +463,3 @@
      </script>
 </body>
 </html>
-
-<!-- 
-<script>
-$(document).ready(function(){
- 
- $(document).on('click', '.add', function(){
-  var html = '';
-  html += '<tr>';
-  html += '<td><input type="text" name="item_name[]" class="form-control item_name" /></td>';
-  html += '<td><input type="text" name="item_quantity[]" class="form-control item_quantity" /></td>';
-  html += '<td><select name="item_unit[]" class="form-control item_unit"><option value="">Select Unit</option><?php //echo fill_unit_select_box($connect); ?></select></td>';
-  html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
-  $('#item_table').append(html);
- });
- 
- $(document).on('click', '.remove', function(){
-  $(this).closest('tr').remove();
- });
- 
- $('#insert_form').on('submit', function(event){
-  event.preventDefault();
-  var error = '';
-  $('.item_name').each(function(){
-   var count = 1;
-   if($(this).val() == '')
-   {
-    error += "<p>Enter Item Name at "+count+" Row</p>";
-    return false;
-   }
-   count = count + 1;
-  });
-  
-  $('.item_quantity').each(function(){
-   var count = 1;
-   if($(this).val() == '')
-   {
-    error += "<p>Enter Item Quantity at "+count+" Row</p>";
-    return false;
-   }
-   count = count + 1;
-  });
-  
-  $('.item_unit').each(function(){
-   var count = 1;
-   if($(this).val() == '')
-   {
-    error += "<p>Select Unit at "+count+" Row</p>";
-    return false;
-   }
-   count = count + 1;
-  });
-  var form_data = $(this).serialize();
-  if(error == '')
-  {
-   $.ajax({
-    url:"insert.php",
-    method:"POST",
-    data:form_data,
-    success:function(data)
-    {
-     if(data == 'ok')
-     {
-      $('#item_table').find("tr:gt(0)").remove();
-      $('#error').html('<div class="alert alert-success">Item Details Saved</div>');
-     }
-    }
-   });
-  }
-  else
-  {
-   $('#error').html('<div class="alert alert-danger">'+error+'</div>');
-  }
- });
- 
-});
-</script> -->

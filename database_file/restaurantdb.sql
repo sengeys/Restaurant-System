@@ -1,9 +1,9 @@
 
 -- Create the database
-CREATE DATABASE restaurantdb;
+-- CREATE DATABASE restaurantdb;
 
 -- Select the database
-USE restaurantdb;
+-- USE restaurantdb;
 
 
 -- Create the staff table
@@ -15,15 +15,21 @@ CREATE TABLE tblstaff (
     address     VARCHAR(255)
 );
 
--- Insert the staff table
-INSERT INTO tblstaff (staff_name, sex, phone, address) VALUES
-('General', 'Male', 'None', 'Battambang'),
-('Admin', 'Male', '012 123 456', 'Battambang'),
-('Owner', 'Female', '012 789 012', 'Battambang');
 
 -- Select the staff table
 SELECT * FROM tblstaff;
 
+
+-- Create the user table
+CREATE TABLE tbluser(
+	user_id 	INT,
+	email		VARCHAR(100),
+	pass_word	VARCHAR(100),
+     
+	UNIQUE (user_id),
+	UNIQUE (email),
+	FOREIGN KEY (user_id)	REFERENCES tblstaff (staff_id)
+);
 
 
 
@@ -98,13 +104,6 @@ CREATE TABLE tblorder (
     FOREIGN KEY (table_id)      REFERENCES tbltable (table_id)
 );
 
--- Insert the order table
-INSERT INTO tblorder (date_created, staff_id, customer_id, table_id, STATUS, total) VALUES
-('2014-06-19 12:39:00', 2, 1, 2, 'No Paid', 6.5);
-
--- Select the order table
-SELECT * FROM tblorder;
-
 
 
 
@@ -119,14 +118,6 @@ CREATE TABLE tblorderdetail (
     FOREIGN KEY (item_id) REFERENCES tblitem (item_id)
 );
 
--- Insert the orderdetail table
-INSERT INTO tblorderdetail (order_id, item_id, price, quantity, amount) VALUES
-(1, 2, 1.5, 3, 4.5),
-(1, 1, 0.5, 1, 0.5),
-(1, 3, 0.75, 2, 1.5);
-
--- Select the orderdetail table
-SELECT * FROM tblorderdetail;
 
 
 
@@ -206,3 +197,19 @@ INNER JOIN tblitem     ON tblorderdetail.item_id  = tblitem.item_id;
 
 -- Select the vieworderdetail view
 SELECT * FROM vieworderdetail;
+
+
+-- Create the user view
+CREATE VIEW viewuser AS
+SELECT
+    tbluser.user_id,
+    tbluser.email,
+    tbluser.pass_word,
+
+    tblstaff.staff_name,
+    tblstaff.sex,
+    tblstaff.phone,
+    tblstaff.address
+
+FROM tbluser
+INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id;
