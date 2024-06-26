@@ -31,6 +31,7 @@
                     $update_query2 = mysqli_query($conn, $sql2);
 
                     if ($update_query2 > 0){
+                        $_SESSION['user_id'] = $last_id;
                         echo "1";
                     }
 

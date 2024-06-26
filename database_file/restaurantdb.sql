@@ -15,9 +15,6 @@ CREATE TABLE tblstaff (
     address     VARCHAR(255)
 );
 
--- Insert the staff table
-INSERT INTO tblstaff (staff_name, sex, phone, address) VALUES
-('Admin', 'Male', '012 123 456', 'Battambang');
 
 -- Select the staff table
 SELECT * FROM tblstaff;
@@ -34,30 +31,6 @@ CREATE TABLE tbluser(
 	FOREIGN KEY (user_id)	REFERENCES tblstaff (staff_id)
 );
 
--- Insert the user table
-INSERT INTO tbluser (user_id, email, pass_word) VALUES 
-	(1, 'admin@gmail.com', 'admin'),
-
--- Select the user table
-SELECT * FROM tbluser INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id;
-
--- Select the user table for login page
-SELECT * FROM tbluser WHERE email = 'admin@gmail.com' AND pass_word = 'admin';
-
--- Create the user view
-CREATE VIEW viewuser AS
-SELECT
-    tbluser.user_id,
-    tbluser.email,
-    tbluser.pass_word,
-
-    tblstaff.staff_name,
-    tblstaff.sex,
-    tblstaff.phone,
-    tblstaff.address
-
-FROM tbluser
-INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id;
 
 
 -- Create the customer table
@@ -131,13 +104,6 @@ CREATE TABLE tblorder (
     FOREIGN KEY (table_id)      REFERENCES tbltable (table_id)
 );
 
--- Insert the order table
-INSERT INTO tblorder (date_created, staff_id, customer_id, table_id, STATUS, total) VALUES
-('2014-06-19 12:39:00', 2, 1, 2, 'No Paid', 6.5);
-
--- Select the order table
-SELECT * FROM tblorder;
-
 
 
 
@@ -152,14 +118,6 @@ CREATE TABLE tblorderdetail (
     FOREIGN KEY (item_id) REFERENCES tblitem (item_id)
 );
 
--- Insert the orderdetail table
-INSERT INTO tblorderdetail (order_id, item_id, price, quantity, amount) VALUES
-(1, 2, 1.5, 3, 4.5),
-(1, 1, 0.5, 1, 0.5),
-(1, 3, 0.75, 2, 1.5);
-
--- Select the orderdetail table
-SELECT * FROM tblorderdetail;
 
 
 
@@ -239,3 +197,19 @@ INNER JOIN tblitem     ON tblorderdetail.item_id  = tblitem.item_id;
 
 -- Select the vieworderdetail view
 SELECT * FROM vieworderdetail;
+
+
+-- Create the user view
+CREATE VIEW viewuser AS
+SELECT
+    tbluser.user_id,
+    tbluser.email,
+    tbluser.pass_word,
+
+    tblstaff.staff_name,
+    tblstaff.sex,
+    tblstaff.phone,
+    tblstaff.address
+
+FROM tbluser
+INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id;
