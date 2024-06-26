@@ -1,9 +1,9 @@
 
 -- Create the database
-CREATE DATABASE restaurantdb;
+-- CREATE DATABASE restaurantdb;
 
 -- Select the database
-USE restaurantdb;
+-- USE restaurantdb;
 
 
 -- Create the staff table
