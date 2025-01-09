@@ -38,9 +38,10 @@
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
 
     <style>
-        body{
+        body {
             padding: 50px;
         }
+
         .wrapper {
             max-width: 600px;
             margin: 0 auto;
@@ -90,15 +91,16 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
-        .go{
+
+        .go {
             color: #2BC48B;
         }
 
-        .hcenter{
+        .hcenter {
             text-align: center;
         }
 
-        .hleft{
+        .hleft {
             text-align: left;
         }
     </style>
@@ -121,14 +123,17 @@
 
             <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label" for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control"  placeholder="Password" required />
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                    required />
             </div>
 
-            <h5 class="form-signin-heading hleft">Don't have an account? <a href="pages/register.php"><span class="go">Register now</span></a></h5>
-            
+            <h5 class="form-signin-heading hleft">Don't have an account? <a href="pages/register.php"><span
+                        class="go">Register now</span></a></h5>
+
             <!-- Submit button -->
-            <input type="submit" value="Login Now" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4"/>
-        </form>      
+            <input type="submit" value="Login Now" data-mdb-button-init data-mdb-ripple-init
+                class="btn btn-primary btn-block mb-4" />
+        </form>
     </div>
 
 
@@ -169,8 +174,8 @@
     <script src="plugins/toastr/toastr.min.js"></script>
 
     <!-- JQuer -->
-     <script>
-        $('#login_form').submit( (e) => {
+    <script>
+        $('#login_form').submit((e) => {
             e.preventDefault();
             var form = $('#login_form').serialize();
 
@@ -178,13 +183,13 @@
                 url: 'config/account/search_login.php',
                 method: 'POST',
                 data: form,
-                success: function(response){
+                success: function (response) {
                     var data = JSON.parse(response);
 
-                    if (data.status == "success"){
+                    if (data.status == "success") {
                         window.location = "pages/dashboard.php";
 
-                    }else{
+                    } else {
                         AlertSubmit(data.status, data.message);
 
                     }
@@ -192,7 +197,7 @@
             });
         });
 
-        function AlertSubmit(icon, title){
+        function AlertSubmit(icon, title) {
             var Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -200,20 +205,20 @@
                 timer: 3000
             });
 
-            if (icon == "success"){
+            if (icon == "success") {
                 Toast.fire({
-                icon: icon,
-                title: title
+                    icon: icon,
+                    title: title
                 });
             }
-            else{
+            else {
                 Toast.fire({
-                icon:  icon,
-                title: title
+                    icon: icon,
+                    title: title
                 });
             }
         }
-     </script>
+    </script>
 </body>
 
 </html>

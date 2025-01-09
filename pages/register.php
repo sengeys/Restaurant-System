@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +12,10 @@
     <?php include '../layouts/link-style.php'; ?>
 
     <style>
-        body{
+        body {
             padding: 50px;
         }
+
         .wrapper {
             max-width: 600px;
             margin: 0 auto;
@@ -77,7 +81,7 @@
     <div class="wrapper">
         <!-- Preloader -->
         <?php include '../layouts/preloader.php'; ?>
-        
+
         <form id="signin_form" class="form-signin">
 
             <h3 class="form-signin-heading hcenter">Please<span class="go"> Register </span>to open system</h3>
@@ -88,7 +92,7 @@
 
             <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label" for="email">Email address</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Enmail address"/>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enmail address" />
             </div>
 
             <div data-mdb-input-init class="form-outline mb-4">
@@ -98,28 +102,31 @@
 
             <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label" for="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" />
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control"
+                    placeholder="Confirm Password" />
             </div>
 
-            <h5 class="form-signin-heading hleft">Already have an account? <a href="../index.php"><span class="go">Login now</span></a></h5>
+            <h5 class="form-signin-heading hleft">Already have an account? <a href="../index.php"><span class="go">Login
+                        now</span></a></h5>
 
             <!-- Submit button -->
-             <!-- Submit button -->
-            <input type="submit" value="Register Now" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4"/>
+            <!-- Submit button -->
+            <input type="submit" value="Register Now" data-mdb-button-init data-mdb-ripple-init
+                class="btn btn-primary btn-block mb-4" />
         </form>
     </div>
 
 
-   <!-- link script -->
-   <?php include '../layouts/link-script.php'; ?>
+    <!-- link script -->
+    <?php include '../layouts/link-script.php'; ?>
 
-   <script>
-        $(document).ready(function(){                       
-            
+    <script>
+        $(document).ready(function () {
+
         });
 
         // Insert Data
-        $("#signin_form").submit( (e) =>{
+        $("#signin_form").submit((e) => {
             e.preventDefault();
             var full_name = $("#full_name").val();
             var email = $("#email").val();
@@ -129,22 +136,22 @@
             $.ajax({
                 url: '../config/insert/insert_register.php',
                 method: 'POST',
-                data: {full_name: full_name, email: email, password: password, confirm_password: confirm_password},
-                success:function(response){
+                data: { full_name: full_name, email: email, password: password, confirm_password: confirm_password },
+                success: function (response) {
                     var data = JSON.parse(response);
 
-                    if (data.status == "success"){
+                    if (data.status == "success") {
                         window.location = "dashboard.php";
 
-                    }else{
+                    } else {
                         AlertSubmit(data.status, data.message);
                     }
                 }
-            });            
+            });
         });
 
         //Alert
-        function AlertSubmit(icon, title){
+        function AlertSubmit(icon, title) {
             var Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -152,20 +159,20 @@
                 timer: 3000
             });
 
-            if (icon == "success"){
+            if (icon == "success") {
                 Toast.fire({
-                icon: icon,
-                title: title
+                    icon: icon,
+                    title: title
                 });
             }
-            else{
+            else {
                 Toast.fire({
-                icon:  icon,
-                title: title
+                    icon: icon,
+                    title: title
                 });
             }
         }
-   </script>
+    </script>
 </body>
 
 </html>

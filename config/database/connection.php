@@ -1,12 +1,20 @@
 <?php
-    // Session
-    session_start();
+// Check if a session is already active
 
-    // Database
-    $hostname = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "restaurantdb";
+session_start();
 
-    $conn = new mysqli($hostname, $username, $password, $database);
+
+// Database
+$hostname = "mysql";
+$username = "admin";
+$password = "admin";
+$database = "restaurantdb";
+
+// Create MySQLi connection
+$conn = new mysqli($hostname, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 ?>
