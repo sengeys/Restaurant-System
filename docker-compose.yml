@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  php:
+  php-apache:
     build: .
     ports:
       - "8000:80"
@@ -9,12 +9,18 @@ services:
       - .:/var/www/html
     depends_on:
       - mysql
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_DATABASE=restaurantdb
 
   mysql:
     image: mysql:8.0
+    container_name: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: restaurantdb
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
@@ -22,16 +28,7 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-
-  phpmyadmin:
-    image: phpmyadmin
-    restart: always
-    ports:
-      - "8080:80"
-    environment:
-      PMA_HOST: mysql
-      PMA_USER: admin
-      PMA_PASSWORD: admin
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   db_data:

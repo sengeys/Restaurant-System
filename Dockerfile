@@ -1,10 +1,15 @@
-FROM php:8.1-apache
+# Use an official PHP image with Apache
+FROM php:8.2-apache
 
-# Install MySQL extension
-RUN docker-php-ext-install mysqli
+# Install required PHP extensions
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Enable Apache mod_rewrite
+# Enable mod_rewrite for Apache
 RUN a2enmod rewrite
 
-# Copy the current directory to /var/www/html
+# Copy project files to /var/www/html
 COPY . /var/www/html
+
+# Set permissions for Apache
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 755 /var/www/html
