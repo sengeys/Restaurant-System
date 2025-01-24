@@ -1,3 +1,8 @@
+<?php
+// include the database
+include 'config/database/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,69 +43,71 @@
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
 
     <style>
-        body{
-            padding: 50px;
-        }
-        .wrapper {
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    body {
+        padding: 50px;
+    }
 
-        .form-signin {
-            max-width: 480px;
-            padding: 15px 35px 45px;
-            margin: 0 auto;
-            background-color: #fff;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 6px;
-        }
+    .wrapper {
+        max-width: 600px;
+        margin: 0 auto;
+    }
 
-        .form-signin .form-signin-heading,
-        .form-signin .checkbox {
-            margin-bottom: 30px;
-            margin-top: 30px;
-        }
+    .form-signin {
+        max-width: 480px;
+        padding: 15px 35px 45px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+    }
 
-        .form-signin .checkbox {
-            font-weight: normal;
-        }
+    .form-signin .form-signin-heading,
+    .form-signin .checkbox {
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
 
-        .form-signin .form-control {
-            position: relative;
-            font-size: 16px;
-            height: auto;
-            padding: 10px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
+    .form-signin .checkbox {
+        font-weight: normal;
+    }
 
-        .form-signin .form-control:focus {
-            z-index: 2;
-        }
+    .form-signin .form-control {
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 
-        .form-signin input[type="text"] {
-            margin-bottom: -1px;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
 
-        .form-signin input[type="password"] {
-            margin-bottom: 20px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-        .go{
-            color: #2BC48B;
-        }
+    .form-signin input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 
-        .hcenter{
-            text-align: center;
-        }
+    .form-signin input[type="password"] {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
 
-        .hleft{
-            text-align: left;
-        }
+    .go {
+        color: #2BC48B;
+    }
+
+    .hcenter {
+        text-align: center;
+    }
+
+    .hleft {
+        text-align: left;
+    }
     </style>
 </head>
 
@@ -121,14 +128,17 @@
 
             <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label" for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control"  placeholder="Password" required />
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                    required />
             </div>
 
-            <h5 class="form-signin-heading hleft">Don't have an account? <a href="pages/register.php"><span class="go">Register now</span></a></h5>
-            
+            <h5 class="form-signin-heading hleft">Don't have an account? <a href="pages/register.php"><span
+                        class="go">Register now</span></a></h5>
+
             <!-- Submit button -->
-            <input type="submit" value="Login Now" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4"/>
-        </form>      
+            <input type="submit" value="Login Now" data-mdb-button-init data-mdb-ripple-init
+                class="btn btn-primary btn-block mb-4" />
+        </form>
     </div>
 
 
@@ -169,51 +179,50 @@
     <script src="plugins/toastr/toastr.min.js"></script>
 
     <!-- JQuer -->
-     <script>
-        $('#login_form').submit( (e) => {
-            e.preventDefault();
-            var form = $('#login_form').serialize();
+    <script>
+    $('#login_form').submit((e) => {
+        e.preventDefault();
+        var form = $('#login_form').serialize();
 
-            $.ajax({
-                url: 'config/account/search_login.php',
-                method: 'POST',
-                data: form,
-                success: function(response){
-                    var data = JSON.parse(response);
+        $.ajax({
+            url: 'config/account/search_login.php',
+            method: 'POST',
+            data: form,
+            success: function(response) {
+                var data = JSON.parse(response);
 
-                    if (data.status == "success"){
-                        window.location = "pages/dashboard.php";
+                if (data.status == "success") {
+                    window.location = "pages/dashboard.php";
 
-                    }else{
-                        AlertSubmit(data.status, data.message);
+                } else {
+                    AlertSubmit(data.status, data.message);
 
-                    }
                 }
-            });
+            }
+        });
+    });
+
+    function AlertSubmit(icon, title) {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
         });
 
-        function AlertSubmit(icon, title){
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-
-            if (icon == "success"){
-                Toast.fire({
+        if (icon == "success") {
+            Toast.fire({
                 icon: icon,
                 title: title
-                });
-            }
-            else{
-                Toast.fire({
-                icon:  icon,
+            });
+        } else {
+            Toast.fire({
+                icon: icon,
                 title: title
-                });
-            }
+            });
         }
-     </script>
+    }
+    </script>
 </body>
 
 </html>

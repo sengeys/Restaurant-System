@@ -1,3 +1,6 @@
+<?php
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -227,174 +230,192 @@
 
         <!-- Query -->
         <script>
+        $(document).ready(function() {
 
-            $(document).ready(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2();
 
-                //Initialize Select2 Elements
-                $('.select2').select2();
+            // Call Function : Loat Data To Table
+            LoadDataToTable();
 
-                // Call Function : Loat Data To Table
-                LoadDataToTable();
+            SelecDataPrint();
 
-                SelecDataPrint();
+            SelecDataDetail();
 
-                SelecDataDetail();
+            SumTotal();
+        });
 
-                SumTotal();
+
+
+        //Alert
+        function AlertSubmit(status, icon, title) {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
             });
 
-
-
-            //Alert
-            function AlertSubmit(status, icon, title) {
-                var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
+            if (status == 1) {
+                Toast.fire({
+                    icon: icon,
+                    title: title
                 });
-
-                if (status == 1) {
-                    Toast.fire({
-                        icon: icon,
-                        title: title
-                    });
-                }
-                else {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Error'
-                    });
-                }
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Error'
+                });
             }
+        }
 
-            // Load Data To Table
-            function LoadDataToTable() {
+        // Load Data To Table
+        function LoadDataToTable() {
+            $.ajax({
+                url: '../config/select/select_payment_dashboard.php',
+                type: 'POST',
+                success: function(data) {
+                    $("#row_payment").html(data);
+                },
+            });
+        }
+
+
+
+        // Print
+        function SelecDataPrint() {
+            $(document).on("click", "#print_btn", function() {
+                var id = $(this).attr('data-id');
+                printPage(id);
+                console.log(id);
+            });
+        }
+
+        function printPage(id) {
+            var printWindow = window.open('../report/print_order.php?id=' + id + '');
+            printWindow.addEventListener('load', function() {
+                printWindow.print();
+            }, true);
+        }
+
+        // Get Data Detail
+        function SelecDataDetail() {
+            $(document).on("click", "#show_detail_btn", function() {
+                var id = $(this).attr('data-id');
+
                 $.ajax({
-                    url: '../config/select/select_payment_dashboard.php',
+                    url: '../config/select/select_order_detail.php',
                     type: 'POST',
-                    success: function (data) {
-                        $("#row_payment").html(data);
+                    dataType: 'JSON',
+                    data: {
+                        id: id
                     },
-                });
-            }
+                    success: function(data) {
+                        $('#modal-detail').modal('show');
+                        try {
+                            console.log(data);
+
+                            var orders = JSON.parse(JSON.stringify(data));
+
+                            var orderleft = '';
+                            var orderright = '';
+                            var orderdetail = '';
+                            var ordertotal = '';
+                            orders.forEach(order => {
+
+                                orderleft += '<li><span class = "text-bold">Date</span>: ' +
+                                    order.order_date + '</li>';
+                                orderleft +=
+                                    '<li><span class = "text-bold">Customer Name</span>:' +
+                                    order.customer_name + '</li>';
+                                orderleft +=
+                                    '<li><span class = "text-bold">Staff Name</span>: ' +
+                                    order.staff_name + '</li>';
+
+                                orderright +=
+                                    '<li class="text-right"><span class = "text-bold">Order No</span>: ' +
+                                    order.order_id + '</li>';
+                                orderright +=
+                                    '<li class="text-right"><span class = "text-bold">Table</span>: ' +
+                                    order.table_name + '</li>';
+                                orderright +=
+                                    '<li class="text-right"><span class = "text-bold">Stutus</span>: ' +
+                                    order.status + '</li>';
+
+                                ordertotal += order.total;
 
 
-
-            // Print
-            function SelecDataPrint() {
-                $(document).on("click", "#print_btn", function () {
-                    var id = $(this).attr('data-id');
-                    printPage(id);
-                    console.log(id);
-                });
-            }
-
-            function printPage(id) {
-                var printWindow = window.open('../report/print_order.php?id=' + id + '');
-                printWindow.addEventListener('load', function () {
-                    printWindow.print();
-                }, true);
-            }
-
-            // Get Data Detail
-            function SelecDataDetail() {
-                $(document).on("click", "#show_detail_btn", function () {
-                    var id = $(this).attr('data-id');
-
-                    $.ajax({
-                        url: '../config/select/select_order_detail.php',
-                        type: 'POST',
-                        dataType: 'JSON',
-                        data: { id: id },
-                        success: function (data) {
-                            $('#modal-detail').modal('show');
-                            try {
-                                console.log(data);
-
-                                var orders = JSON.parse(JSON.stringify(data));
-
-                                var orderleft = '';
-                                var orderright = '';
-                                var orderdetail = '';
-                                var ordertotal = '';
-                                orders.forEach(order => {
-
-                                    orderleft += '<li><span class = "text-bold">Date</span>: ' + order.order_date + '</li>';
-                                    orderleft += '<li><span class = "text-bold">Customer Name</span>:' + order.customer_name + '</li>';
-                                    orderleft += '<li><span class = "text-bold">Staff Name</span>: ' + order.staff_name + '</li>';
-
-                                    orderright += '<li class="text-right"><span class = "text-bold">Order No</span>: ' + order.order_id + '</li>';
-                                    orderright += '<li class="text-right"><span class = "text-bold">Table</span>: ' + order.table_name + '</li>';
-                                    orderright += '<li class="text-right"><span class = "text-bold">Stutus</span>: ' + order.status + '</li>';
-
-                                    ordertotal += order.total;
-
-
-                                    let index = 1;
-                                    order.details.forEach(detail => {
-                                        orderdetail += '<tr>';
-                                        orderdetail += '<td>' + index + '</td>';
-                                        orderdetail += '<td>' + detail.item_name + '</td>';
-                                        orderdetail += '<td>$' + detail.unit_price + '</td>';
-                                        orderdetail += '<td>' + detail.quantity + '</td>';
-                                        orderdetail += '<td>$' + detail.amount + '</td>';
-                                        orderdetail += '</tr>';
-                                        index++;
-                                    });
-
-                                    $('#orderleft').html(orderleft);
-                                    $('#orderright').html(orderright);
-                                    $('#row_detail').html(orderdetail);
-
-
-                                    $('#grand_total').text('$' + ordertotal);
+                                let index = 1;
+                                order.details.forEach(detail => {
+                                    orderdetail += '<tr>';
+                                    orderdetail += '<td>' + index + '</td>';
+                                    orderdetail += '<td>' + detail.item_name +
+                                        '</td>';
+                                    orderdetail += '<td>$' + detail.unit_price +
+                                        '</td>';
+                                    orderdetail += '<td>' + detail.quantity +
+                                        '</td>';
+                                    orderdetail += '<td>$' + detail.amount +
+                                        '</td>';
+                                    orderdetail += '</tr>';
+                                    index++;
                                 });
 
-                            } catch (error) {
-                                console.error('Error parsing JSON:', error);
-                                console.error('Raw response:', data);
-                            }
+                                $('#orderleft').html(orderleft);
+                                $('#orderright').html(orderright);
+                                $('#row_detail').html(orderdetail);
+
+
+                                $('#grand_total').text('$' + ordertotal);
+                            });
+
+                        } catch (error) {
+                            console.error('Error parsing JSON:', error);
+                            console.error('Raw response:', data);
                         }
-                    });
-                });
-            }
-
-            function SumTotal() {
-                $.ajax({
-                    url: '../config/total/total_order.php',
-                    type: 'POST',
-                    success: function (data) {
-                        $('#order').text(data);
                     }
                 });
+            });
+        }
 
-                $.ajax({
-                    url: '../config/total/total_item.php',
-                    type: 'POST',
-                    success: function (data) {
-                        $('#item').text(data);
-                    }
-                });
+        function SumTotal() {
+            $.ajax({
+                url: '../config/total/total_order.php',
+                type: 'POST',
+                success: function(data) {
+                    $('#order').text(data);
+                }
+            });
 
-                $.ajax({
-                    url: '../config/total/total_staff.php',
-                    type: 'POST',
-                    success: function (data) {
-                        $('#staff').text(data);
-                    }
-                });
+            $.ajax({
+                url: '../config/total/total_item.php',
+                type: 'POST',
+                success: function(data) {
+                    $('#item').text(data);
+                }
+            });
 
-                $.ajax({
-                    url: '../config/total/total_sale.php',
-                    type: 'POST',
-                    success: function (data) {
-                        $('#sale').text(data);
-                    }
-                });
-            }
+            $.ajax({
+                url: '../config/total/total_staff.php',
+                type: 'POST',
+                success: function(data) {
+                    $('#staff').text(data);
+                }
+            });
 
+            $.ajax({
+                url: '../config/total/total_sale.php',
+                type: 'POST',
+                success: function(data) {
+                    $('#sale').text(data);
+                }
+            });
+        }
         </script>
 </body>
 
 </html>
+
+<?php
+ob_end_flush();
+?>

@@ -1,32 +1,32 @@
 <?php
-    try{
-        // include connection db
-        include('../config/database/connection.php');
+try {
+    // include connection db
+    include('../config/database/connection.php');
 
-        $staff_name = "";
+    $staff_name = "";
 
-        if($_SESSION['user_id']){
-            $user_id = $_SESSION['user_id'];
+    if ($_SESSION['user_id']) {
+        $user_id = $_SESSION['user_id'];
 
-            $sql = "SELECT * FROM tbluser INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id WHERE user_id = " . $user_id;
+        $sql = "SELECT * FROM tbluser INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id WHERE user_id = " . $user_id;
 
-            $fetch_query = mysqli_query($conn, $sql);
+        $fetch_query = mysqli_query($conn, $sql);
 
-            $row = mysqli_num_rows($fetch_query);
+        $row = mysqli_num_rows($fetch_query);
 
-            if ($row > 0){
-                $result = mysqli_fetch_array($fetch_query);
+        if ($row > 0) {
+            $result = mysqli_fetch_array($fetch_query);
 
-                $staff_name = $result['staff_name'];
-            }
-        }else{
-            header("location:../index.php");
+            $staff_name = $result['staff_name'];
         }
-        
-        $conn->close();
-    }catch(Exception $ex){
-
+    } else {
+        header("location:../index.php");
     }
+
+    $conn->close();
+} catch (Exception $ex) {
+
+}
 ?>
 
 <!-- Main Sidebar Container -->
@@ -46,7 +46,7 @@
                 <img src="../dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="myaccount.php" class="d-block"><?php echo $staff_name;?></a>
+                <a href="myaccount.php" class="d-block"><?php echo $staff_name; ?></a>
             </div>
         </div>
 
@@ -132,7 +132,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="../pages/logout.php" class="nav-link">
-                            <i class="nav-icon fas fa-share-from-square"></i>
+                                <i class="nav-icon fas fa-share-from-square"></i>
                                 <p>Logout</p>
                             </a>
                         </li>
