@@ -1,26 +1,37 @@
 <?php
-    try{
-        // include connection db
-        include('../database/connection.php');
+try {
+    // include connection db
+    include('../database/connection.php');
 
-        // SQL query to select all customers
-        $sql = "SELECT * FROM vieworder";
+    // SQL query to select all customers
+    $sql = "SELECT
+    tbluser.user_id,
+    tbluser.email,
+    tbluser.pass_word,
 
-        $fetch_query = mysqli_query($conn, $sql);
+    tblstaff.staff_name,
+    tblstaff.sex,
+    tblstaff.phone,
+    tblstaff.address
 
-        $row = mysqli_num_rows($fetch_query);
+FROM tbluser
+INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id";
 
-        $total = 0;
+    $fetch_query = mysqli_query($conn, $sql);
 
-        if ($row > 0){
-            while($result = mysqli_fetch_array($fetch_query)){
-               $total +=  $result['total'];
-            }
+    $row = mysqli_num_rows($fetch_query);
+
+    $total = 0;
+
+    if ($row > 0) {
+        while ($result = mysqli_fetch_array($fetch_query)) {
+            $total += $result['total'];
         }
-
-        echo $total;
-        $conn->close();
-    }catch(Exception $ex){
-
     }
+
+    echo $total;
+    $conn->close();
+} catch (Exception $ex) {
+
+}
 ?>
