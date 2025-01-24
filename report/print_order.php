@@ -1,67 +1,90 @@
 <?php
-    $tr = "";
-    $date  = "";
-    $order_id = "";
-    $customer = "";
-    $staff    = "";
-    $table    = "";
-    $status   = "";
-    $total    = "";
+ob_start();
 
-    try{
-        include('../config/database/connection.php');
+$tr = "";
+$date = "";
+$order_id = "";
+$customer = "";
+$staff = "";
+$table = "";
+$status = "";
+$total = "";
 
-        $id = $_GET['id'];
+try {
+    include('../config/database/connection.php');
 
-        // SQL query to select all customers
-        $sql = "SELECT * FROM vieworderdetail WHERE order_id = $id";
+    $id = $_GET['id'];
 
-        $fetch_query = mysqli_query($conn, $sql);
+    // SQL query to select all customers
+    $sql = "SELECT 
+    tblorder.order_id, 
+    tblorder.date_created, 
+    tblstaff.staff_id, 
+    tblstaff.staff_name, 
+    tblcustomer.customer_id, 
+    tblcustomer.customer_name, 
+    tbltable.table_id,
+    tbltable.table_name, 
+    tblorder.STATUS, 
+    tblorder.total, 
+    tblitem.item_id, 
+    tblitem.item_name, 
+    quantity, 
+    price, 
+    amount
+FROM tblorderdetail
+INNER JOIN tblorder    ON tblorderdetail.order_id = tblorder.order_id
+INNER JOIN tblstaff    ON tblorder.staff_id       = tblstaff.staff_id
+INNER JOIN tblcustomer ON tblorder.customer_id    = tblcustomer.customer_id
+INNER JOIN tbltable    ON tblorder.table_id       = tbltable.table_id
+INNER JOIN tblitem     ON tblorderdetail.item_id  = tblitem.item_id WHERE order_id = $id";
 
-        $row = mysqli_num_rows($fetch_query);
+    $fetch_query = mysqli_query($conn, $sql);
 
-        if ($row > 0){
-            $i = 1;
+    $row = mysqli_num_rows($fetch_query);
+
+    if ($row > 0) {
+        $i = 1;
+        ?>
+        <?php
+        while ($result = mysqli_fetch_array($fetch_query)) {
             ?>
             <?php
-            while($result = mysqli_fetch_array($fetch_query)){
-                ?>
-                <?php 
-                    $date  = $result['date_created'];
-                    $order_id = $result['order_id'];
-                    $customer = $result['customer_name'];
-                    $staff    = $result['staff_name'];
-                    $table    = $result['table_name'];
-                    $status   = $result['STATUS'];
-                    $total    = $result['total'];
+            $date = $result['date_created'];
+            $order_id = $result['order_id'];
+            $customer = $result['customer_name'];
+            $staff = $result['staff_name'];
+            $table = $result['table_name'];
+            $status = $result['STATUS'];
+            $total = $result['total'];
 
-                    $tr .= "<tr>";
-                    $tr .= "<td> " . $i ." </td>";
-                    $tr .= "<td> " . $result['item_name'] ." </td>";
-                    $tr .= "<td> $" . number_format($result['price'], 2, '.', '') ." </td>";
-                    $tr .= "<td> " . $result['quantity'] ." </td>";
-                    $tr .= "<td class = 'text-end'> $" . number_format($result['amount'], 2, '.', '') ." </td>";
-                    $tr .= "</tr>";
-
-                    $i = $i + 1;
-                ?>
-                <?php
-            }
-            ?>
-            
-            <?php
-        }else{
             $tr .= "<tr>";
-            $tr .= "<td colspan='5' align='center'> No Found</td>";
+            $tr .= "<td> " . $i . " </td>";
+            $tr .= "<td> " . $result['item_name'] . " </td>";
+            $tr .= "<td> $" . number_format($result['price'], 2, '.', '') . " </td>";
+            $tr .= "<td> " . $result['quantity'] . " </td>";
+            $tr .= "<td class = 'text-end'> $" . number_format($result['amount'], 2, '.', '') . " </td>";
             $tr .= "</tr>";
-        }
 
-        $conn->close();
-    }catch(Exception $ex){
+            $i = $i + 1;
+        ?>
+        <?php
+        }
+        ?>
+
+        <?php
+    } else {
         $tr .= "<tr>";
-        $tr .= "<td colspan='5' align='center' class='bg-danger'> Connection Database Field.</td>";
+        $tr .= "<td colspan='5' align='center'> No Found</td>";
         $tr .= "</tr>";
     }
+
+    $conn->close();
+} catch (Exception $ex) {
+    $tr .= "<tr>";
+    $tr .= "<td colspan='5' align='center' class='bg-danger'> Connection Database Field.</td>";
+    $tr .= "</tr>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,57 +101,61 @@
 </head>
 
 <body>
-    <div class = "invoice-wrapper" id = "print-area">
-        <div class = "invoice">
-            <div class = "invoice-container">
-                <div class = "invoice-head">
-                    <div class = "invoice-head-top">
+    <div class="invoice-wrapper" id="print-area">
+        <div class="invoice">
+            <div class="invoice-container">
+                <div class="invoice-head">
+                    <div class="invoice-head-top">
                         <!-- <div class = "invoice-head-top-left text-start">
                             <img src = "images/logo.png">
                         </div> -->
-                        <div class = "invoice-head-top-right text-end">
+                        <div class="invoice-head-top-right text-end">
                             <h3>Invoice</h3>
                         </div>
                     </div>
-                    <div class = "hr"></div>
-                    <div class = "invoice-head-middle">
-                        <div class = "invoice-head-middle-left text-start">
-                            <p><span class = "text-bold">Date</span>: <?php echo date_format(date_create($date),"d-m-Y  h:m A");?></p>
+                    <div class="hr"></div>
+                    <div class="invoice-head-middle">
+                        <div class="invoice-head-middle-left text-start">
+                            <p><span class="text-bold">Date</span>:
+                                <?php echo date_format(date_create($date), "d-m-Y  h:m A"); ?>
+                            </p>
                         </div>
-                        <div class = "invoice-head-middle-right text-end">
-                            <p><spanf class = "text-bold">Order No:</span><?php echo $order_id;?></p>
+                        <div class="invoice-head-middle-right text-end">
+                            <p>
+                                <spanf class="text-bold">Order No:</span><?php echo $order_id; ?>
+                            </p>
                         </div>
                     </div>
-                    <div class = "hr"></div>
-                    <div class = "invoice-head-bottom">
-                        <div class = "invoice-head-bottom-left">
+                    <div class="hr"></div>
+                    <div class="invoice-head-bottom">
+                        <div class="invoice-head-bottom-left">
                             <ul>
-                                <li><span class = "text-bold">Customer Name</span>: <?php echo $customer;?></li>
-                                <li><span class = "text-bold">Staff Name</span>: <?php echo $staff;?></li>
+                                <li><span class="text-bold">Customer Name</span>: <?php echo $customer; ?></li>
+                                <li><span class="text-bold">Staff Name</span>: <?php echo $staff; ?></li>
                             </ul>
                         </div>
-                        <div class = "invoice-head-bottom-right">
-                            <ul class = "text-end">
-                                <li><span class = "text-bold">Table</span>: <?php echo $table;?></li>
-                                <li><span class = "text-bold">Stutus</span>: <?php echo $status;?></li>
+                        <div class="invoice-head-bottom-right">
+                            <ul class="text-end">
+                                <li><span class="text-bold">Table</span>: <?php echo $table; ?></li>
+                                <li><span class="text-bold">Stutus</span>: <?php echo $status; ?></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class = "overflow-view">
-                    <div class = "invoice-body">
+                <div class="overflow-view">
+                    <div class="invoice-body">
                         <table>
                             <thead>
                                 <tr>
-                                    <td class = "text-bold">No</td>
-                                    <td class = "text-bold">Item</td>
-                                    <td class = "text-bold">Unit Price</td>
-                                    <td class = "text-bold">Quantity</td>
-                                    <td class = "text-bold">SubTotal</td>
+                                    <td class="text-bold">No</td>
+                                    <td class="text-bold">Item</td>
+                                    <td class="text-bold">Unit Price</td>
+                                    <td class="text-bold">Quantity</td>
+                                    <td class="text-bold">SubTotal</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php echo $tr;?>
+                                <?php echo $tr; ?>
                                 <!-- <tr>
                                     <td>Design</td>
                                     <td>Creating a website design</td>
@@ -138,15 +165,16 @@
                                 </tr>                                 -->
                             </tbody>
                         </table>
-                        <div class = "invoice-body-bottom">
-                            <div class = "invoice-body-info-item">
-                                <div class = "info-item-td text-end text-bold">Total:</div>
-                                <div class = "info-item-td text-end">$<?php echo number_format($total, 2, '.', '') ;?></div>
+                        <div class="invoice-body-bottom">
+                            <div class="invoice-body-info-item">
+                                <div class="info-item-td text-end text-bold">Total:</div>
+                                <div class="info-item-td text-end">$<?php echo number_format($total, 2, '.', ''); ?>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class = "invoice-foot text-center">
+                <div class="invoice-foot text-center">
                     <!-- <p><span class = "text-bold text-center">NOTE:&nbsp;</span>This is computer generated receipt and does not require physical signature.</p> -->
 
                     <!-- <div class = "invoice-btns">
@@ -172,6 +200,10 @@
 </body>
 
 </html>
+
+<?php
+ob_end_flush();
+?>
 
 <style>
     *,
