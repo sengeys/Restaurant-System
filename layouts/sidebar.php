@@ -1,5 +1,6 @@
 <?php
 try {
+<<<<<<< HEAD
     // include connection db
     include('../config/database/connection.php');
 
@@ -23,6 +24,36 @@ try {
         header("location:../index.php");
     }
 
+=======
+
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // include connection db
+    include('../config/database/connection.php');
+
+    $staff_name = "";
+
+    if ($_SESSION['user_id']) {
+        $user_id = $_SESSION['user_id'];
+
+        $sql = "SELECT * FROM tbluser INNER JOIN tblstaff ON tblstaff.staff_id = tbluser.user_id WHERE user_id = " . $user_id;
+
+        $fetch_query = mysqli_query($conn, $sql);
+
+        $row = mysqli_num_rows($fetch_query);
+
+        if ($row > 0) {
+            $result = mysqli_fetch_array($fetch_query);
+
+            $staff_name = $result['staff_name'];
+        }
+    } else {
+        header("location:../index.php");
+    }
+
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
     $conn->close();
 } catch (Exception $ex) {
 

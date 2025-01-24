@@ -1,7 +1,12 @@
 <?php
+<<<<<<< HEAD
 ob_start();
 ?>
 
+=======
+session_start();
+?>
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,9 +18,20 @@ ob_start();
     <?php include '../layouts/link-style.php'; ?>
 
     <style>
+<<<<<<< HEAD
     body {
         padding: 50px;
     }
+=======
+        body {
+            padding: 50px;
+        }
+
+        .wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 
     .wrapper {
         max-width: 600px;
@@ -120,6 +136,7 @@ ob_start();
 
     <!-- link script -->
     <?php include '../layouts/link-script.php'; ?>
+<<<<<<< HEAD
 
     <script>
     $(document).ready(function() {
@@ -177,6 +194,61 @@ ob_start();
             });
         }
     }
+=======
+
+    <script>
+        $(document).ready(function () {
+
+        });
+
+        // Insert Data
+        $("#signin_form").submit((e) => {
+            e.preventDefault();
+            var full_name = $("#full_name").val();
+            var email = $("#email").val();
+            var password = $("#password").val();
+            var confirm_password = $("#confirm_password").val();
+
+            $.ajax({
+                url: '../config/insert/insert_register.php',
+                method: 'POST',
+                data: { full_name: full_name, email: email, password: password, confirm_password: confirm_password },
+                success: function (response) {
+                    var data = JSON.parse(response);
+
+                    if (data.status == "success") {
+                        window.location = "dashboard.php";
+
+                    } else {
+                        AlertSubmit(data.status, data.message);
+                    }
+                }
+            });
+        });
+
+        //Alert
+        function AlertSubmit(icon, title) {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            if (icon == "success") {
+                Toast.fire({
+                    icon: icon,
+                    title: title
+                });
+            }
+            else {
+                Toast.fire({
+                    icon: icon,
+                    title: title
+                });
+            }
+        }
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
     </script>
 </body>
 

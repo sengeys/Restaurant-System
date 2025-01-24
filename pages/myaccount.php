@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 ob_start();
 // Set address to select option
 function fectch_address()
@@ -31,6 +32,43 @@ function fectch_address()
         "Tboung Khmum"
     );
 
+=======
+session_start();
+?>
+
+<?php
+// Set address to select option
+function fectch_address()
+{
+    $array_address = array(
+        "Phnom Penh",
+        "Banteay Meanchey",
+        "Kampong Chhnang",
+        "Kampot",
+        "Koh Kong",
+        "Oddar Meanchey",
+        "Preah Vihear",
+        "Ratanak Kiri",
+        "Svay Rieng",
+        "Battambang",
+        "Kampong Speu",
+        "Kandal",
+        "Kratie",
+        "Pailin",
+        "Prey Veng",
+        "Siem Reap",
+        "Takeo",
+        "Kampong Cham",
+        "Kampong Thom",
+        "Kep",
+        "Mondul Kiri",
+        "Preah Sihanouk",
+        "Pursat",
+        "Steung Treng",
+        "Tboung Khmum"
+    );
+
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
     foreach ($array_address as $value) {
         echo "<option value='" . $value . "'> " . $value . " </option> ";
     }
@@ -162,9 +200,15 @@ function fectch_address()
 
     <!-- Query -->
     <script>
+<<<<<<< HEAD
     $(document).ready(function() {
         // Call Function : style
         SelectionStyle();
+=======
+        $(document).ready(function () {
+            // Call Function : style
+            SelectionStyle();
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 
         // Call Function : select data to update
         SelecDataUpdate();
@@ -187,6 +231,7 @@ function fectch_address()
             timer: 3000
         });
 
+<<<<<<< HEAD
         if (status == 1) {
             Toast.fire({
                 icon: icon,
@@ -197,6 +242,36 @@ function fectch_address()
                 icon: 'error',
                 title: 'Error'
             });
+=======
+        // Function : Style
+        function SelectionStyle() {
+            //Initialize Select2 Elements
+            $('.select2').select2();
+
+        }
+
+        //Alert
+        function AlertSubmit(status, icon, title) {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            if (status == 1) {
+                Toast.fire({
+                    icon: icon,
+                    title: title
+                });
+            }
+            else {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Error'
+                });
+            }
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
         }
     }
 
@@ -232,9 +307,16 @@ function fectch_address()
             var address = $("#address").val();
             var password = $("#password").val();
 
+<<<<<<< HEAD
+=======
+        // Get Data Update
+        function SelecDataUpdate() {
+            var id = "<?php echo $_SESSION['user_id']; ?>";
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
             $.ajax({
                 url: '../config/update/update_staff.php',
                 method: 'POST',
+<<<<<<< HEAD
                 data: {
                     user_id: user_id,
                     full_name: full_name,
@@ -246,12 +328,49 @@ function fectch_address()
                 },
                 success: function(data) {
                     AlertSubmit(data, "success", "Data Updated Successfully!");
+=======
+                data: { user_id: id },
+                dataType: 'JSON',
+                success: function (data) {
+                    $('#user_id').val(data.user_id);
+                    $('#full_name').val(data.staff_name);
+                    $('#gender').val(data.sex).change();
+                    $('#phone').val(data.phone);
+                    $('#email').val(data.email);
+                    $('#address').val(data.address).change();
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
                 }
             });
         });
     }
     </script>
 
+<<<<<<< HEAD
+=======
+        // Update Item
+        function UpdateData() {
+            $(document).on("click", "#update_submit", function () {
+                var user_id = $('#user_id').val();
+                var full_name = $("#full_name").val();
+                var gender = $("#gender").val();
+                var phone = $("#phone").val();
+                var email = $("#email").val();
+                var address = $("#address").val();
+                var password = $("#password").val();
+
+                $.ajax({
+                    url: '../config/update/update_staff.php',
+                    method: 'POST',
+                    data: { user_id: user_id, full_name: full_name, gender: gender, phone: phone, email: email, address: address, password: password },
+                    success: function (data) {
+                        AlertSubmit(data, "success", "Data Updated Successfully!");
+                    }
+                });
+            });
+        }
+    </script>
+
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 </body>
 
 </html>

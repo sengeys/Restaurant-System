@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 ob_start();
+=======
+session_start();
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 ?>
 
 <!DOCTYPE html>
@@ -267,6 +271,7 @@ ob_start();
 
         <!-- Query -->
         <script>
+<<<<<<< HEAD
         $(document).ready(function() {
             //Initialize Select2 Elements
             $('.select2').select2();
@@ -277,11 +282,32 @@ ob_start();
             // Call Function : Update Data
             SelecDataUpdate();
             UpdateData();
+=======
+            $(document).ready(function () {
+                //Initialize Select2 Elements
+                $('.select2').select2();
 
-            // Call Function : Delete Data
-            SelecDataDelete();
-            DeleteData();
+                // Call Function : Loat Data To Table
+                LoadDataToTable();
 
+                // Call Function : Update Data
+                SelecDataUpdate();
+                UpdateData();
+
+                // Call Function : Delete Data
+                SelecDataDelete();
+                DeleteData();
+
+                // Call Function : Live Search
+                LiveSearch();
+
+                // Call Function : Filter Status
+                FilterData();
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
+
+                SelecDataPrint();
+
+<<<<<<< HEAD
             // Call Function : Live Search
             LiveSearch();
 
@@ -332,8 +358,40 @@ ob_start();
         function SelecDataUpdate() {
             $(document).on("click", "#edit_btn", function() {
                 var id = $(this).attr('data-id');
+=======
+                SelecDataDetail();
+            });
 
+
+
+            //Alert
+            function AlertSubmit(status, icon, title) {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if (status == 1) {
+                    Toast.fire({
+                        icon: icon,
+                        title: title
+                    });
+                }
+                else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Error'
+                    });
+                }
+            }
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
+
+            // Load Data To Table
+            function LoadDataToTable() {
                 $.ajax({
+<<<<<<< HEAD
                     url: '../config/search/search_payment.php',
                     method: 'POST',
                     data: {
@@ -427,12 +485,17 @@ ob_start();
                         search: search_data
                     },
                     success: function(data) {
+=======
+                    url: '../config/select/select_payment.php',
+                    type: 'POST',
+                    success: function (data) {
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
                         $("#row_payment").html(data);
-                    }
+                    },
                 });
-            });
-        }
+            }
 
+<<<<<<< HEAD
         //Function : Filter
         function FilterData() {
             $("#filter_status").on("change", function() {
@@ -443,20 +506,110 @@ ob_start();
                 if (search == "") {
                     LoadDataToTable();
                 } else {
+=======
+            // Get Data Update
+            function SelecDataUpdate() {
+                $(document).on("click", "#edit_btn", function () {
+                    var id = $(this).attr('data-id');
+
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
                     $.ajax({
-                        url: '../config/filter/filter_payment.php',
+                        url: '../config/search/search_payment.php',
                         method: 'POST',
+<<<<<<< HEAD
                         data: {
                             search: search,
                         },
                         success: function(data) {
+=======
+                        data: { payment_id: id },
+                        dataType: 'JSON',
+                        success: function (data) {
+                            $('#modal-update').modal('show');
+                            $('#edit_payment_id').val(data.order_id);
+                            $('#edit_payment_date').val(data.date_created);
+                            $('#edit_customer_name').val(data.customer_name);
+                            $('#edit_amount').val(data.total);
+                            $('#edit_status').val(data.STATUS).change();
+                        }
+                    });
+                });
+            }
+
+            // Update Data
+            function UpdateData() {
+                $(document).on("click", "#update_submit", function () {
+                    var payment_id = $("#edit_payment_id").val();
+                    var status = $("#edit_status").val();
+
+                    $.ajax({
+                        url: '../config/update/update_payment.php',
+                        method: 'POST',
+                        data: { payment_id: payment_id, status: status },
+                        success: function (data) {
+                            LoadDataToTable();
+                            AlertSubmit(data, "success", "Data Updated Successfully!");
+                        }
+                    });
+                    $('#modal-update').modal('hide');
+                });
+            }
+
+            // Get Data Delete
+            function SelecDataDelete() {
+                $(document).on("click", "#delete_btn", function () {
+                    var id = $(this).attr('data-id');
+
+                    $.ajax({
+                        url: '../config/search/search_payment.php',
+                        method: 'POST',
+                        data: { payment_id: id },
+                        dataType: 'JSON',
+                        success: function (data) {
+                            $('#modal-delete').modal('show');
+                            $('#delete_payment_id').val(data.order_id);
+                        }
+                    });
+                });
+            }
+
+            // Delete Item
+            function DeleteData() {
+                $(document).on("click", "#delete_submit", function () {
+                    var payment_id = $("#delete_payment_id").val();
+
+                    $.ajax({
+                        url: '../config/delete/delete_payment.php',
+                        method: 'POST',
+                        data: { payment_id: payment_id },
+                        success: function (data) {
+                            LoadDataToTable();
+                            AlertSubmit(data, "success", "Data Deleted Successfully!");
+                        }
+                    });
+
+                    $('#modal-delete').modal('hide');
+                });
+            }
+
+            // Live Search
+            function LiveSearch() {
+                $(document).on("keyup", "#search", function () {
+                    var search_data = $(this).val();
+
+                    $.ajax({
+                        url: '../config/livesearch/live_search_payment.php',
+                        method: 'POST',
+                        data: { search: search_data },
+                        success: function (data) {
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
                             $("#row_payment").html(data);
                         }
                     });
-                }
-            });
-        }
+                });
+            }
 
+<<<<<<< HEAD
         // Print
         function SelecDataPrint() {
             $(document).on("click", "#print_btn", function() {
@@ -552,6 +705,109 @@ ob_start();
                 });
             });
         }
+=======
+            //Function : Filter
+            function FilterData() {
+                $("#filter_status").on("change", function () {
+                    var search = $("#filter_status").val();
+
+                    console.log(search);
+
+                    if (search == "") {
+                        LoadDataToTable();
+                    } else {
+                        $.ajax({
+                            url: '../config/filter/filter_payment.php',
+                            method: 'POST',
+                            data: { search: search, },
+                            success: function (data) {
+                                $("#row_payment").html(data);
+                            }
+                        });
+                    }
+                });
+            }
+
+            // Print
+            function SelecDataPrint() {
+                $(document).on("click", "#print_btn", function () {
+                    var id = $(this).attr('data-id');
+                    printPage(id);
+                    console.log(id);
+                });
+            }
+
+            function printPage(id) {
+                var printWindow = window.open('../report/print_order.php?id=' + id + '');
+                printWindow.addEventListener('load', function () {
+                    printWindow.print();
+                }, true);
+            }
+
+            // Get Data Detail
+            function SelecDataDetail() {
+                $(document).on("click", "#show_detail_btn", function () {
+                    var id = $(this).attr('data-id');
+
+                    $.ajax({
+                        url: '../config/select/select_order_detail.php',
+                        type: 'POST',
+                        dataType: 'JSON',
+                        data: { id: id },
+                        success: function (data) {
+                            $('#modal-detail').modal('show');
+                            try {
+                                console.log(data);
+
+                                var orders = JSON.parse(JSON.stringify(data));
+
+                                var orderleft = '';
+                                var orderright = '';
+                                var orderdetail = '';
+                                var ordertotal = '';
+                                orders.forEach(order => {
+
+                                    orderleft += '<li><span class = "text-bold">Date</span>: ' + order.order_date + '</li>';
+                                    orderleft += '<li><span class = "text-bold">Customer Name</span>:' + order.customer_name + '</li>';
+                                    orderleft += '<li><span class = "text-bold">Staff Name</span>: ' + order.staff_name + '</li>';
+
+                                    orderright += '<li class="text-right"><span class = "text-bold">Order No</span>: ' + order.order_id + '</li>';
+                                    orderright += '<li class="text-right"><span class = "text-bold">Table</span>: ' + order.table_name + '</li>';
+                                    orderright += '<li class="text-right"><span class = "text-bold">Stutus</span>: ' + order.status + '</li>';
+
+                                    ordertotal += order.total;
+
+
+                                    let index = 1;
+                                    order.details.forEach(detail => {
+                                        orderdetail += '<tr>';
+                                        orderdetail += '<td>' + index + '</td>';
+                                        orderdetail += '<td>' + detail.item_name + '</td>';
+                                        orderdetail += '<td>$' + detail.unit_price + '</td>';
+                                        orderdetail += '<td>' + detail.quantity + '</td>';
+                                        orderdetail += '<td>$' + detail.amount + '</td>';
+                                        orderdetail += '</tr>';
+                                        index++;
+                                    });
+
+                                    $('#orderleft').html(orderleft);
+                                    $('#orderright').html(orderright);
+                                    $('#row_detail').html(orderdetail);
+
+
+                                    $('#grand_total').text('$' + ordertotal);
+                                });
+
+                            } catch (error) {
+                                console.error('Error parsing JSON:', error);
+                                console.error('Raw response:', data);
+                            }
+                        }
+                    });
+                });
+            }
+
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
         </script>
 
 </body>

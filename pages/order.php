@@ -1,7 +1,12 @@
 <?php
+<<<<<<< HEAD
 ob_start();
 ?>
 
+=======
+session_start();
+?>
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 <!DOCTYPE html>
 <html lang="en">
 
@@ -218,15 +223,23 @@ ob_start();
 
         <!-- JQuery -->
         <script>
+<<<<<<< HEAD
         $(document).ready(function() {
             // Call Function : style
             SelectionStyle();
             SelectDataTimePicker();
+=======
+            $(document).ready(function () {
+                // Call Function : style
+                SelectionStyle();
+                SelectDataTimePicker();
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 
-            // Call Function :
-            LoadDataToBox();
-            AddRowItemDetail();
+                // Call Function :
+                LoadDataToBox();
+                AddRowItemDetail();
 
+<<<<<<< HEAD
         });
 
         // Function : Style
@@ -393,10 +406,60 @@ ob_start();
                         $("#row_item_detail").append(html);
                         SelectionStyle();
                         calc_total();
-                    }
-                });
+=======
             });
 
+            // Function : Style
+            function SelectionStyle() {
+                //Initialize Select2 Elements
+                $('.select2').select2();
+
+            }
+
+            // Function : Date Time Picker
+            function SelectDataTimePicker() {
+                //Datemask dd/mm/yyyy
+                $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+                //Datemask2 mm/dd/yyyy
+                $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' });
+                //Money Euro
+                $('[data-mask]').inputmask();
+
+                //Date picker
+                $('#reservationdate').datetimepicker({
+                    format: 'L'
+                });
+
+                //Date and time picker
+                $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+                //Date range picker
+                $('#reservation').daterangepicker();
+                //Date range picker with time picker
+                $('#reservationtime').daterangepicker({
+                    timePicker: true,
+                    timePickerIncrement: 30,
+                    locale: {
+                        format: 'MM/DD/YYYY hh:mm A'
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
+                    }
+                });
+                //Date range as a button
+                $('#daterange-btn').daterangepicker(
+                    {
+                        ranges: {
+                            'Today': [moment(), moment()],
+                            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                            'This Month': [moment().startOf('month'), moment().endOf('month')],
+                            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        },
+                        startDate: moment().subtract(29, 'days'),
+                        endDate: moment()
+                    },
+
+<<<<<<< HEAD
             $("#row_item_detail").on("click", ".delete_btn", function() {
                 $(this).closest("tr").remove();
                 i--;
@@ -469,10 +532,49 @@ ob_start();
                 var customer_id = $("#customer_id").val();
                 var table_id = $("#table_id").val();
                 var total = $("#grand_total").val();
+=======
+                    function (start, end) {
+                        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                    }
+                );
 
+                //Timepicker
+                $('#timepicker').datetimepicker({
+                    format: 'LT'
+                });
+            }
+
+            //Alert
+            function AlertSubmit(status, icon, title) {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
+
+                if (status == 1) {
+                    Toast.fire({
+                        icon: icon,
+                        title: title
+                    });
+                }
+                else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Error'
+                    });
+                }
+            }
+
+            // Function : Load Data To Box Order Detail
+            function LoadDataToBox() {
+                // staff
                 $.ajax({
-                    url: '../config/insert/insert_order.php',
+                    url: '../config/select/get_to_box/get_staff_to_box.php',
                     type: 'POST',
+<<<<<<< HEAD
                     data: {
                         order_date: order_date,
                         staff_id: staff_id,
@@ -495,10 +597,14 @@ ob_start();
                                     "Data Inserted Successfully!");
                             },
                         });
+=======
+                    success: function (data) {
+                        $("#staff_id").html(data);
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
                     },
                 });
-            });
 
+<<<<<<< HEAD
 
         }
         </script>
@@ -509,3 +615,162 @@ ob_start();
 <?php
 ob_end_flush();
 ?>
+=======
+                // customer
+                $.ajax({
+                    url: '../config/select/get_to_box/get_customer_to_box.php',
+                    type: 'POST',
+                    success: function (data) {
+                        $("#customer_id").html(data);
+                    },
+                });
+
+                // customer
+                $.ajax({
+                    url: '../config/select/get_to_box/get_table_to_box.php',
+                    type: 'POST',
+                    success: function (data) {
+                        $("#table_id").html(data);
+                    },
+                });
+            }
+
+
+            // Function : Add New Row Item Detail
+            function AddRowItemDetail() {
+                var i = 0;
+                $(document).on("click", "#add_new_btn", function () {
+                    $.ajax({
+                        url: '../config/select/select_order.php',
+                        type: 'POST',
+                        success: function (data) {
+                            i++;
+                            var html = '';
+                            html += '<tr id = "row' + i + '">';
+                            html += '<td style="min-width: 8rem; width: 30%;">';
+                            html += '<select id="' + i + '" name="item_id[]" class="form-control select2 item_id" style="width: 100%;">' + data + '</select> </td>';
+
+                            html += '<td style="min-width: 8rem; width: 20%;">';
+                            html += '<input id="quantity' + i + '" name="quantity[]" type="number" class="form-control quantity"> </td>';
+
+                            html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
+                            html += '<input id="price' + i + '" name="price[]" type="number" class="form-control text-right price" value="">';
+                            html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
+
+                            html += '<td style="min-width: 8rem; width: 20%;"> <div class="input-group">';
+                            html += '<input id="total' + i + '" name="total[]" type="number" class="form-control text-right total">';
+                            html += '<div class="input-group-prepend"> <span class="input-group-text">$</span> </div> </div> </td>';
+
+                            html += '<td class="text-right" style="min-width: 8rem; width: 10%;">';
+                            html += '<button type="button" name="remove" id="' + i + '" class="btn btn-danger delete_btn"> <i class="nav-icon fas fa-trash"></i> Delete </button> </td>';
+                            html += '</tr>';
+
+                            $("#row_item_detail").append(html);
+                            SelectionStyle();
+                            calc_total();
+                        }
+                    });
+                });
+
+                $("#row_item_detail").on("click", ".delete_btn", function () {
+                    $(this).closest("tr").remove();
+                    i--;
+                    calc_total();
+                });
+
+                $("#row_item_detail").on("input", ".quantity", function () {
+                    var qty = parseFloat($(this).val());
+                    var unit_price = parseFloat($(this).closest("tr").find(".price").val());
+                    var total = $(this).closest("tr").find(".total");
+                    total.val(unit_price * qty);
+                    calc_total();
+                });
+
+                $("#row_item_detail").on("input", ".price", function () {
+                    var unit_price = parseFloat($(this).val());
+                    var qty = parseFloat($(this).closest("tr").find(".quantity").val());
+                    var total = $(this).closest("tr").find(".total");
+                    total.val(unit_price * qty);
+
+                    calc_total();
+                });
+
+                function calc_total() {
+                    var sum = 0;
+                    $(".total").each(function () {
+                        sum += parseFloat($(this).val());
+                    });
+
+                    $(".grand_total").val(sum);
+
+                    var amounts = sum;
+                    $(document).on("change keyup blur", "#quantity", function () {
+                        $(".grand_total").val(amounts);
+                    });
+                }
+
+                $(document).on("change", ".item_id", function () {
+                    var btn_id = $(this).attr('id');
+                    var item_id = $('#' + btn_id + '').val();
+
+                    $.ajax({
+                        url: '../config/search/search_item.php',
+                        method: 'POST',
+                        data: { item_id: item_id },
+                        dataType: 'JSON',
+                        success: function (data) {
+                            var quantity = 1;
+                            var price = data.unit_price;
+
+                            $('#quantity' + btn_id + '').val(quantity);
+                            $('#price' + btn_id + '').val(price);
+                            $('#total' + btn_id + '').val(quantity * price);
+
+                            var sum = 0;
+                            for (var j = 1; j <= i; j++) {
+
+                                sum += Number($('#total' + j + '').val());
+                            }
+                            $('#grand_total').val(sum);
+                        }
+                    });
+                });
+
+                $('#insert_submit').click(function () {
+                    var order_date = $("#order_date").val();
+                    var staff_id = $("#staff_id").val();
+                    var customer_id = $("#customer_id").val();
+                    var table_id = $("#table_id").val();
+                    var total = $("#grand_total").val();
+
+                    $.ajax({
+                        url: '../config/insert/insert_order.php',
+                        type: 'POST',
+                        data: { order_date: order_date, staff_id: staff_id, customer_id: customer_id, table_id: table_id, total: total },
+                        success: function (data) {
+                            console.log(data);
+
+                            var form_item = $('#form_item').serialize();
+
+                            $.ajax({
+                                url: '../config/insert/insert_order_detail.php',
+                                type: 'POST',
+                                data: form_item,
+                                success: function (data2) {
+                                    console.log(data2);
+                                    AlertSubmit(data2, "success", "Data Inserted Successfully!");
+                                },
+                            });
+                        },
+                    });
+                });
+
+
+            }
+
+
+        </script>
+</body>
+
+</html>
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674

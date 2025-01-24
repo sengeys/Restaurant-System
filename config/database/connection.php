@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // Session
 session_start();
 
@@ -98,4 +99,24 @@ FOREIGN KEY (item_id)  REFERENCES tblitem (item_id)
 $conn->query($sql);
 
 
+=======
+// Check if a session is already active
+
+session_start();
+
+
+// Database
+$hostname = "mysql";
+$username = "admin";
+$password = "admin";
+$database = "restaurantdb";
+
+// Create MySQLi connection
+$conn = new mysqli($hostname, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 ?>

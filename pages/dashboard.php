@@ -1,6 +1,12 @@
 <?php
+<<<<<<< HEAD
 ob_start();
 ?>
+=======
+include('../config/database/connection.php');
+?>
+
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 <!DOCTYPE html>
 <html lang="en">
 

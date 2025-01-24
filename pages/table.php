@@ -1,7 +1,12 @@
 <?php
+<<<<<<< HEAD
 ob_start();
 ?>
 
+=======
+session_start();
+?>
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 <!DOCTYPE html>
 <html lang="en">
 
@@ -200,6 +205,7 @@ ob_start();
 
         <!-- JQuery -->
         <script>
+<<<<<<< HEAD
         $(document).ready(function() {
             // Call Function : Loat Data To Table
             LoadDataToTable();
@@ -207,15 +213,21 @@ ob_start();
             // Call Function : Update Data
             SelecDataUpdate();
             UpdateData();
+=======
+            $(document).ready(function () {
+                // Call Function : Loat Data To Table
+                LoadDataToTable();
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 
-            // Call Function : Delete Data
-            SelecDataDelete();
-            DeleteData();
+                // Call Function : Update Data
+                SelecDataUpdate();
+                UpdateData();
 
-            // Call Function : Live Search
-            LiveSearch();
-        });
+                // Call Function : Delete Data
+                SelecDataDelete();
+                DeleteData();
 
+<<<<<<< HEAD
         //Alert
         function AlertSubmit(status, icon, title) {
             var Toast = Swal.mixin({
@@ -278,8 +290,39 @@ ob_start();
         function SelecDataUpdate() {
             $(document).on("click", "#edit_btn", function() {
                 var id = $(this).attr('data-id');
+=======
+                // Call Function : Live Search
+                LiveSearch();
+            });
 
+            //Alert
+            function AlertSubmit(status, icon, title) {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if (status == 1) {
+                    Toast.fire({
+                        icon: icon,
+                        title: title
+                    });
+                }
+                else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Error'
+                    });
+                }
+            }
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
+
+            // Load Data To Table
+            function LoadDataToTable() {
                 $.ajax({
+<<<<<<< HEAD
                     url: '../config/search/search_table.php',
                     method: 'POST',
                     data: {
@@ -370,11 +413,135 @@ ob_start();
                         search: search_data
                     },
                     success: function(data) {
+=======
+                    url: '../config/select/select_table.php',
+                    type: 'POST',
+                    success: function (data) {
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
                         $("#row_table").html(data);
+                    },
+                });
+            }
+
+            // open modal
+            $("#add_new_btn").on("click", function () {
+                $('#modal-insert').modal('show');
+            });
+
+            // Insert item
+            $("#insert_submit").on("click", function (e) {
+                var table_name = $("#table_name").val();
+
+                $.ajax({
+                    url: '../config/insert/insert_table.php',
+                    method: 'POST',
+                    data: { table_name: table_name },
+                    success: function (data) {
+                        LoadDataToTable();
+                        AlertSubmit(data, "success", "Data Inserted Successfully!");
                     }
                 });
+<<<<<<< HEAD
             });
         }
+=======
+
+                $("#table_name").val("");
+                $('#modal-insert').modal('hide');
+            });
+
+            // Get Data Update
+            function SelecDataUpdate() {
+                $(document).on("click", "#edit_btn", function () {
+                    var id = $(this).attr('data-id');
+
+                    $.ajax({
+                        url: '../config/search/search_table.php',
+                        method: 'POST',
+                        data: { table_id: id },
+                        dataType: 'JSON',
+                        success: function (data) {
+                            $('#modal-update').modal('show');
+                            $('#edit_table_id').val(data.table_id);
+                            $('#edit_table_name').val(data.table_name);
+                        }
+                    });
+                });
+            }
+
+            // Update Item
+            function UpdateData() {
+                $(document).on("click", "#update_submit", function () {
+                    var table_id = $("#edit_table_id").val();
+                    var table_name = $("#edit_table_name").val();
+
+                    $.ajax({
+                        url: '../config/update/update_table.php',
+                        method: 'POST',
+                        data: { table_id: table_id, table_name: table_name },
+                        success: function (data) {
+                            AlertSubmit(data, "success", "Data Updated Successfully!");
+                            LoadDataToTable();
+                        }
+                    });
+                    $('#modal-update').modal('hide');
+                });
+            }
+
+            // Get Data Delete
+            function SelecDataDelete() {
+                $(document).on("click", "#delete_btn", function () {
+                    var id = $(this).attr('data-id');
+
+                    $.ajax({
+                        url: '../config/search/search_table.php',
+                        method: 'POST',
+                        data: { table_id: id },
+                        dataType: 'JSON',
+                        success: function (data) {
+                            $('#modal-delete').modal('show');
+                            $('#delete_table_id').val(data.table_id);
+                        }
+                    });
+                });
+            }
+
+            // Delete Item
+            function DeleteData() {
+                $(document).on("click", "#delete_submit", function () {
+                    var table_id = $("#delete_table_id").val();
+
+                    $.ajax({
+                        url: '../config/delete/delete_table.php',
+                        method: 'POST',
+                        data: { table_id: table_id },
+                        success: function (data) {
+                            LoadDataToTable();
+                            AlertSubmit(data, "success", "Data Deleted Successfully!");
+                        }
+                    });
+
+                    $('#modal-delete').modal('hide');
+                });
+            }
+
+            // Live Search
+            function LiveSearch() {
+                $(document).on("keyup", "#search", function () {
+                    var search_data = $(this).val();
+
+                    $.ajax({
+                        url: '../config/livesearch/live_search_table.php',
+                        method: 'POST',
+                        data: { search: search_data },
+                        success: function (data) {
+                            $("#row_table").html(data);
+                        }
+                    });
+                });
+            }
+
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
         </script>
 </body>
 

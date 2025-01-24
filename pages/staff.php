@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 ob_start();
+=======
+session_start();
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -371,6 +375,7 @@ ob_start();
 
         <!-- JQuery -->
         <script>
+<<<<<<< HEAD
         $(document).ready(function() {
             //Initialize Select2 Elements
             $('.select2').select2();
@@ -381,17 +386,30 @@ ob_start();
             // Call Function : Update Data
             SelecDataUpdate();
             UpdateData();
+=======
+            $(document).ready(function () {
+                //Initialize Select2 Elements
+                $('.select2').select2();
 
-            // Call Function : Delete Data
-            SelecDataDelete();
-            DeleteData();
+                // Call Function : Loat Data To Table
+                LoadDataToTable();
 
-            // Call Function : Live Search
-            LiveSearch();
+                // Call Function : Update Data
+                SelecDataUpdate();
+                UpdateData();
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
 
-            // Call Function : Filter
-            FilterData();
+                // Call Function : Delete Data
+                SelecDataDelete();
+                DeleteData();
 
+                // Call Function : Live Search
+                LiveSearch();
+
+                // Call Function : Filter
+                FilterData();
+
+<<<<<<< HEAD
         });
 
         //Alert
@@ -466,8 +484,37 @@ ob_start();
         function SelecDataUpdate() {
             $(document).on("click", "#edit_btn", function() {
                 var id = $(this).attr('data-id');
+=======
+            });
 
+            //Alert
+            function AlertSubmit(status, icon, title) {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if (status == 1) {
+                    Toast.fire({
+                        icon: icon,
+                        title: title
+                    });
+                }
+                else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Error'
+                    });
+                }
+            }
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
+
+            // Load Data To Table
+            function LoadDataToTable() {
                 $.ajax({
+<<<<<<< HEAD
                     url: '../config/search/search_user.php',
                     method: 'POST',
                     data: {
@@ -572,12 +619,45 @@ ob_start();
                         search: search_data
                     },
                     success: function(data) {
+=======
+                    url: '../config/select/select_staff.php',
+                    type: 'POST',
+                    success: function (data) {
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
                         $("#row_staff").html(data);
+                    },
+                });
+
+            }
+
+            // open modal
+            $("#add_new_btn").on("click", function () {
+                $('#modal-insert').modal('show');
+            });
+
+            // Insert Data
+            $("#insert_btn").on("click", function (e) {
+                var staff_name = $("#staff_name").val();
+                var gender = $("#gender").val();
+                var phone = $("#phone").val();
+                var address = $("#address").val();
+                var email = $("#email").val();
+                var password = $("#password").val();
+
+                $.ajax({
+                    url: '../config/insert/insert_staff.php',
+                    method: 'POST',
+                    data: { staff_name: staff_name, gender: gender, phone: phone, address: address, email: email, password: password },
+                    success: function (data) {
+                        LoadDataToTable();
+                        AlertSubmit(data, "success", "Data Inserted Successfully!");
                     }
                 });
-            });
-        }
 
+                $('#modal-insert').modal('hide');
+            });
+
+<<<<<<< HEAD
         //Function : Filter
         function FilterData() {
             $("#filter_gender , #filter_address").on("change", function() {
@@ -589,9 +669,17 @@ ob_start();
                 if (search_gender == "" && search_address == "") {
                     LoadDataToTable();
                 } else {
+=======
+            // Get Data Update
+            function SelecDataUpdate() {
+                $(document).on("click", "#edit_btn", function () {
+                    var id = $(this).attr('data-id');
+
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
                     $.ajax({
-                        url: '../config/filter/filter_staff.php',
+                        url: '../config/search/search_user.php',
                         method: 'POST',
+<<<<<<< HEAD
                         data: {
                             search_gender: search_gender,
                             search_address: search_address
@@ -603,6 +691,123 @@ ob_start();
                 }
             });
         }
+=======
+                        data: { user_id: id },
+                        dataType: 'JSON',
+                        success: function (data) {
+                            $('#modal-update').modal('show');
+                            $('#edit_staff_id').val(data.user_id);
+                            $('#edit_staff_name').val(data.staff_name);
+                            $('#edit_gender').val(data.sex).change();
+                            $('#edit_phone').val(data.phone);
+                            $('#edit_email').val(data.email);
+                            $('#edit_address').val(data.address).change();
+                            $('#edit_password').val(data.pass_word);
+                        }
+                    });
+                });
+            }
+
+            // Update Item
+            function UpdateData() {
+                $(document).on("click", "#update_submit", function () {
+                    var user_id = $('#edit_staff_id').val();
+                    var full_name = $("#edit_staff_name").val();
+                    var gender = $("#edit_gender").val();
+                    var phone = $("#edit_phone").val();
+                    var email = $("#edit_email").val();
+                    var address = $("#edit_address").val();
+                    var password = $("#edit_password").val();
+
+                    $.ajax({
+                        url: '../config/update/update_staff.php',
+                        method: 'POST',
+                        data: { user_id: user_id, full_name: full_name, gender: gender, phone: phone, email: email, address: address, password: password },
+                        success: function (data) {
+                            LoadDataToTable();
+                            AlertSubmit(data, "success", "Data Updated Successfully!");
+                        }
+                    });
+
+                    $('#modal-update').modal('hide');
+                });
+            }
+
+            // Get Data Delete
+            function SelecDataDelete() {
+                $(document).on("click", "#delete_btn", function () {
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: '../config/search/search_staff.php',
+                        method: 'POST',
+                        data: { staff_id: id },
+                        dataType: 'JSON',
+                        success: function (data) {
+                            $('#modal-delete').modal('show');
+                            $('#delete_staff_id').val(data.staff_id);
+                        }
+                    });
+                });
+            }
+
+            // Delete Item
+            function DeleteData() {
+                $(document).on("click", "#delete_submit", function () {
+                    var id = $("#delete_staff_id").val();
+
+                    $.ajax({
+                        url: '../config/delete/delete_staff.php',
+                        method: 'POST',
+                        data: { staff_id: id },
+                        success: function (data) {
+                            LoadDataToTable();
+                            AlertSubmit(data, "success", "Data Deleted Successfully!");
+                        }
+                    });
+
+                    $('#modal-delete').modal('hide');
+                });
+            }
+
+            // Live Search
+            function LiveSearch() {
+                $(document).on("keyup", "#search_staff", function () {
+                    var search_data = $(this).val();
+                    $.ajax({
+                        url: '../config/livesearch/live_search_staff.php',
+                        method: 'POST',
+                        data: { search: search_data },
+                        success: function (data) {
+                            $("#row_staff").html(data);
+                        }
+                    });
+                });
+            }
+
+            //Function : Filter
+            function FilterData() {
+                $("#filter_gender , #filter_address").on("change", function () {
+                    var search_gender = $("#filter_gender").val();
+                    var search_address = $("#filter_address").val();
+
+                    console.log(search_gender + search_address);
+
+                    if (search_gender == "" && search_address == "") {
+                        LoadDataToTable();
+                    } else {
+                        $.ajax({
+                            url: '../config/filter/filter_staff.php',
+                            method: 'POST',
+                            data: { search_gender: search_gender, search_address: search_address },
+                            success: function (data) {
+                                $("#row_staff").html(data);
+                            }
+                        });
+                    }
+                });
+            }
+
+>>>>>>> 60b29bb18524458d89b5510aff8f2849b29f7674
         </script>
 </body>
 
